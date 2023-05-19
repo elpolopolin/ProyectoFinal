@@ -1,7 +1,7 @@
 import config from "./dbconfig.js";
 import sql from 'mssql';
-import PizzaService from "./src/services/pizzas-services.js";
-import Pizza from "./src/models/pizza.js";
+import EventoService from "./src/services/evento-service.js";
+import Pizza from "./src/models/evento.js";
 import express from "express";
 
 
@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(express.json());
 const port = 3000;
 
-let svc = new PizzaService()
+let svc = new EventoService()
  
 //1
 app.get('/getAll', async (req, res) => {
@@ -22,7 +22,7 @@ app.get('/getAll', async (req, res) => {
   console.log(resultado);
 })
 
-
+/*
 app.get('/getbyid/:id', async (req, res) => {
 try {
   let resultado = await svc.getById(req.params.id);
@@ -70,7 +70,7 @@ app.delete('/delete/:id', async (req, res) => {
   res.send(resultado);
 })
 
-/*
+
 
 console.log(result.recordsets.length) //recuento de conjuntos de registros devueltos por el procedimiento
 console.log(result.recordsets[0].length) //recuento de filas devueltas en el primer conjunto de registros
