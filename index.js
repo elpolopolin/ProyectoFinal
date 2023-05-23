@@ -22,7 +22,7 @@ app.get('/getAll', async (req, res) => {
   console.log(resultado);
 })
 
-/*
+
 app.get('/getbyid/:id', async (req, res) => {
 try {
   let resultado = await svc.getById(req.params.id);
@@ -70,18 +70,6 @@ app.delete('/delete/:id', async (req, res) => {
   res.send(resultado);
 })
 
-
-
-console.log(result.recordsets.length) //recuento de conjuntos de registros devueltos por el procedimiento
-console.log(result.recordsets[0].length) //recuento de filas devueltas en el primer conjunto de registros
-console.log(result.recordsets[0]) // primer registro de los registros
-console.log(result.recordsets)
-console.log(result.returnValue) // procedimiento devuelve valor
-console.log(result.output) // key/value coleccion de valores de salida
-console.log(result.rowsAffected) // el numero de rows (filas) afectados por las declaraciones ejecutadas
-
-process.exit();
-*/
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

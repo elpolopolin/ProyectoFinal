@@ -4,7 +4,7 @@ const config = {
 
     user    : 'Eventop',
     password: 'VivaLaMuzza123',
-    server: 'DESKTOP-885T6PK\SQLEXPRESS',
+    server: 'A-PHZ2-LUM-15',
     database: 'ProyectoFinal',
     options : {
         trustServerCertificate  : true,
