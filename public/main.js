@@ -1,5 +1,6 @@
 function getAll () {
-
+    document.getElementById("boton1").innerHTML = "GetAll";
+    document.getElementById("evento-verMas").innerHTML = "";
     axios
     .get("http://localhost:3000/getAll")
 
@@ -41,11 +42,13 @@ function getAll () {
 
     .catch((error) => {
         console.log(error);
-    })
+    })  
 
     }
 
     function verMas(id) {
+        document.getElementById("evento-list").innerHTML = "";
+        document.getElementById("boton1").innerHTML = "Regresar";
         url = "http://localhost:3000/getbyid/" + id;
     
         axios
@@ -54,12 +57,30 @@ function getAll () {
         .then((result) => {
             var resultado = result.data
             console.log(resultado);
-                
+
                 let table = '';
                 table += `
+                
                 <center>
-                        <img src="${resultado.ImagenEvento}">
-                        <h2> ${resultado.Nombre} </h2>
+                                        <ul class="list-group">
+                        <li class="list-group-item"><img src="${resultado.ImagenEvento}"></li>
+                        <li class="list-group-item"><h2> ${resultado.Nombre} </h2></li>
+                        <li class="list-group-item"><p> ${resultado.Descripcion} </p></li>
+                        <li class="list-group-item"><b>Capacidad: ${resultado.Participantes} Participantes</li>
+                        <li class="list-group-item">Precio: ${resultado.Precio}</li>
+
+                        `
+                        if (resultado.Publico == true) {
+                            table += `<li class="list-group-item">Direccion: <p class="text-success"> ${resultado.Direccion} </p> </li>`
+                        }
+                        else {
+                           table += `<li class="list-group-item">Direccion: <b class="text-danger">Privada</b> </li>`
+                        }
+
+                        table += `
+                       
+                        
+                        </ul>    
                 </center>
 
                 `

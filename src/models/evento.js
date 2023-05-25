@@ -8,24 +8,25 @@ class Evento {
     participantes;
     descripcion;
     direccion;
+    publico;
     colaboradores;
     invitados;
     edadMinima;
     edadMaxima;
 
     
-    constructor (a,b,c,d,e,f,g,h,i,j){
+    constructor (a,b,c,d,e,f,g,h,i,j,k){
         this.nombre = a;
         this.fecha = b;
         this.precio = c;
         this.participantes = d;
         this.descripcion = e;
         this.direccion =f;
-        this.colaboradores = g;
-        this.invitados = h;
-        this.edadMinima = i;
-        this.edadMaxima = j;
-
+        this.publico = g;
+        this.colaboradores = h;
+        this.invitados = i;
+        this.edadMinima = j;
+        this.edadMaxima = k;
     }
 }
 
