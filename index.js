@@ -1,8 +1,11 @@
 import config from "./dbconfig.js";
 import sql from 'mssql';
 import EventoService from "./src/services/evento-service.js";
+import UsuarioService from "./src/services/usuario-service.js";
 import Pizza from "./src/models/evento.js";
+import Usuario from "./src/models/usuario.js";
 import express from "express";
+
 
 
 const app = new express();
@@ -22,6 +25,14 @@ app.get('/getAll', async (req, res) => {
   console.log(resultado);
 })
 
+//GET ALL USUARIOS
+app.get('/getAll/usuario', async (req, res) => {
+  
+  let resultado = await svc.getAllUsuario();
+  res.send(resultado);
+  console.log(resultado);
+})
+
 
 app.get('/getbyid/:id', async (req, res) => {
 try {
@@ -34,16 +45,24 @@ try {
  
 })
 
-//revisar
+//insert de usuario
 app.post('/insert', async (req, res) => {
+
   let resultado = null;
-     let pizza = new Pizza ();
-     pizza.nombre = req.body.Nombre;
-     pizza.libreGluten = req.body.LibreGluten;
-     pizza.importe = req.body.Importe;
-     pizza.descripcion = req.body.Descripcion;
-    console.log(pizza);
-    resultado = await svc.insert(pizza);
+     let usuario = new Usuario ();
+     usuario.nombreUsuario = req.body.NombreUsuario;
+     usuario.contraseña = req.body.Contraseña;
+     usuario.nombre = req.body.Nombre;
+     usuario.apellido = req.body.Apellido;
+     usuario.fechaNacimiento = req.body.FechaNacimiento;
+     usuario.genero = req.body.genero;
+     usuario.fechaCreacion = req.body.FechaCreacion;
+     usuario.descripcion = req.body.Descripcion;
+     usuario.direccion = req.body.Direccion;
+     usuario.fotoPerfil = req.body.FotoPerfil;
+
+    console.log(usuario);
+    resultado = await svc.insert(usuario);
     res.send(resultado);
     console.log(resultado)
  
