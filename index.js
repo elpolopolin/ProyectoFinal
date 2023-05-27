@@ -5,8 +5,7 @@ import UsuarioService from "./src/services/usuario-service.js";
 import Pizza from "./src/models/evento.js";
 import Usuario from "./src/models/usuario.js";
 import express from "express";
-
-
+import multer from "multer";
 
 const app = new express();
 
@@ -15,7 +14,26 @@ app.use(express.static('public'));
 app.use(express.json());
 const port = 3000;
 
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, './uploads')
+      },
+      filename: function (req, file, cb) {
+        const ext = file.orinalname.split('.').pop()
+        cb(null, `${Date.now()}.${ext} `)
+      }
+    })
+
+    const upload = multer({ storage })
+
+    app.post('/upload', upload.single('file'), (req, res) =>
+  {
+    res.send({ data: 'Imagen cargada'})
+    
+  })
+
 let svc = new EventoService()
+let svc2 = new UsuarioService()
  
 //1
 app.get('/getAll', async (req, res) => {
@@ -28,7 +46,7 @@ app.get('/getAll', async (req, res) => {
 //GET ALL USUARIOS
 app.get('/getAll/usuario', async (req, res) => {
   
-  let resultado = await svc.getAllUsuario();
+  let resultado = await svc2.getAllUsuario();
   res.send(resultado);
   console.log(resultado);
 })
@@ -62,7 +80,7 @@ app.post('/insert', async (req, res) => {
      usuario.fotoPerfil = req.body.FotoPerfil;
 
     console.log(usuario);
-    resultado = await svc.insert(usuario);
+    resultado = await svc2.insert(usuario);
     res.send(resultado);
     console.log(resultado)
  

@@ -16,7 +16,7 @@ function getAll () {
             resultado.forEach((unEvento, index) => {
                 table += `
                 <div class="col-3">
-                    <div class="card mb-4" style="width: 18rem;">
+                    <div class="card mb-4" >
                             <img src="${unEvento.ImagenEvento}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">${unEvento.Nombre}</h5>
@@ -117,7 +117,7 @@ function getAll () {
        <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento">
        <input placeholder="genero" type="checkbox" id="textGenero"> 
        <input placeholder="Direccion" type="text" id="textDireccion"> 
-     <input placeholder="Foto Perfil" type="file" id="textFotoPerfil" accept="image/jpg"/> 
+    <form enctype="multipart/form-data" action="/upload" method="post"> <input placeholder="Foto Perfil" type="file" id="textFotoPerfil" accept="image/jpg"/> <button class="btn btn-primary" onClick="">Upload</button> </form> 
         <br> <br> 
         <button onClick="Registro()">Registrarse</button>
         
@@ -126,6 +126,7 @@ function getAll () {
 
     }
 
+    
 
 function Registro() {
 
@@ -199,13 +200,13 @@ function Usuarios () {
            /*    edad = (year - naciemientoAño); */
 
                 table += `
-                
-                <div class="col-3 mb-4">
+              
+                <div class="col-3 ">
   
        
-                <img src="${unUsuario.FotoPerfil}" class="" style= "height: 200px; width: auto; border-radius: 50%;">
+                <img src="${unUsuario.FotoPerfil}" class="" style= "height: 200px; width: auto; border-radius: 50%; width:100%; height: auto; max-width:250px; max-height: 250px; background-color: transparent">
                  
-              <div class="flex-grow-1 ms-3">
+              <div class="flex-grow-1 ms-3 mb-4">
                 <h5 class="mb-1">${unUsuario.NombreUsuario}</h5>
                 <p class="mb-2 pb-1" style="color: #2b2a2a;">${unUsuario.Nombre} ${unUsuario.Apellido}</p>
                 <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
