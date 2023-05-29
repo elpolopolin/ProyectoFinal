@@ -7,30 +7,22 @@ import Usuario from "./src/models/usuario.js";
 import express from "express";
 import multer from "multer";
 
+
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '.jpg');
+  }
+});
+
+const upload = multer({ storage: storage });
+
 const app = new express();
 
 app.use(express.static('public'));
 
 app.use(express.json());
 const port = 3000;
-
-    const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, './uploads')
-      },
-      filename: function (req, file, cb) {
-        const ext = file.orinalname.split('.').pop()
-        cb(null, `${Date.now()}.${ext} `)
-      }
-    })
-
-    const upload = multer({ storage })
-
-    app.post('/upload', upload.single('file'), (req, res) =>
-  {
-    res.send({ data: 'Imagen cargada'})
-    
-  })
 
 let svc = new EventoService()
 let svc2 = new UsuarioService()
@@ -86,6 +78,10 @@ app.post('/insert', async (req, res) => {
  
 
 })
+
+app.post('/upload', upload.single('avatar'), (req, res) => {
+  res.send('Archivo subido correctamente');
+});
 
 app.put('/update/:id', async function (req,res) {
 

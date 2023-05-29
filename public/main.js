@@ -110,16 +110,19 @@ function getAll () {
         <a href="https://mdbootstrap.com/docs/standard/extended/registration/">Templates de registro</a>
         <br> <br>
         
-       <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario"> 
-       <input placeholder="Contraseña" type="password" id="textContraseña"> 
-       <input placeholder="Nombre" type="text" id="textNombre"> 
-       <input placeholder="Apellido" type="text" id="textApellido"> 
-       <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento">
-       <input placeholder="genero" type="checkbox" id="textGenero"> 
-       <input placeholder="Direccion" type="text" id="textDireccion"> 
-    <form enctype="multipart/form-data" action="/upload" method="post"> <input placeholder="Foto Perfil" type="file" id="textFotoPerfil" accept="image/jpg"/> <button class="btn btn-primary" onClick="">Upload</button> </form> 
+        
+        <form onSubmit="Registro()">
+       <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario" required> 
+       <input placeholder="Contraseña" type="password" id="textContraseña" required> 
+       <input placeholder="Nombre" type="text" id="textNombre" required> 
+       <input placeholder="Apellido" type="text" id="textApellido" required> 
+       <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
+       <input placeholder="genero" type="checkbox" id="textGenero" required> 
+       <input placeholder="Direccion" type="text" id="textDireccion" required> 
+         
         <br> <br> 
-        <button onClick="Registro()">Registrarse</button>
+        <button onClick="">Registrarse</button>
+        </form>
         
         `
 
@@ -137,33 +140,35 @@ function Registro() {
     nombre = document.getElementById("textNombre").value;
     apellido = document.getElementById("textApellido").value;
     fechaNacimiento = document.getElementById("textFechaNacimiento").value;
-    genero = document.getElementById("textGenero").Checked;
+    genero = document.getElementById("textGenero").check;
     direccion = document.getElementById("textDireccion").value;
-    fotoPerfil = document.getElementById("textFotoPerfil").value;
+    fotoPerfil = null;
     
-    let fechaCreacion = new Date().toLocaleString();
+    
+    let fechaCreacion = new Date();
+   let nacimiento = new Date(fechaNacimiento);
 
     let objUsuario = {
         NombreUsuario: nombreUsuario,
         Contraseña: contraseña,
         Nombre: nombre,
         Apellido: apellido,
-        FechaNaciemiento: fechaNacimiento,
+        FechaNaciemiento: nacimiento,
         Genero: genero,
-        FechaCreacion: null,
+        FechaCreacion: fechaCreacion,
         Descripcion: null,
         Direccion: direccion,
         FotoPerfil: fotoPerfil
     }
 
-    
+   
     axios
 
     .post (url, objUsuario)
 
     .then ((result) => {
-        
-        getAll();
+      
+     ImgUsuario();
         
     })
 
@@ -171,6 +176,15 @@ function Registro() {
         console.log(error);
     })
 
+}
+
+function ImgUsuario() {
+    document.getElementById("Registro").innerHTML = ` <br>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+     <input type="file" name="avatar" accept="image/jpeg">
+     <button type="submit">Subir Avatar</button>
+         </form>
+         `
 }
 
 
@@ -209,7 +223,7 @@ function Usuarios () {
               <div class="flex-grow-1 ms-3 mb-4">
                 <h5 class="mb-1">${unUsuario.NombreUsuario}</h5>
                 <p class="mb-2 pb-1" style="color: #2b2a2a;">${unUsuario.Nombre} ${unUsuario.Apellido}</p>
-                <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                <div class="d-flex justify-content-center rounded-3 p-2 mb-2"
                   style="background-color: #efefef;">
                   <div>
                     <p class="small text-muted mb-1">Eventos</p>
