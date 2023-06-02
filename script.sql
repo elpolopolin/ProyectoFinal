@@ -1,28 +1,30 @@
 USE [ProyectoFinal2]
 GO
-
-/****** Object:  User [Eventop]    Script Date: 2/6/2023 09:48:38 ******/
-CREATE USER [Eventop] FOR LOGIN [Eventop] WITH DEFAULT_SCHEMA=[dbo]
-GO
-ALTER ROLE [db_owner] ADD MEMBER [Eventop]
-GO
-/****** Object:  Table [dbo].[Amistades]    Script Date: 2/6/2023 09:48:38 ******/
+/****** Object:  Table [dbo].[Amistades]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Amistades](
-	IdUsuario INTEGER,             
-	IdUsuario_FK INTEGER         
+	[IdUsuario] [int] NULL,
+	[IdUsuario_FK] [int] NULL
 ) ON [PRIMARY]
 GO
-ALTER TABLE Amistades ADD CONSTRAINT FK_User_Friends FOREIGN KEY (IdUsuario) REFERENCES Usuario(Id);              
-ALTER TABLE Amistades ADD CONSTRAINT FK_User_FK_Friends FOREIGN KEY (idUser_FK) REFERENCES Usuario(Id);                
+/****** Object:  Table [dbo].[Categoria]    Script Date: 2/6/2023 11:47:31 ******/
+SET ANSI_NULLS ON
 GO
-INSERT INTO Amistades VALUES(1,2); 
-INSERT INTO Amistades VALUES(1,3); 
+SET QUOTED_IDENTIFIER ON
 GO
-/****** Object:  Table [dbo].[Colaborador_x_Evento]    Script Date: 2/6/2023 09:48:38 ******/
+CREATE TABLE [dbo].[Categoria](
+	[idCategoria] [int] NOT NULL,
+	[NombreCategoria] [varchar](50) NULL
+ CONSTRAINT [PK_Categoria] PRIMARY KEY CLUSTERED 
+(
+	[idCategoria] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Colaborador_x_Evento]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,7 +34,7 @@ CREATE TABLE [dbo].[Colaborador_x_Evento](
 	[IdEvento] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Evento]    Script Date: 2/6/2023 09:48:38 ******/
+/****** Object:  Table [dbo].[Evento]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -51,13 +53,14 @@ CREATE TABLE [dbo].[Evento](
 	[EdadMinima] [float] NULL,
 	[EdadMaxima] [float] NULL,
 	[ImagenEvento] [varchar](max) NULL,
+	[idCategoria] [int] NULL,
  CONSTRAINT [PK_Evento] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Invitado_x_evento]    Script Date: 2/6/2023 09:48:38 ******/
+/****** Object:  Table [dbo].[Invitado_x_evento]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -67,7 +70,7 @@ CREATE TABLE [dbo].[Invitado_x_evento](
 	[IdEvento] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Participante_x_Evento]    Script Date: 2/6/2023 09:48:38 ******/
+/****** Object:  Table [dbo].[Participante_x_Evento]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -77,7 +80,7 @@ CREATE TABLE [dbo].[Participante_x_Evento](
 	[IdEvento] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 2/6/2023 09:48:38 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 2/6/2023 11:47:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -89,7 +92,7 @@ CREATE TABLE [dbo].[Usuario](
 	[Nombre] [varchar](150) NULL,
 	[Apellido] [varchar](150) NULL,
 	[FechaNacimiento] [datetime] NULL,
-	[Genero] [bit] NULL,
+	[Genero] [varchar](150) NULL,
 	[FechaCreacion] [datetime] NULL,
 	[Descripcion] [varchar](max) NULL,
 	[Direccion] [varchar](50) NOT NULL,
@@ -100,13 +103,16 @@ CREATE TABLE [dbo].[Usuario](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-INSERT [dbo].[Amistades] ([IdUsuario1], [IdUsuario2], [FechaAmistad]) VALUES (1, 2, CAST(N'2023-02-22' AS Date))
+INSERT [dbo].[Amistades] ([IdUsuario], [IdUsuario_FK]) VALUES (1, 2)
+INSERT [dbo].[Amistades] ([IdUsuario], [IdUsuario_FK]) VALUES (1, 3)
+GO
+INSERT [dbo].[Categoria] ([idCategoria], [NombreCategoria]) VALUES (1, N'Juegos de mesa')
 GO
 SET IDENTITY_INSERT [dbo].[Evento] ON 
 
-INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento]) VALUES (1, N'Fiesta Milagrosa', CAST(N'2023-06-24T00:00:00.000' AS DateTime), 800, 200, N'La mejor joda estilo proyecto X.', N'Guardia Vieja 4000', 1, NULL, NULL, 16, 30, N'https://cpad.ask.fm/379/040/503/-389996995-1ss3e9t-jmbfo9dgb80758a/original/noche.jpg')
-INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento]) VALUES (2, N'Torneo Truco', CAST(N'2023-02-22T00:00:00.000' AS DateTime), 500, 8, N'Torneo de Truco los viernes. El torneo consta de 4 equipos con dos integrantes cada uno, el equipo ganador se llevara el increible premio de 4000 mil pesos', N'Malabia y Paraguay', 0, NULL, NULL, 14, 99, N'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-jqeGOaK32uBiLQndOYQybwwjHjuZ0tl79EvNTRUN4e6EYaSTSTaXguDJeKfOX9GCC9I&usqp=CAU')
-INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento]) VALUES (10, N'Partido F11', CAST(N'2023-06-24T00:00:00.000' AS DateTime), 730, 22, N'Partido de futbol 11 vs 11', N'Kdt Salguero', 1, NULL, NULL, 17, 27, N'')
+INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento], [idCategoria]) VALUES (1, N'Fiesta Milagrosa', CAST(N'2023-06-24T00:00:00.000' AS DateTime), 800, 200, N'La mejor joda estilo proyecto X.', N'Guardia Vieja 4000', 1, NULL, NULL, 16, 30, N'https://cpad.ask.fm/379/040/503/-389996995-1ss3e9t-jmbfo9dgb80758a/original/noche.jpg', NULL)
+INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento], [idCategoria]) VALUES (2, N'Torneo Truco', CAST(N'2023-02-22T00:00:00.000' AS DateTime), 500, 8, N'Torneo de Truco los viernes. El torneo consta de 4 equipos con dos integrantes cada uno, el equipo ganador se llevara el increible premio de 4000 mil pesos', N'Malabia y Paraguay', 0, NULL, NULL, 14, 99, N'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-jqeGOaK32uBiLQndOYQybwwjHjuZ0tl79EvNTRUN4e6EYaSTSTaXguDJeKfOX9GCC9I&usqp=CAU', NULL)
+INSERT [dbo].[Evento] ([Id], [Nombre], [Fecha], [Precio], [Participantes], [Descripcion], [Direccion], [Publico], [Colaboradores], [Invitados], [EdadMinima], [EdadMaxima], [ImagenEvento], [idCategoria]) VALUES (10, N'Partido F11', CAST(N'2023-06-24T00:00:00.000' AS DateTime), 730, 22, N'Partido de futbol 11 vs 11', N'Kdt Salguero', 1, NULL, NULL, 17, 27, N'', NULL)
 SET IDENTITY_INSERT [dbo].[Evento] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] ON 
@@ -114,17 +120,15 @@ SET IDENTITY_INSERT [dbo].[Usuario] ON
 INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (1, N'DominikPoleto', N'1', N'Domingo', N'Sarmiento', CAST(N'2005-12-04T00:00:00.000' AS DateTime), 1, CAST(N'2023-06-24T00:00:00.000' AS DateTime), N'Un hombre con gustos refinados', N'Buenos Aires', N'https://lh3.googleusercontent.com/P8jSjd8WGq2g6wNrhN7y9a6u0iJa0D1oH6M4K9_shMih8R2fLqfuQwRIvpYqu5bjzGYscv_N9wg_TtxFxI1jxBLeiEk8q7oodkiY-LOfLJG6N0UOmJTXT1HxNhDAelESLK9io9exE0r6IMIEbKn4-hnZWaKffh604oHD5aG5D_qZwLIY7K5nKj-AuS0IGRlMy1onzHVHZhv-l4xid71w3Jpw-bFyYqK3pcf3deCL2CXHqhZmlgmz4LKuqU-eEBu69n4IJok2M54Tgejef-gVm8uEbXf07AdKJU5l6LxSKlIlA790W4b63VJZ9Z6DV8rvXWKhQV-6ty1PzR__RPlwM54TRnFWyQbXcaQbqVzmXPkvdZLOQwP_QXjRwcil17vzlKSlOqIAPYMT1N5G7Z_zV9SZDbczxtpweKOUceub-7F10V-UUxQ9Sy4ynZ3vFYrPgoN8IOYgXzzMTFq2f6zsq4qpcB4HImKTBSY2yECJSMtHnocVFONwihMFUrI0TkzYgsR3wzEpVMIh57tqGPcmDZltwv1qUP-CSlcD1N4mljeKkLIZe0ySfjshgOJh7SlqxHDJc0S10R1kwluS7oCulZnwAz2OoVhiO5chyNyX5nN5FZBCLHyrw87cYvkAYutru6qh3USMnHsfWb0JB_8BubFJD6AqpT-A7zpr4hj6-De_LocXZpEwa_DuV739Rs3LArsON88kpIEThk2JoAjjrTooCGXHT6VJgrPfHogV7IZ-uJfJEdOHy8lud1VePM7f4ygGMkhw6LuJR8n-fbb0PJTVXVsWwhHe9CpV8xNIdoV32DBiPS2o6os107tNikQL6qe7PxBHEiYuGFa4TkRR1rGjfgLkojQNR0W6BnXksJpBfTvBKnaC96CuZC_qwmSC5Y6uJdW3RyZbCXf6v14T6xUC7s0cKz7cALN3ykWUwkOKrdT35Sm7bMXs7KxFQ5MSYttu6zIVpsIiSOcPqA=w545-h969-s-no?authuser=0')
 INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (2, N'SebasPolo', N'2', N'Sebastian', N'Polonsky', CAST(N'1965-11-14T00:00:00.000' AS DateTime), 1, CAST(N'2023-06-24T00:00:00.000' AS DateTime), N'Me gusta el tennis y el cricket', N'Buenos Aires', N'/img/fotto')
 INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (3, N'has ', N'123', N'sta', N'asf', NULL, NULL, CAST(N'2023-06-02T11:41:55.707' AS DateTime), NULL, N'asfdan 123', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (4, N'a ver si funka', N'sdds', N'sdsd', N'sddssd', NULL, NULL, CAST(N'2023-06-02T14:17:38.230' AS DateTime), NULL, N'12', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (5, N'a ver si funka', N'sdds', N'cxd', N'sdds', NULL, NULL, CAST(N'2023-06-02T14:19:21.213' AS DateTime), NULL, N'sdsd', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (6, N'a ver si funka', N'sdds', N'sdsd', N'dasda', NULL, NULL, CAST(N'2023-06-02T14:20:00.390' AS DateTime), NULL, N'2121', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (7, N'a ver si funka', N'sdds', N'sdsd', N'sdsd', NULL, NULL, CAST(N'2023-06-02T14:20:44.110' AS DateTime), NULL, N'2121', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (8, N'a ver si funka', N'sdds', N'22', N'22', NULL, NULL, CAST(N'2023-06-02T14:21:32.197' AS DateTime), NULL, N'22', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (9, N'a ver si funkads', N'sdds', N'dssd', N'sd', NULL, NULL, CAST(N'2023-06-02T14:22:58.260' AS DateTime), NULL, N'21', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (10, N'fdf', N'sdds', N'fddf', N'fdfd', NULL, NULL, CAST(N'2023-06-02T14:25:42.330' AS DateTime), NULL, N'sd', NULL)
+INSERT [dbo].[Usuario] ([Id], [NombreUsuario], [Contraseña], [Nombre], [Apellido], [FechaNacimiento], [Genero], [FechaCreacion], [Descripcion], [Direccion], [FotoPerfil]) VALUES (11, N'Camila_Navarro', N'pololove', N'camila', N'navarro', NULL, NULL, CAST(N'2023-06-02T14:35:03.490' AS DateTime), NULL, N'malabia 287', N'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH2h4-vffniu-BiaeF66Kh_gw9lZUFjYXx7BWZo6BEqEi6SuAxIWMS-fZGIChJ0A6bvbM&usqp=CAU')
 SET IDENTITY_INSERT [dbo].[Usuario] OFF
-GO
-ALTER TABLE [dbo].[Amistades]  WITH CHECK ADD  CONSTRAINT [FK_Amistades_Usuario] FOREIGN KEY([IdUsuario1])
-REFERENCES [dbo].[Usuario] ([Id])
-GO
-ALTER TABLE [dbo].[Amistades] CHECK CONSTRAINT [FK_Amistades_Usuario]
-GO
-ALTER TABLE [dbo].[Amistades]  WITH CHECK ADD  CONSTRAINT [FK_Amistades_Usuario1] FOREIGN KEY([IdUsuario2])
-REFERENCES [dbo].[Usuario] ([Id])
-GO
-ALTER TABLE [dbo].[Amistades] CHECK CONSTRAINT [FK_Amistades_Usuario1]
 GO
 ALTER TABLE [dbo].[Colaborador_x_Evento]  WITH CHECK ADD  CONSTRAINT [FK_Colaborador_x_Evento_Evento] FOREIGN KEY([IdEvento])
 REFERENCES [dbo].[Evento] ([Id])
