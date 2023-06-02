@@ -9,13 +9,13 @@ BEGIN
 	PRINT 'Creando Login'
 	CREATE LOGIN [Eventop] WITH 
 		PASSWORD=N'VivaLaMuzza123', 
-		DEFAULT_DATABASE=[ProyectoFinal], 
+		DEFAULT_DATABASE=[ProyectoFinal2], 
 		CHECK_EXPIRATION=OFF, 
 		CHECK_POLICY=OFF
 END
 GO
 
-USE [ProyectoFinal]
+USE [ProyectoFinal2]
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE [name] = N'Evento')
 BEGIN
 	PRINT 'Creando User'

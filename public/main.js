@@ -133,7 +133,7 @@ function getAll () {
 
 function Registro() {
 
-    url = "http://localhost:3000/insert/" ;
+    url = "http://localhost:3000/usuarios/insert/" ;
 
     nombreUsuario = document.getElementById("textNombreUsuario").value;
     contraseña = document.getElementById("textContraseña").value;
@@ -195,7 +195,7 @@ function Usuarios () {
     document.getElementById("evento-verMas").innerHTML = "";
     
     axios
-    .get("http://localhost:3000/getAll/usuario")
+    .get("http://localhost:3000/usuarios/getAll/")
 
     .then((result) => {
         var resultado = result.data
