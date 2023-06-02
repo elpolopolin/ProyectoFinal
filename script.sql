@@ -1,8 +1,6 @@
 USE [ProyectoFinal2]
 GO
-/****** Object:  User [alumno]    Script Date: 2/6/2023 09:48:38 ******/
-CREATE USER [alumno] FOR LOGIN [alumno] WITH DEFAULT_SCHEMA=[dbo]
-GO
+
 /****** Object:  User [Eventop]    Script Date: 2/6/2023 09:48:38 ******/
 CREATE USER [Eventop] FOR LOGIN [Eventop] WITH DEFAULT_SCHEMA=[dbo]
 GO
@@ -14,10 +12,15 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Amistades](
-	[IdUsuario1] [int] NOT NULL,
-	[IdUsuario2] [int] NOT NULL,
-	[FechaAmistad] [date] NOT NULL
+	IdUsuario INTEGER,             
+	IdUsuario_FK INTEGER         
 ) ON [PRIMARY]
+GO
+ALTER TABLE Amistades ADD CONSTRAINT FK_User_Friends FOREIGN KEY (IdUsuario) REFERENCES Usuario(Id);              
+ALTER TABLE Amistades ADD CONSTRAINT FK_User_FK_Friends FOREIGN KEY (idUser_FK) REFERENCES Usuario(Id);                
+GO
+INSERT INTO Amistades VALUES(1,2); 
+INSERT INTO Amistades VALUES(1,3); 
 GO
 /****** Object:  Table [dbo].[Colaborador_x_Evento]    Script Date: 2/6/2023 09:48:38 ******/
 SET ANSI_NULLS ON
