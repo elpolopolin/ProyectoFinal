@@ -6,6 +6,7 @@ import EventoRouter from "./src/controllers/eventoController.js"
 import UsuarioRouter from "./src/controllers/usuarioController.js"
 import express from "express";
 import multer from "multer";
+import cors from "cors";
 
 
 const storage = multer.diskStorage({
@@ -21,6 +22,7 @@ const app = new express();
 
 app.use(express.static('public'));
 
+app.use(cors());
 app.use(express.json());
 const port = 3000;
 
