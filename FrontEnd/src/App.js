@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import axios from "axios";
 
 function App() {
+  let eventos = [];
+  const CargarEventos = function () {
+    axios
+      .get("http://localhost:3000/getAll")
+      .then((result) => {
+        const events = result.data;
+        events.map((event) => 
+          eventos.push(event)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      console.log(eventos)
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => CargarEventos()}> Cargar Eventos </button>
     </div>
   );
 }
