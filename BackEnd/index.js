@@ -9,7 +9,7 @@ import multer from "multer";
 
 
 const storage = multer.diskStorage({
-  destination: 'uploads/',
+  destination: '/public/uploads',
   filename: (req, file, cb) => {
     cb(null, Date.now() + '.jpg');
   }

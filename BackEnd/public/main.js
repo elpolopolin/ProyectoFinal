@@ -112,16 +112,15 @@ function getAll () {
         
         
         <form onSubmit="Registro()">
-       <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario" required> 
-       <input placeholder="Contraseña" type="password" id="textContraseña" required> 
-       <input placeholder="Nombre" type="text" id="textNombre" required> 
-       <input placeholder="Apellido" type="text" id="textApellido" required> 
-       <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
-       <input placeholder="genero" type="checkbox" id="textGenero" required> 
-       <input placeholder="Direccion" type="text" id="textDireccion" required> 
-         
-        <br> <br> 
-        <button onClick="">Registrarse</button>
+            <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario" required> 
+            <input placeholder="Contraseña" type="password" id="textContraseña" required> 
+            <input placeholder="Nombre" type="text" id="textNombre" required> 
+            <input placeholder="Apellido" type="text" id="textApellido" required> 
+            <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
+            <input placeholder="genero" type="text" id="textGenero" required> 
+            <input placeholder="Direccion" type="text" id="textDireccion" required> 
+            <br> <br> 
+            <button >Registrarse</button>
         </form>
         
         `
@@ -132,21 +131,22 @@ function getAll () {
     
 
 function Registro() {
-
+    
     url = "http://localhost:3000/usuarios/insert/" ;
 
+    alert('hola');
     nombreUsuario = document.getElementById("textNombreUsuario").value;
     contraseña = document.getElementById("textContraseña").value;
     nombre = document.getElementById("textNombre").value;
     apellido = document.getElementById("textApellido").value;
     fechaNacimiento = document.getElementById("textFechaNacimiento").value;
-    genero = document.getElementById("textGenero").check;
+    genero = document.getElementById("textGenero").value;
     direccion = document.getElementById("textDireccion").value;
-    fotoPerfil = null;
+    fotoPerfil = document.getElementById("textFotoPerfil").value;;
     
     
     let fechaCreacion = new Date();
-   let nacimiento = new Date(fechaNacimiento);
+   
 
     let objUsuario = {
         NombreUsuario: nombreUsuario,
@@ -160,33 +160,23 @@ function Registro() {
         Direccion: direccion,
         FotoPerfil: fotoPerfil
     }
-
+    
+   
    
     axios
 
     .post (url, objUsuario)
 
     .then ((result) => {
-      
-     ImgUsuario();
-        
+        console.log("ok");
     })
-
     .catch((error) => {
         console.log(error);
     })
+ 
+    
 
 }
-
-function ImgUsuario() {
-    document.getElementById("Registro").innerHTML = ` <br>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-     <input type="file" name="avatar" accept="image/jpeg">
-     <button type="submit">Subir Avatar</button>
-         </form>
-         `
-}
-
 
 function Usuarios () {
     document.getElementById("Registro").innerHTML = "";
