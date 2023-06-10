@@ -117,13 +117,23 @@ function getAll () {
        <input placeholder="Nombre" type="text" id="textNombre" required> 
        <input placeholder="Apellido" type="text" id="textApellido" required> 
        <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
-       <input placeholder="genero" type="checkbox" id="textGenero" required> 
+       
+       <select name="Genero" id="textGenero">
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        </select>
+
        <input placeholder="Direccion" type="text" id="textDireccion" required> 
          
         <br> <br> 
-        <button onClick="">Registrarse</button>
-        </form>
         
+        </form>
+        <br>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+         <input type="file" name="avatar" accept="image/jpeg">
+         <button type="submit" onClick="Registro()">Subir Avatar</button>
+             </form>
+             
         `
 
 
@@ -140,10 +150,13 @@ function Registro() {
     nombre = document.getElementById("textNombre").value;
     apellido = document.getElementById("textApellido").value;
     fechaNacimiento = document.getElementById("textFechaNacimiento").value;
-    genero = document.getElementById("textGenero").check;
+    genero = document.getElementById("textGenero").value;
     direccion = document.getElementById("textDireccion").value;
-    fotoPerfil = null;
+ 
+    fotoPerfil = "./uploads/";
     
+    
+
     
     let fechaCreacion = new Date();
    let nacimiento = new Date(fechaNacimiento);
@@ -168,7 +181,7 @@ function Registro() {
 
     .then ((result) => {
       
-     ImgUsuario();
+    
         
     })
 
