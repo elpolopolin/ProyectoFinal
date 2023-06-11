@@ -22,8 +22,9 @@ const app = new express();
 
 app.use(express.static('public'));
 
-app.use(cors());
+
 app.use(express.json());
+app.use(cors());
 const port = 3000;
 
 

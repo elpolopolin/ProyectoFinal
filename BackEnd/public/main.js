@@ -1,3 +1,4 @@
+
 function getAll () {
     document.getElementById("Registro").innerHTML = "";
     document.getElementById("botones").innerHTML = '<button id="boton1" onclick="getAll()">GetAll</button>    <button id="boton2" onclick="Registrarse()">Registrarse</button> <button id="boton3" onclick="Usuarios()">Ver Usuarios</button> <button id="boton4" onclick="crearEvento()">Crear Evento</button>';
@@ -112,7 +113,6 @@ function getAll () {
         
         
         <form onSubmit="Registro()">
-<<<<<<< HEAD:public/main.js
        <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario" required> 
        <input placeholder="Contraseña" type="password" id="textContraseña" required> 
        <input placeholder="Nombre" type="text" id="textNombre" required> 
@@ -120,36 +120,25 @@ function getAll () {
        <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
        
        <select name="Genero" id="textGenero">
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
+        <option id="textGenero value="Masculino">Masculino</option> 
+        <option value="Femenino" id="textGenero">Femenino</option> 
         </select>
 
        <input placeholder="Direccion" type="text" id="textDireccion" required> 
-         
+       <button type="submit" ">Registrarse</button>
+       </form>
         <br> <br> 
-=======
-            <input placeholder="Nombre de usuario" type="text" id="textNombreUsuario" required> 
-            <input placeholder="Contraseña" type="password" id="textContraseña" required> 
-            <input placeholder="Nombre" type="text" id="textNombre" required> 
-            <input placeholder="Apellido" type="text" id="textApellido" required> 
-            <input placeholder="fecha naciemiento" type="date" id="textFechaNacimiento" required>
-            <input placeholder="genero" type="text" id="textGenero" required> 
-            <input placeholder="Direccion" type="text" id="textDireccion" required> 
-            <br> <br> 
-            <button >Registrarse</button>
-        </form>
->>>>>>> 7ec15da89ef0027d2f4b7a5f8de7f83e541b2504:BackEnd/public/main.js
         
-        </form>
+        
+             
+        `
+        /* </form>
         <br>
         <form action="/upload" method="POST" enctype="multipart/form-data">
          <input type="file" name="avatar" accept="image/jpeg">
          <button type="submit" onClick="Registro()">Subir Avatar</button>
-             </form>
-             
-        `
-
-
+             </form> */ //subir imagen onda upload
+ 
     }
 
     
@@ -158,7 +147,7 @@ function Registro() {
     
     url = "http://localhost:3000/usuarios/insert/" ;
 
-    alert('hola');
+    
     nombreUsuario = document.getElementById("textNombreUsuario").value;
     contraseña = document.getElementById("textContraseña").value;
     nombre = document.getElementById("textNombre").value;
@@ -166,12 +155,8 @@ function Registro() {
     fechaNacimiento = document.getElementById("textFechaNacimiento").value;
     genero = document.getElementById("textGenero").value;
     direccion = document.getElementById("textDireccion").value;
-<<<<<<< HEAD:public/main.js
  
     fotoPerfil = "./uploads/";
-=======
-    fotoPerfil = document.getElementById("textFotoPerfil").value;;
->>>>>>> 7ec15da89ef0027d2f4b7a5f8de7f83e541b2504:BackEnd/public/main.js
     
     
 
@@ -199,13 +184,9 @@ function Registro() {
     .post (url, objUsuario)
 
     .then ((result) => {
-<<<<<<< HEAD:public/main.js
       
     
         
-=======
-        console.log("ok");
->>>>>>> 7ec15da89ef0027d2f4b7a5f8de7f83e541b2504:BackEnd/public/main.js
     })
     .catch((error) => {
         console.log(error);
