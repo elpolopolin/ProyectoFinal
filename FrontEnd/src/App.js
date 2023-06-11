@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Eventos from "./components/Eventos.js";
+import NavBar from "./components/NavBar";
 
 function App() {
 
+  const appStyle = {
+    backgroundColor: "rgba(37, 37, 37, 1)",
+  };
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
@@ -24,21 +29,14 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App container" style={appStyle}>
+      <br />
+      <Eventos eventos={eventos} />
+
       <br></br>
-      <div id="eventos" class="row">
-        {eventos.map((evento) => (
-          <div key={evento.Id} className="col-3" style={{ margin: "10px"}}>
-            <div className="card mb-4">
-              <img src={evento.ImagenEvento} className="card-img-top img-fluid" alt="..."  /> 
-              <div className="card-body">
-                <h4 className="card-title">{evento.Nombre}</h4>
-                <button /*onClick={() => MasInfo(evento.Id)}*/>Info</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <NavBar/>
+     
+      
     </div>
   );
 }
