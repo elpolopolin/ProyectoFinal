@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.image-fluid {
+  width: 200px; /* Establece el ancho de la imagen al 100% del contenedor */
+  height: 100px; /* Ajusta automáticamente la altura de la imagen proporcionalmente */
+}

@@ -1,26 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  let eventos = [];
-  const CargarEventos = function () {
+
+  const [eventos, setEventos] = useState([]);
+
+  useEffect(() => {
+    cargarEventos();
+  }, []);
+
+  const cargarEventos = () => {
     axios
       .get("http://localhost:3000/getAll")
       .then((result) => {
         const events = result.data;
-        events.map((event) => 
-          eventos.push(event)
-        );
+        setEventos(events);
       })
       .catch((error) => {
         console.log(error);
       });
-      console.log(eventos)
   };
+
   return (
     <div className="App">
-      <button onClick={() => CargarEventos()}> Cargar Eventos </button>
+      <br></br>
+      <div id="eventos" class="row">
+        {eventos.map((evento) => (
+          <div key={evento.Id} className="col-3" style={{ margin: "10px"}}>
+            <div className="card mb-4">
+              <img src={evento.ImagenEvento} className="card-img-top img-fluid" alt="..."  /> 
+              <div className="card-body">
+                <h4 className="card-title">{evento.Nombre}</h4>
+                <button /*onClick={() => MasInfo(evento.Id)}*/>Info</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
