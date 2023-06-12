@@ -10,6 +10,7 @@ function App() {
 
   const appStyle = {
     backgroundColor: "rgba(37, 37, 37, 1)",
+    
   };
   const [eventos, setEventos] = useState([]);
 
@@ -33,7 +34,7 @@ function App() {
     <div className="App container" style={appStyle}>
       <br />
       
-      
+
       <Eventos eventos={eventos}/>
       
       

@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 function Eventos({ eventos }) {
    
     return (
-        <div id="eventos" className="row" style={{objectPosition: 'center',  height: '600px', overflowY: 'scroll'}}>
+        <div id="eventos" className="row" style={{objectPosition: 'center',  height: '700px', overflowY: 'scroll'}}>
       {eventos.map((evento) => {
           let privacidad = "";
          let direccion = "";
