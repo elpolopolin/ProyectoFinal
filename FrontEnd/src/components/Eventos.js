@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 function Eventos({ eventos }) {
    
     return (
-        <div id="eventos" className="row">
+        <div id="eventos" className="row" style={{objectPosition: 'center',  height: '600px', overflowY: 'scroll'}}>
       {eventos.map((evento) => {
           let privacidad = "";
          let direccion = "";
@@ -27,7 +27,7 @@ function Eventos({ eventos }) {
          }
 
           return (
-            <div key={evento.Id} className="col-3 mb-4">
+            <div key={evento.Id} className="col-4 mb-4">
             <div className="card mb-4 h-100">
                 <img
                  src={evento.ImagenEvento}

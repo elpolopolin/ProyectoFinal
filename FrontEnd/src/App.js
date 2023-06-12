@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 
+
 function App() {
 
   const appStyle = {
@@ -31,13 +32,17 @@ function App() {
   return (
     <div className="App container" style={appStyle}>
       <br />
-      <Eventos eventos={eventos} />
-
-      <br></br>
-      <NavBar/>
+      
+      
+      <Eventos eventos={eventos}/>
+      
+      
+      
+      <NavBar></NavBar>
      
       
     </div>
+
   );
 }
 
