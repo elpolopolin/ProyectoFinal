@@ -54,15 +54,13 @@ class EventoService {
                                             .input('pDescripcion', sql.VarChar, evento.descripcion)
                                             .input('pDireccion', sql.VarChar, evento.direccion)
                                             .input('pPublico', sql.Bit, evento.publico)
-                                            .input('pColaboradores', sql.VarChar, evento.colaboradores)
-                                            .input('pInvitados', sql.VarChar, evento.invitados) //cambiar por id de invitados invitados..
                                             .input('pEdadMinima', sql.Float, evento.edadMinima)
                                             .input('pEdadMaxima', sql.Float, evento.edadMaxima)
                                             .input('pImagenEvento', sql.VarChar, evento.imagenEvento)
                                             .input('pidCategoria', sql.Int, evento.IdCategoria)
 
 
-                                            .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, Colaboradores, Invitados, EdadMinima, EdadMaxima, ImagenEvento, IdCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pColaboradores, @pInvitados, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
+                                            .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, IdCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
             rowsAffected = result.rowsAffected;
         } catch (error) {
             console.log(error);
