@@ -8,10 +8,7 @@ import NavBar from "./components/NavBar";
 
 function App() {
 
-  const appStyle = {
-    backgroundColor: "rgba(37, 37, 37, 1)",
-    
-  };
+ 
   const [eventos, setEventos] = useState([]);
 
   useEffect(() => {
@@ -31,16 +28,16 @@ function App() {
   };
 
   return (
-    <div className="App container" style={appStyle}>
+    <div className="App container" >
       <br />
       
-
+      <div className="eventos-container">
       <Eventos eventos={eventos}/>
+      </div>
       
-      
-      
+      <div className="bottom-navbar">
       <NavBar></NavBar>
-     
+      </div>
       
     </div>
 

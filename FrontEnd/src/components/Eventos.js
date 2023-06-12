@@ -8,7 +8,7 @@ function Eventos({ eventos }) {
       {eventos.map((evento) => {
           let privacidad = "";
          let direccion = "";
-    
+
           if (evento.Publico === false) {
            privacidad = "Solo Invitación";
           direccion = "Privada";
@@ -28,7 +28,7 @@ function Eventos({ eventos }) {
 
           return (
             <div key={evento.Id} className="col-4 mb-4">
-            <div className="card mb-4 h-100">
+            <div className="card mb-4 h-3">
                 <img
                  src={evento.ImagenEvento}
                 className="card-img-top  ink"
