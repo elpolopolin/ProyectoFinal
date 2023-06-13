@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; 
 import { format } from 'date-fns';
+
 
 function Eventos({ eventos }) {
   let numColumns = 3; // Número de columnas predeterminado
   if (eventos.length <= 2) {
     numColumns = eventos.length; // Mostrar 2 eventos en una fila
   }
+  const [mostrarEvento, setMostrarEvento] = useState(false);
+  const [EventoMostrar, setEventoMostrar] = useState({});
+
+  const handleClick = (evento) => {
+    setMostrarEvento(true);
+    setEventoMostrar(evento);
+    console.log(EventoMostrar);
+  };
 
   return (
     <div
@@ -38,7 +47,9 @@ function Eventos({ eventos }) {
         }
 
         return (
+          
           <div key={evento.Id} className="">
+            <div onClick={() => handleClick(evento)}>
             <div className="card mb-4">
               <img
                 src={evento.ImagenEvento}
@@ -59,6 +70,8 @@ function Eventos({ eventos }) {
               </div>
             </div>
           </div>
+          </div>
+          
         );
       })}
     </div>
