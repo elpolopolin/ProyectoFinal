@@ -14,7 +14,7 @@ function App() {
   const [username, setUsername] = useState(""); // Estado para almacenar el nombre de usuario
   const [password, setPassword] = useState(""); // Estado para almacenar la contraseña
   const [incorrecto, setIncorrecto] = useState("");
- 
+  const [UserLogged, setUserLogged] = useState({});
 
   useEffect(() => {
     cargarEventos();
@@ -62,6 +62,8 @@ function App() {
     );
     if (foundUser) {
       setIsLoggedIn(true);
+     setUserLogged(foundUser);
+     
     }
     else{
       setIncorrecto("Usuario o Contraseña Incorrecta");
@@ -101,7 +103,7 @@ function App() {
               </div>
 
               <div className="bottom-navbar">
-                <NavBar></NavBar>
+                <NavBar usuario={UserLogged}></NavBar>
               </div>
           </div>
       

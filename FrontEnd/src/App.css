@@ -34,17 +34,54 @@ body {
 .navbar-container {
   display: flex;
   justify-content: center;
+  
 }
 
 .navbar-white {
-
+  
   background-color: white;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 80%;
-  height: 40px;
-  object-position: center;
-
+  height: 45px;
 }
+
+.fotoPerfil {
+  position: fixed;
+  bottom: 2.5%;
+  left: 45%;
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
+}
+.fotoHome {
+  position: fixed;
+  bottom: 2.5%;
+  left: 11.5%;
+  height: 40px;
+  width: 40px;
+}
+.fotoAmigos {
+  position: fixed;
+  bottom: 2.5%;
+  left: 25%;
+  height: 40px;
+  width: 40px;
+}
+.fotoEntrada {
+  position: fixed;
+  bottom: 2.5%;
+  right: 25%;
+  height: 40px;
+  width: 40px;
+}
+.fotoCalendario {
+  position: fixed;
+  bottom: 2.5%;
+  right: 11.5%;
+  height: 40px;
+  width: 40px;
+}
+
 
 
 .ink {
@@ -57,9 +94,10 @@ body {
 
 .bottom-navbar {
   position: fixed;
-  bottom: 20px;
+  bottom: 2.3%;
   left: 0;
   width: 100%;
+  
 }
 
 :root { font-family: 'Inter', sans-serif; }
