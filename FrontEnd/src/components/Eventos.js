@@ -15,7 +15,7 @@ function Eventos({ eventos }) {
         display: "grid",
         gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
        gap: "1rem",
-        height: "660px",
+      height: '680px',
         overflowY: "scroll",
       }}
     >
@@ -50,11 +50,11 @@ function Eventos({ eventos }) {
                 <p className="card-text card-text-line">
                   {format(
                     new Date(evento.Fecha),
-                    "dd 'de' MMMM 'de' yyyy 'a las' HH'hs'"
+                    "dd 'de' MMMM 'de' yyyy ' ' HH'hs'"
                   )}
                 </p>
                 <p className="card-text card-text-line">{privacidad}</p>
-                <p className="card-text card-text-line">{direccion}</p>
+                <p className="card-text ">{direccion}</p>
                     
               </div>
             </div>
