@@ -1,46 +1,35 @@
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
  
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ 
   background-color: rgba(37, 37, 37, 1);
   margin-bottom: 50px; /* Espacio para la barra de navegación en la parte inferior */
   
  }
 
+ .home {
+  background-color: rgba(37, 37, 37, 1);
+ }
+
  .eventos-container {
- padding-top: 45px;
+  
+  padding-top: 35px;
+   
  }
 
  .App {
   background-color: rgba(37, 37, 37, 1);
   min-height: 100vh;
+ 
+  
 }
 
-
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-@media (min-height: 640px) {
-  .app-container {
-    flex-direction: row;
-    align-items: stretch;
-  }
-}
-.container {
-  align-items: center;
-  flex: 1;
-}
 
 .navbar-container {
   display: flex;
@@ -80,7 +69,7 @@ body {
 
 .card {
   border-radius: 8px;
-  
+  max-height: 200px;
 }
 .card-title {
   font-family: "Inter", sans-serif;
@@ -103,16 +92,25 @@ body {
   font-family: 'Inter', sans-serif;
 font-style: normal;
 font-weight: 600;
-font-size: 6px;
-
-line-height: 20px;
+font-size: 8.5px;
+line-height: 1.5;
 /* or 333% */
-
 display: flex;
 align-items: left;
-
 color: 
 rgba(0, 0, 0, 1);
+}
+
+.card-text-line {
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem; /* Ajusta el valor según tus necesidades */
+  margin-bottom: 0.5rem; /* Ajusta el valor según tus necesidades */
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
