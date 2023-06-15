@@ -10,6 +10,10 @@ function MostrarEvento({ evento }) {
         <h1 className="title">{evento.Nombre}</h1>
         <img src={evento.ImagenEvento} className="imagenEvento"></img>
         <p className="text-white">{evento.Descripcion}</p>
+        <hr></hr>
+
+        <h1>organizador del evento:</h1>
+
         </center>
     </div>
   );

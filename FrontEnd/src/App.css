@@ -23,8 +23,8 @@ body {
 
 .imagenEvento {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 88%;
+  height: 300px;
   border: 2px solid white; /* Grosor y color de los bordes */
   box-sizing: border-box;
 }
@@ -35,6 +35,21 @@ body {
  
 }
 
+.text-white{
+  font-family: "Inter", sans-serif;
+  font-size: small;
+  width: 80%;
+  line-height: 80px;
+  margin-bottom: 20px;
+}
+
+hr{
+  height: 2px;
+  background-color: rgb(253, 253, 253);
+  opacity: 100%;
+  width: 315px;
+}
+
 
 .navbar-container {
   display: flex;
@@ -43,11 +58,11 @@ body {
 }
 
 .navbar-white {
-  
   background-color: white;
   border-radius: 12px;
-  width: 80%;
+  width: 90%;
   height: 45px;
+  margin-bottom: auto;
 }
 
 .fotoPerfil {
@@ -199,6 +214,7 @@ font-style: normal;
 font-weight: 600;
 font-size: 100%;
 font-size: xx-large;
+line-height: 100px;
 
 
 align-items: left;
