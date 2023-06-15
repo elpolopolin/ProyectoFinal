@@ -4,6 +4,7 @@ import MostrarEvento from "./MostrarEvento";
 
 function Eventos({ eventos }) {
   let numColumns = 3; // Número de columnas predeterminado
+  const [searchTerm, setSearchTerm] = useState("");
   if (eventos.length <= 2) {
     numColumns = eventos.length; // Mostrar 2 eventos en una fila
   }
@@ -15,9 +16,30 @@ function Eventos({ eventos }) {
     setEventoMostrar(evento);
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredEventos = eventos.filter((evento) => {
+    return evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div>
       {!mostrarEvento && (
+        <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder="Buscar eventos por nombre"
+      />
+      
+
+      )}
+          
+
+      {!mostrarEvento && (
+         <div className="eventos-container">
         <div
           id="eventos"
           className="row container"
@@ -29,7 +51,9 @@ function Eventos({ eventos }) {
             overflowY: "scroll",
           }}
         >
-          {eventos.map((evento) => {
+            
+
+          {filteredEventos.map((evento) => {
             let privacidad = "";
             let direccion = "";
 
@@ -67,8 +91,11 @@ function Eventos({ eventos }) {
                   </div>
                 </div>
               </div>
+              
             );
           })}
+          </div>
+
         </div>
       )}
       {mostrarEvento && (
