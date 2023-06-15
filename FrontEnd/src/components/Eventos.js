@@ -16,6 +16,11 @@ function Eventos({ eventos }) {
     setEventoMostrar(evento);
   };
 
+  const handleClick2 = (evento) => {
+    setMostrarEvento(false);
+    
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -37,7 +42,6 @@ function Eventos({ eventos }) {
 
       )}
           
-
       {!mostrarEvento && (
          <div className="eventos-container">
         <div
@@ -101,6 +105,7 @@ function Eventos({ eventos }) {
       {mostrarEvento && (
         <div className="container">
         <MostrarEvento evento={eventoMostrar} />
+        <button onClick={handleClick2} className="btn btn-primary">Regresar</button>
         </div>
       )}
     </div>
