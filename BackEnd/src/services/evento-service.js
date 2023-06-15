@@ -21,6 +21,9 @@ class EventoService {
         return returnEntity;
     }
 
+    getAllConParticipantes = async () => { 
+    //SELECT * FROM Evento INNER JOIN Participante_x_Evento ON  Evento.Id = Participante_x_Evento.IdEvento
+    }
 
     getById = async (id) => {
         
