@@ -18,17 +18,21 @@ body {
  }
 
  .eventos-container {
-  
   padding-top: 35px;
-
- 
  }
+
+.imagenEvento {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid white; /* Grosor y color de los bordes */
+  box-sizing: border-box;
+}
 
  .App {
   background-color: rgba(37, 37, 37, 1);
   min-height: 100vh;
  
-  
 }
 
 
@@ -186,6 +190,20 @@ rgba(0, 0, 0, 1);
   to {
     transform: rotate(360deg);
   }
+}
+
+.title {
+
+  font-family: 'Inter', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 100%;
+font-size: xx-large;
+
+
+align-items: left;
+color: rgb(255, 255, 255);
+
 }
 
 
