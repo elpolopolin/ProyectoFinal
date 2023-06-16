@@ -29,6 +29,31 @@ body {
   box-sizing: border-box;
 }
 
+.lej {
+  line-height: 50px;
+}
+
+.Logo {
+  display: block;
+  width: 88%;
+  height: 50%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  
+}
+
+.inputt {
+  width: 88%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 55%;
+  height: 25px;
+  
+}
+
  .App {
   background-color: rgba(37, 37, 37, 1);
   min-height: 100vh;
@@ -318,6 +343,58 @@ color: rgb(255, 255, 255);
   border: none;
   color: #ffffff; /* Color del texto del botón */
  
+}
+
+/*Modal mas usuarios*/
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.participantes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.foto-perfil-modal {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 
