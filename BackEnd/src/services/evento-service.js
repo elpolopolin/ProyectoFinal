@@ -12,7 +12,8 @@ class EventoService {
         try {
             let pool    = await sql.connect(config);
             let result  = await pool.request()
-                                                .query('SELECT * FROM Evento')
+                                                .query('SELECT * FROM Evento ')
+                                                        
             returnEntity = result.recordset;
             console.log(returnEntity);
         } catch (error) {
@@ -29,7 +30,7 @@ class EventoService {
             let pool    = await sql.connect(config);
             let result  = await pool.request()
                                                 .input('pId', sql.Int, id)
-                                                .query('SELECT * FROM Evento INNER JOIN Participante_x_Evento ON  Evento.Id = Participante_x_Evento.IdEvento WHERE id = @pId');
+                                                .query('SELECT * FROM Participante_x_Evento INNER JOIN Evento ON  Participante_x_Evento.IdEvento = Evento.Id INNER JOIN Usuario ON  Participante_x_Evento.IdUsuario = Usuario.Id WHERE IdEvento = @pId');
             returnEntity = result.recordsets[0]; //
         } catch (error) {
             res.status(404).send('No se encontró (404)!!');
@@ -68,22 +69,22 @@ class EventoService {
         return rowsAffected;
     }
 
-    AsistentesXEvento = async (idEvento) => {
+    AsistentesXEvento = async () => {
         let returnEntity = null;
 
         console.log('estoy en:  EventoService.VerParticipantesEvento(id)');
         try {
             let pool   = await sql.connect(config);
             let result = await pool.request()
-                                            .input('pId', sql.Int, idEvento)
+                                        
             .query(`
-            SELECT	IdUsuario, IdEvento, Usuario.NombreUsuario, Usuario.Nombre, Usuario.Apellido, Usuario.Descripcion, Usuario.FotoPerfil, Usuario.Direccion
+            SELECT	IdEvento,IdUsuario, Usuario.NombreUsuario, Usuario.Nombre, Usuario.Apellido, Usuario.Descripcion, Usuario.FotoPerfil, Usuario.Direccion
                             
                         FROM Participante_x_Evento
                         INNER JOIN Evento ON Participante_x_Evento.IdEvento = Evento.Id
                         INNER JOIN Usuario ON Participante_x_Evento.IdUsuario = Usuario.Id
                         
-                        WHERE IdEvento = @pId`);
+                       `);
 
                         returnEntity = result.recordsets[0]; //
 
