@@ -24,7 +24,7 @@ function App() {
 
   const cargarEventos = () => {
     axios
-      .get("http://localhost:3000/getAll")
+      .get("https://4b21-2800-810-596-5c3-d1d8-58a4-8b9f-424f.ngrok-free.app/getAll")
       .then((result) => {
         const events = result.data;
         setEventos(events);
@@ -36,7 +36,7 @@ function App() {
 
   const cargarUsuarios = () => {
     axios
-      .get("http://localhost:3000/usuarios/getAll")
+      .get("https://4b21-2800-810-596-5c3-d1d8-58a4-8b9f-424f.ngrok-free.app/usuarios/getAll")
       .then((result) => {
         const users = result.data;
         setUsuarios(users);

@@ -23,6 +23,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
        placeholder="Nombre de usuario"
         
       />
+    
       <input
         type="password"
         value={password}
