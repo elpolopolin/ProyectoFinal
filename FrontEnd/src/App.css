@@ -38,19 +38,88 @@ body {
 .text-white{
   font-family: "Inter", sans-serif;
   font-size: small;
-  width: 80%;
-  line-height: 80px;
-  margin-bottom: 20px;
+  width: 100%;
+  line-height: 325%;
+  margin-bottom: 5%;
 }
 
-hr{
+.hr1{
   height: 2px;
   background-color: rgb(253, 253, 253);
   opacity: 100%;
-  width: 315px;
+  width: 95%;
+
+}
+
+.hr2{
+  height: 2px;
+  background-color: rgb(253, 253, 253);
+  opacity: 100%;
+  width: 95%;
+
+  
+  
+}
+
+.Dat-izq{
+  position: absolute;
+  height: 2%;
+  left: 5%;
+  top: 95%;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+  color: #ffffff;
+}
+
+.Dat-der{
+  position: absolute;
+  height: 2%;
+  left: 50%;
+  top: 95%;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: 120%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #ffffff;
+}
+
+.Datos{
+  flex: 1;
+  font-weight: bold;
+}
+
+.Logo-Fecha{
+  flex-direction: row;
+  flex: 10;
+  float: left;
+}
+
+.img-Calendario2{
+  width: 24%;
+  float: left;
+  margin: 0;
+}
+
+.Fecha-Evento{
+  width: 74%;
 }
 
 
+.Asisten-Evento{
+  display: block;
+  margin-top: auto;
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 .navbar-container {
   display: flex;
   justify-content: center;
