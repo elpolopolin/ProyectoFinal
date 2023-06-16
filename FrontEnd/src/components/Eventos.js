@@ -147,11 +147,14 @@ function Eventos({ eventos }) {
       )}
       {mostrarEvento && (
         <div className="container">
-          <MostrarEvento evento={eventoMostrar} />
-          <button onClick={handleClick2} className="btn btn-primary">
-            Regresar
+        
+          <button onClick={handleClick2} className="btn-transparent">
+            &lt;
           </button>
-        </div>
+         
+          <MostrarEvento evento={eventoMostrar} />
+        
+      </div>
       )}
     </div>
   );

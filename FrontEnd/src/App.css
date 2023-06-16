@@ -56,8 +56,6 @@ body {
   background-color: rgb(253, 253, 253);
   opacity: 100%;
   width: 95%;
-
-  
   
 }
 
@@ -66,7 +64,6 @@ body {
   height: 2%;
   left: 5%;
   top: 95%;
-
   font-family: 'Inter';
   font-style: normal;
   font-size: 120%;
@@ -300,5 +297,31 @@ align-items: left;
 color: rgb(255, 255, 255);
 
 }
+
+
+
+.flex-containert {
+  display: flex;
+  align-items: flex-start;
+}
+
+.btn-transparent {
+  display: flex;
+  font-size: 16px;
+  margin-top: -10px;
+  margin-left: -10px;
+  justify-content: flex-start;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  color: #ffffff; /* Color del texto del botón */
+ 
+}
+
+
+
+
 
 

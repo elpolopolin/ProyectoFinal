@@ -5,7 +5,7 @@ import Calendario2 from '../icons/Calendario2.png'
 
 function MostrarEvento({ evento }) {
     console.log(evento);
-    evento.fecha = toString(evento.fecha);
+    
   return (
     <div key={evento.Id} >
         <center>
@@ -26,11 +26,18 @@ function MostrarEvento({ evento }) {
           <p className="Datos">Rangos de edad: {evento.EdadMinima} - {evento.EdadMaxima}</p>
           <div className="Logo-Fecha">
           <img className="img-Calendario2" src={Calendario2}></img>
-          <p className="Fecha-Evento">{evento.Fecha}</p>
+          <p className="Fecha-Evento">
+          {format(
+                          new Date(evento.Fecha),
+                          "dd 'of' MMMM 'of' yyyy ' ' HH'hs'"
+                        )}
+          </p>
           </div>
         </div>
         
-        <hr className="hr2"></hr>
+        <hr className="hr2">
+          
+        </hr>
         
 
         </center>
