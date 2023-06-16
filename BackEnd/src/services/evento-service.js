@@ -21,10 +21,6 @@ class EventoService {
         return returnEntity;
     }
 
-    getAllConParticipantes = async () => { 
-    //SELECT * FROM Evento INNER JOIN Participante_x_Evento ON  Evento.Id = Participante_x_Evento.IdEvento
-    }
-
     getById = async (id) => {
         
         let returnEntity = null;
@@ -33,8 +29,8 @@ class EventoService {
             let pool    = await sql.connect(config);
             let result  = await pool.request()
                                                 .input('pId', sql.Int, id)
-                                                .query('SELECT * FROM Evento WHERE id = @pId');
-            returnEntity = result.recordsets[0][0]; //
+                                                .query('SELECT * FROM Evento INNER JOIN Participante_x_Evento ON  Evento.Id = Participante_x_Evento.IdEvento WHERE id = @pId');
+            returnEntity = result.recordsets[0]; //
         } catch (error) {
             res.status(404).send('No se encontró (404)!!');
         }
@@ -81,7 +77,7 @@ class EventoService {
             let result = await pool.request()
                                             .input('pId', sql.Int, idEvento)
             .query(`
-            SELECT	IdUsuario, IdEvento, Usuario.NombreUsuario
+            SELECT	IdUsuario, IdEvento, Usuario.NombreUsuario, Usuario.Nombre, Usuario.Apellido, Usuario.Descripcion, Usuario.FotoPerfil, Usuario.Direccion
                             
                         FROM Participante_x_Evento
                         INNER JOIN Evento ON Participante_x_Evento.IdEvento = Evento.Id
