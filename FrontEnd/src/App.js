@@ -9,7 +9,6 @@ import LogIn from "./components/LogIn";
 function App() {
   const [eventos, setEventos] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar si el usuario ha iniciado sesión
   const [username, setUsername] = useState(""); // Estado para almacenar el nombre de usuario
   const [password, setPassword] = useState(""); // Estado para almacenar la contraseña
@@ -47,13 +46,7 @@ function App() {
       });
   };
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredEventos = eventos.filter((evento) => {
-    return evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  
 
   const handleLogin = () => {
     
@@ -91,17 +84,9 @@ function App() {
       {isLoggedIn && (
 
           <div className="Home">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearch}
-                placeholder="Buscar eventos por nombre"
-              />
 
-              <div className="eventos-container">
-                <Eventos eventos={filteredEventos} />
-              </div>
-
+              <Eventos eventos={eventos} />
+              
               <div className="bottom-navbar">
                 <NavBar usuario={UserLogged}></NavBar>
               </div>

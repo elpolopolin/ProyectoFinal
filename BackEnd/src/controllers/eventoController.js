@@ -24,12 +24,12 @@ router.get('/getAll', async (req, res) => {
      
     })
 
-    router.get('/AsistentesXEvento/:id', async (req, res) => {
+    router.get('/AsistentesXEvento', async (req, res) => {
       try {
-        let resultado = await svc.AsistentesXEvento(req.params.id);
+        let resultado = await svc.AsistentesXEvento();
         return res.status(200).json(resultado);
-        console.log(resultado);
-      } catch (res) {
+        
+      } catch (error) {
         console.log(error);
       }
        
