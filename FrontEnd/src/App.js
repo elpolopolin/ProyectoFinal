@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn";
+  
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -66,10 +67,14 @@ function App() {
 
   return (
     <div className="App container">
+      
       <br />
 
       {!isLoggedIn && (
+        
+
         <div className="logIn">
+          
           <LogIn
             username={username}
             password={password}

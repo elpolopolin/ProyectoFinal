@@ -10,7 +10,7 @@ function RegisterModal({ closeModal }) {
 
   return (
     <div className="modal">
-      <div className="modal-content">
+      <div className="modal-content title">
         <h2>Formulario de registro</h2>
         {/* Aquí puedes agregar los campos y elementos del formulario de registro */}
         <button onClick={handleRegister}>Registrarse</button>

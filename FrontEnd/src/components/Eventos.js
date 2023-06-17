@@ -78,6 +78,7 @@ function Eventos({ eventos }) {
                   gridTemplateColumns: `repeat(${numColumns}, 0.5fr)`,
                   gap: "1rem",
                   height: "680px",
+               
                   overflowY: "scroll",
                 }}
               >
