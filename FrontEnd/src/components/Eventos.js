@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext ,useState, useEffect } from "react";
+import { AuthContext } from '../App';
 import { format } from "date-fns";
 import MostrarEvento from "./MostrarEvento";
 import axios from "axios";
@@ -13,7 +14,7 @@ function Eventos({ eventos }) {
       const [eventoMostrar, setEventoMostrar] = useState({});
       const [participantes, setParticipantes] = useState({});
       
-    
+      const { isLoggedIn, userLogged } = useContext(AuthContext); //usuarioLoggeado y si esta loggeado true sino hay user logged false
 
       const handleClick = (evento) => {
         setMostrarEvento(true);
@@ -45,6 +46,7 @@ function Eventos({ eventos }) {
       useEffect(() => {
         eventos.forEach((evento) => {
           cargarParticipantes(evento.Id);
+         
         });
       }, [eventos]);
 
@@ -126,21 +128,6 @@ function Eventos({ eventos }) {
                         </div>
                       </div>
 
-                      {
-                      participantesEvento.map((participante) => {
-                          // console.log(participante);
-                          if (participante.IdEvento === evento.Id) {
-                            return (
-                              <img
-                                key={participante.IdUsuario}
-                                src={participante.FotoPerfil}
-                                alt="Participante"
-                                className="foto-perfil-cards"
-                              />
-                            );
-                          }
-                          return null;
-                        })}
 
                     </div>
                   );
@@ -155,7 +142,7 @@ function Eventos({ eventos }) {
                 &lt;
               </button>
             
-              <MostrarEvento evento={eventoMostrar} />
+              <MostrarEvento evento={eventoMostrar} participantesEvento ={participantes[eventoMostrar.Id]} />
             
           </div>
           )}

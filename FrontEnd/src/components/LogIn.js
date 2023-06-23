@@ -80,16 +80,16 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
                 {usernameError && <span className="error-message">El nombre de usuario no puede contener espacios.</span>}
               </p>
               <p className="form-group text-form-group">
-                Nombre: <input className="form-control" />
+                Nombre: <input className="form-control" id="Nombre"/>
               </p>
               <p className="form-group text-form-group">
-                Apellido: <input className="form-control" />
+                Apellido: <input className="form-control" id="apellido" />
               </p>
               <p className="form-group text-form-group">
-                Nacimiento: <input type="date" className="form-control" />
+                Nacimiento: <input type="date" className="form-control" id="Nacimiento"/>
               </p>
               <p className="form-group text-form-group">
-                Dirección: <input className="form-control" />
+                Dirección: <input className="form-control" id="Direccion"/>
               </p>
             </div>
           </Modal.Body>
