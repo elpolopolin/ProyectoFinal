@@ -14,11 +14,14 @@ function MostrarEvento({ evento }) {
         <p className="text-white">{evento.Descripcion}</p>
         <hr className="hr1"></hr>
         </center>
-        <center className="center2">
+        <div className="div-center2">
         <div className="Dat-izq">
-          <p className="Datos">Organizador: {evento.organizador}</p>
-          <p className="Datos">Personas que asisten:</p>
-          
+          <p className="Datos">Organizador: Juan Pablo {evento.organizador}</p>
+          <p className="Datos">Personas que asisten</p>
+          <p className="Datos">Destacados:</p>
+          {/* fotos de destacados */}
+          <p className="Datos">Amigos:</p>
+          {/* fotos de destacados */}
         </div>
 
         <div className="Dat-der">
@@ -31,12 +34,12 @@ function MostrarEvento({ evento }) {
           <p className="Fecha-Evento">
           {format(
                           new Date(evento.Fecha),
-                          "dd 'of' MMMM 'of' yyyy ' ' HH'hs'"
+                          "dd 'of' MMMM  yyyy ' ' HH'hs'"
                         )}
           </p>
           </div>
         </div>
-        </center>
+        </div>
         <center>
         <hr className="hr2"></hr>
         </center>

@@ -64,7 +64,7 @@ input {
   font-family: "Inter", sans-serif;
   font-size: small;
   width: 100%;
-  line-height: 325%;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 
@@ -85,39 +85,37 @@ input {
   
 }
 
-.center2{
+.div-center2{
   display: flex;
   justify-content: space-around;
 }
 
 .Dat-izq{
-  
   margin: 0 4%;
   font-family: 'Inter';
   font-style: normal;
-  font-size: 120%;
+  font-size: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 0%;
-  margin-top: 20px;
+  align-items: flex-start;
+  margin-top: 10px;
 
   color: #ffffff;
+  flex: 50%;
 }
 
 
 .Dat-der{
-  
-  margin: 0 5%;  
+  flex: 50%;
+  margin: 0 8%;  
   font-family: 'Inter';
   font-style: normal;
-  font-size: 120%;
+  font-size: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 0%;
   color: #ffffff;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .Datos{
@@ -127,18 +125,17 @@ input {
 
 .Logo-Fecha{
   flex-direction: row;
-  flex: 10;
-  
+  margin-left: -10%;  
 }
 
 .img-Calendario2{
-  width: 24%;
+  width: 22%;
   float: left;
   margin: 0;
 }
 
 .Fecha-Evento{
-  width: 74%;
+  width: 130%;
 }
 
 .foto-perfil-cards {
