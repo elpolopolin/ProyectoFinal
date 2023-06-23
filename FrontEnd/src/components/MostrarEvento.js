@@ -52,16 +52,33 @@ function MostrarEvento({ evento, participantesEvento }) {
    
     </div>
   }
+ 
    {MostrarParticipantes && 
    <div>
+     <center>
+  <h1 className="title-participantes-evento">Participantes del evento</h1>
+  </center>
      {
                       participantesEvento.map((participante) => {
                         return (
+                          
                           <div key={participante.IdUsuario}>
                             <center>
-                              <h1 className="title-participantes-evento">Participantes del Evento</h1>
-                            <img src={participante.FotoPerfil} alt="Participante" className="foto-perfil-participantes"/>
-                            </center>S
+                              </center>
+                              <div class="card mb-3" className="card mb-3">
+                                <div class="row g-0">
+                                  <div class="col-md-4">
+                                  <img src={participante.FotoPerfil} alt="Participante" className="foto-perfil-participantes"/>
+                                  <h5 class="card-title1">{participante.NombreUsuario}</h5>
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body1">
+                                      <p class="card-text1">{participante.Descripcion[1]}</p></div>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                            
                           </div>
                         );
                       })}
