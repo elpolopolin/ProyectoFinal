@@ -6,6 +6,18 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
 
+  const [usuarioRegistrar, setUsuarioRegistrar] = useState({
+    usernameRegistro: '',
+    contrasena: '',
+    nombre: '',
+    apellido: '',
+    nacimiento: '',
+    genero: '',
+    fechaCreacion: new Date(),
+    direccion: '',
+    fotoPerfil: ''
+  });
+
   const handleLogin = () => {
     onLogin();
   };
@@ -78,6 +90,10 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
                   value={username}
                 />
                 {usernameError && <span className="error-message">El nombre de usuario no puede contener espacios.</span>}
+              </p>
+              
+              <p className="form-group text-form-group">
+                Contraseña: <input className="form-control" type="password" id="contraseña"/>
               </p>
               <p className="form-group text-form-group">
                 Nombre: <input className="form-control" id="Nombre"/>
