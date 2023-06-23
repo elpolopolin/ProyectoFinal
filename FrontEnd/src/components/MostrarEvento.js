@@ -13,10 +13,12 @@ function MostrarEvento({ evento }) {
         <img src={evento.ImagenEvento} className="imagenEvento"></img>
         <p className="text-white">{evento.Descripcion}</p>
         <hr className="hr1"></hr>
-
+        </center>
+        <center className="center2">
         <div className="Dat-izq">
-          <p className="Datos">organizador del evento: {evento.organizador}</p>
+          <p className="Datos">Organizador: {evento.organizador}</p>
           <p className="Datos">Personas que asisten:</p>
+          
         </div>
 
         <div className="Dat-der">
@@ -34,13 +36,17 @@ function MostrarEvento({ evento }) {
           </p>
           </div>
         </div>
+        </center>
+        <center>
+        <hr className="hr2"></hr>
+        </center>
         
-        <hr className="hr2">
-          
-        </hr>
+        
         
 
-        </center>
+        
+
+        
     </div>
   );
 }
