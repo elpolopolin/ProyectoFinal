@@ -20,7 +20,7 @@ function MostrarEvento({ evento, participantesEvento }) {
         </center>
         <div className="div-center2">
         <div className="Dat-izq">
-          <p className="Datos">Organizador: Juan Pablo {evento.organizador}</p>
+          <p className="Datos">Organizador: {evento.organizador}</p>
           <p className="Datos"><a className="link" onClick={()=> setMostrarParticipantes(true)}>Personas que asisten </a></p>
           <p className="Datos">Destacados:</p>
           {/* fotos de destacados */}
@@ -58,12 +58,10 @@ function MostrarEvento({ evento, participantesEvento }) {
                       participantesEvento.map((participante) => {
                         return (
                           <div key={participante.IdUsuario}>
-                            
-                            <img
-                              src={participante.FotoPerfil}
-                              alt="Participante"
-                              className="foto-perfil-cards"
-                            />
+                            <center>
+                              <h1 className="title-participantes-evento">Participantes del Evento</h1>
+                            <img src={participante.FotoPerfil} alt="Participante" className="foto-perfil-participantes"/>
+                            </center>S
                           </div>
                         );
                       })}
