@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { format } from 'date-fns';
 import Calendario2 from '../icons/Calendario2.png'
+import "../App.css";
+import { Button, Modal } from "react-bootstrap";
 
+function MostrarEvento({ evento, participantesEvento }) {
+   
+    const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
 
-function MostrarEvento({ evento }) {
-    console.log(evento);
-    
-  return (
-    <div key={evento.Id} >
+    return (
+      <div>
+      {!MostrarParticipantes &&
+    <div key={evento.Id}>
         <center>
         <h1 className="title">{evento.Nombre}</h1>
         <img src={evento.ImagenEvento} className="imagenEvento"></img>
@@ -17,9 +21,11 @@ function MostrarEvento({ evento }) {
         <center className="center2">
         <div className="Dat-izq">
           <p className="Datos">Organizador: {evento.organizador}</p>
-          <p className="Datos">Personas que asisten:</p>
+          <p className="Datos"><a className="link" onClick={()=> setMostrarParticipantes(true)}>Personas que asisten </a></p>
           
         </div>
+
+        
 
         <div className="Dat-der">
           <p className="Datos">Precio: ${evento.Precio}</p>
@@ -37,17 +43,38 @@ function MostrarEvento({ evento }) {
           </div>
         </div>
         </center>
+      
         <center>
         <hr className="hr2"></hr>
         </center>
-        
-        
-        
-
-        
-
-        
+   
     </div>
+  }
+   {MostrarParticipantes && 
+   <div>
+     {
+                      participantesEvento.map((participante) => {
+                        return (
+                          <div key={participante.IdUsuario}>
+                            
+                            <img
+                              src={participante.FotoPerfil}
+                              alt="Participante"
+                              className="foto-perfil-cards"
+                            />
+                          </div>
+                        );
+                      })}
+                  <button
+                    onClick={() => setMostrarParticipantes(false)}
+                    className="btn btn-primary "
+                  >
+                    Salir
+                </button>
+    </div>
+   }
+
+   </div>
   );
 }
 
