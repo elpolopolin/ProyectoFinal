@@ -5,6 +5,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Friends from "./components/Friends";
+import Profile from "./components/Profile";
+import Calendar from "./components/Calendar";
+import Entradas from "./components/Entradas";
 
 export const AuthContext = createContext();
 
@@ -59,31 +65,40 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
-      <div className="App container">
-        <br />
-        {!isLoggedIn && (
-          <div className="logIn">
-            <LogIn
-              username={username}
-              password={password}
-              setUsername={setUsername}
-              setPassword={setPassword}
-              onLogin={handleLogin}
-              incorrecto={incorrecto}
-            />
-          </div>
-        )}
-        {isLoggedIn && (
-          <div className="Home">
-            <Eventos eventos={eventos} />
-            <div className="bottom-navbar">
-              <NavBar usuario={userLogged}></NavBar>
+    <BrowserRouter>
+      <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
+        <div className="App container">
+          <br />
+          {!isLoggedIn && (
+            <div className="logIn">
+              <LogIn
+                username={username}
+                password={password}
+                setUsername={setUsername}
+                setPassword={setPassword}
+                onLogin={handleLogin}
+                incorrecto={incorrecto}
+              />
             </div>
-          </div>
-        )}
-      </div>
-    </AuthContext.Provider>
+          )}
+          {isLoggedIn && (
+            <div className="Home">
+              <Routes>
+                <Route path="/" element={<Eventos eventos={eventos} />} />
+                <Route path="/friends" element={<Friends />} />
+                <Route path="/profile" element={<Profile usuario={userLogged}/>} />
+                <Route path="/entradas" element={<Entradas />} />
+                <Route path="/calendar" element={<Calendar />} />
+              </Routes>
+
+              <div className="bottom-navbar">
+                <NavBar usuario={userLogged} />
+              </div>
+            </div>
+          )}
+        </div>
+      </AuthContext.Provider>
+    </BrowserRouter>
   );
 }
 

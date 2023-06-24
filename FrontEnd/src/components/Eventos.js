@@ -2,7 +2,7 @@ import React, { useContext ,useState, useEffect } from "react";
 import { AuthContext } from '../App';
 import { format } from "date-fns";
 import MostrarEvento from "./MostrarEvento";
-import axios from "axios";
+import axios from "axios";     
 
 function Eventos({ eventos }) {
       let numColumns = 2; // Número de columnas predeterminado

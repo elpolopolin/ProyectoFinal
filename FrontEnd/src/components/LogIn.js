@@ -60,10 +60,10 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
     const nacimientoo = document.getElementById("Nacimiento").value;
     const direccionn = document.getElementById("Direccion").value;
     setShowRegisterModal(false);
-   
-    setUsuarioRegistrar({
+  
+    const nuevoUsuario = {
       NombreUsuario: usuarioo,
-      Contraseña: contrasenaa,
+      Contrasena: contrasenaa,
       Nombre: nombree,
       Apellido: apellidoo,
       FechaNacimiento: nacimientoo,
@@ -72,17 +72,19 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
       Descripcion: "",
       Direccion: direccionn,
       FotoPerfil: ""
-    });
-   
+      //falta ingresar foto de perfil del usuario
+    };
+  
     axios 
-      .post("http://localhost:3000/usuarios/insert/", usuarioRegistrar)
-      .then ((result) => {
-        console.log(usuarioRegistrar)   
-    })
-    .catch((error) => {
+      .post("http://localhost:3000/usuarios/insert/", nuevoUsuario)
+      .then((response) => {
+        console.log(response.data); // Puedes acceder a la respuesta del servidor aquí
+        setUsuarioRegistrar(nuevoUsuario);
+        window.location.reload()
+      })
+      .catch((error) => {
         console.log(error);
-    })
-
+      });
   };
 
   return (
@@ -109,7 +111,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
           />
         </div>
         <br />
-        <button onClick={handleLogin}>Iniciar sesión</button>
+        <button className="btn btn-primary" onClick={handleLogin}>Iniciar sesión</button>
       
         <p className="text-danger" style={{marginTop: "10px"}}>{incorrecto}</p>
         <br />
