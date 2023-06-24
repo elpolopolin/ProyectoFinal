@@ -31,7 +31,7 @@ class UsuarioService {
             let pool   = await sql.connect(config);
             let result = await pool.request()
                                             .input('pNombreUsuario', sql.VarChar, usuario.nombreUsuario)
-                                            .input('pContraseña', sql.VarChar, usuario.contraseña)
+                                            .input('pContrasena', sql.VarChar, usuario.contrasena)
                                             .input('pNombre', sql.VarChar, usuario.nombre)
                                             .input('pApellido', sql.VarChar, usuario.apellido)
                                             .input('pFechaNacimiento', sql.DateTime, usuario.fechaNacimiento)
@@ -41,7 +41,7 @@ class UsuarioService {
                                             .input('pDireccion', sql.VarChar, usuario.direccion)
                                             .input('pFotoPerfil', sql.VarChar, usuario.fotoPerfil)
 
-                                            .query('Insert into Usuario (NombreUsuario,Contraseña,Nombre, Apellido, FechaNacimiento, Genero, FechaCreacion, Descripcion, Direccion, FotoPerfil) Values (@pNombreUsuario, @pContraseña, @pNombre, @pApellido, @pFechaNacimiento, @pGenero, @pFechaCreacion, @pDescripcion, @pDireccion, @pFotoPerfil)')
+                                            .query('Insert into Usuario (NombreUsuario,Contrasena,Nombre, Apellido, FechaNacimiento, Genero, FechaCreacion, Descripcion, Direccion, FotoPerfil) Values (@pNombreUsuario, @pContrasena, @pNombre, @pApellido, @pFechaNacimiento, @pGenero, @pFechaCreacion, @pDescripcion, @pDireccion, @pFotoPerfil)')
             rowsAffected = result.rowsAffected;
         } catch (error) {
             console.log(error);

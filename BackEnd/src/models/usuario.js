@@ -2,7 +2,7 @@
 class Usuario {
     id;
     nombreUsuario;
-    contraseña;
+    contrasena;
     nombre;
     apellido;
     fechaNacimiento;
@@ -16,7 +16,7 @@ class Usuario {
     
     constructor (a,b,c,d,e,f,g,h,i,j){
      this.nombreUsuario = a;
-     this.contraseña = b;
+     this.contrasena = b;
      this.nombre = c;
      this.apellido = d;
      this.fechaNacimiento = e;
