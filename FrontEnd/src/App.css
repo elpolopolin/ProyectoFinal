@@ -8,14 +8,12 @@ html, body {
 
 body {
  
-  background-color: rgba(37, 37, 37, 1);
+ 
   margin-bottom: 50px; /* Espacio para la barra de navegación en la parte inferior */
   
  }
 
- .home {
-  background-color: rgba(37, 37, 37, 1);
- }
+ 
 
  .eventos-container {
   padding-top: 35px;
@@ -384,8 +382,6 @@ rgba(0, 0, 0, 1);
 
 
 
-
-
 .flex-containert {
   display: flex;
   align-items: flex-start;
@@ -409,8 +405,9 @@ rgba(0, 0, 0, 1);
 /*Modal mas usuarios*/
 
 .modal {
+
   display: flex;
-  margin-top: 50%;
+  margin-top: 40px;
   top: 0;
   left: 0;
   width: 100%;
@@ -418,13 +415,12 @@ rgba(0, 0, 0, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 5px;
-  
   border-radius: 5px;
 }
 

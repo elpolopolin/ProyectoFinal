@@ -100,7 +100,7 @@ function Eventos({ eventos }) {
                       direccion = evento.Direccion;
                     }
                   }
-                  const participantesEvento = participantes[evento.Id] || []; //participantes de cada evento por id jojo
+                  
 
                   return (
                     <div>

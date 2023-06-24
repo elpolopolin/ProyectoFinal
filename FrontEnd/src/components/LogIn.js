@@ -1,44 +1,88 @@
 import React, { useState } from "react";
 import Logo from "../icons/Logo.png";
 import { Button, Modal } from "react-bootstrap";
+import axios from "axios";
 
 function LogIn({ username, password, setUsername, setPassword, onLogin, incorrecto }) {
+
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
 
   const [usuarioRegistrar, setUsuarioRegistrar] = useState({
-    usernameRegistro: '',
-    contrasena: '',
-    nombre: '',
-    apellido: '',
-    nacimiento: '',
-    genero: '',
+    nombreUsuario: "",
+    contrasena: "",
+    nombre: "",
+    apellido: "",
+    nacimiento: "",
+    genero: "",
     fechaCreacion: new Date(),
-    direccion: '',
-    fotoPerfil: ''
+    direccion: "",
+    fotoPerfil: ""
   });
 
   const handleLogin = () => {
     onLogin();
   };
+
   const handleUsernameChange = (event) => {
     const value = event.target.value;
     setUsername(value);
-    
   };
+
   const handleUsernameChange2 = (event) => {
     const value = event.target.value;
+    setUsuarioRegistrar(prevState => ({
+      ...prevState,
+      usernameRegistro: value
+    }));
     setUsername(value);
     setUsernameError(value.includes(" "));
   };
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  const handleRegisterClick = () => {
+
+  const openRegisterModal = () => {
     setShowRegisterModal(true);
   };
+
   const closeRegisterModal = () => {
     setShowRegisterModal(false);
+   
+  };
+
+  const handleRegister = () => {
+    const usuarioo = document.getElementById("nombreUsuario").value;
+    const contrasenaa = document.getElementById("contraseña").value;
+    const nombree = document.getElementById("Nombre").value;
+    const apellidoo = document.getElementById("apellido").value;
+    const nacimientoo = document.getElementById("Nacimiento").value;
+    const direccionn = document.getElementById("Direccion").value;
+    setShowRegisterModal(false);
+   
+    setUsuarioRegistrar({
+      NombreUsuario: usuarioo,
+      Contraseña: contrasenaa,
+      Nombre: nombree,
+      Apellido: apellidoo,
+      FechaNacimiento: nacimientoo,
+      genero: "",
+      FechaCreacion: new Date(),
+      Descripcion: "",
+      Direccion: direccionn,
+      FotoPerfil: ""
+    });
+   
+    axios 
+      .post("http://localhost:3000/usuarios/insert/", usuarioRegistrar)
+      .then ((result) => {
+        console.log(usuarioRegistrar)   
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+
   };
 
   return (
@@ -47,7 +91,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
         <div className="lej">
           <img src={Logo} className="Logo" alt="Logo" />
 
-          <input
+          <input id="nombreUsuario"
             type="text"
             value={username}
             className="inputt"
@@ -71,12 +115,12 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
         <br />
         <p className="text-white">
           ¿Aún no tienes una cuenta?{" "}
-          <a className="underline" onClick={handleRegisterClick}>
+          <a className="underline" onClick={openRegisterModal}>
             Registrarte
           </a>
         </p>
 
-        <Modal show={showRegisterModal} onHide={closeRegisterModal}>
+        <Modal show={showRegisterModal} onHide={closeRegisterModal} animation={false}>
           <Modal.Header closeButton>
             <Modal.Title>Registrarse</Modal.Title>
           </Modal.Header>
@@ -87,7 +131,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
                 <input
                   className="form-control"
                   onChange={handleUsernameChange2}
-                  value={username}
+                  value={usuarioRegistrar.usernameRegistro}
                 />
                 {usernameError && <span className="error-message">El nombre de usuario no puede contener espacios.</span>}
               </p>
@@ -110,7 +154,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary">Registrar</Button>
+            <Button variant="primary" onClick={handleRegister}>Registrar</Button>
           </Modal.Footer>
         </Modal>
       </center>
