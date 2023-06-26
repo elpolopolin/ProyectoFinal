@@ -46,7 +46,6 @@ function Eventos({ eventos }) {
       useEffect(() => {
         eventos.forEach((evento) => {
           cargarParticipantes(evento.Id);
-         
         });
       }, [eventos]);
 
@@ -74,16 +73,10 @@ function Eventos({ eventos }) {
             <div className="eventos-container">
               <div
                 id="eventos"
-                className="row container"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: `repeat(${numColumns}, 0.5fr)`,
-                  gap: "1rem",
-                  height: "680px",
-               
-                  overflowY: "scroll",
-                }}
-              >
+                className="row container">
+                
+          )
+              
                 {filteredEventos.map((evento) => {
                   let privacidad = "";
                   let direccion = "";
@@ -135,6 +128,7 @@ function Eventos({ eventos }) {
               </div>
             </div>
           )}
+          
           {mostrarEvento && (
             <div className="container">
             
