@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import Logo from "../icons/Logo.png";
-import { Button, Modal } from "react-bootstrap";
 import axios from "axios";
 
 function LogIn({ username, password, setUsername, setPassword, onLogin, incorrecto }) {
-
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showRegisterPage, setShowRegisterPage] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
 
   const [usuarioRegistrar, setUsuarioRegistrar] = useState({
-    nombreUsuario: "",
-    contrasena: "",
-    nombre: "",
-    apellido: "",
-    nacimiento: "",
-    genero: "",
-    fechaCreacion: new Date(),
-    direccion: "",
-    fotoPerfil: ""
+    nombreUsuario: "",  contrasena: "", nombre: "", apellido: "", nacimiento: "", genero: "", fechaCreacion: new Date(),  direccion: "",  fotoPerfil: ""
   });
 
   const handleLogin = () => {
@@ -31,7 +21,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
 
   const handleUsernameChange2 = (event) => {
     const value = event.target.value;
-    setUsuarioRegistrar(prevState => ({
+    setUsuarioRegistrar((prevState) => ({
       ...prevState,
       usernameRegistro: value
     }));
@@ -43,13 +33,12 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
     setPassword(event.target.value);
   };
 
-  const openRegisterModal = () => {
-    setShowRegisterModal(true);
+  const openRegisterPage = () => {
+    setShowRegisterPage(true);
   };
 
-  const closeRegisterModal = () => {
-    setShowRegisterModal(false);
-   
+  const closeRegisterPage = () => {
+    setShowRegisterPage(false);
   };
 
   const handleRegister = () => {
@@ -59,8 +48,8 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
     const apellidoo = document.getElementById("apellido").value;
     const nacimientoo = document.getElementById("Nacimiento").value;
     const direccionn = document.getElementById("Direccion").value;
-    setShowRegisterModal(false);
-  
+    setShowRegisterPage(false);
+
     const nuevoUsuario = {
       NombreUsuario: usuarioo,
       Contrasena: contrasenaa,
@@ -74,33 +63,94 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
       FotoPerfil: ""
       //falta ingresar foto de perfil del usuario
     };
-  
-    axios 
+
+    axios
       .post("http://localhost:3000/usuarios/insert/", nuevoUsuario)
       .then((response) => {
         console.log(response.data); // Puedes acceder a la respuesta del servidor aquí
         setUsuarioRegistrar(nuevoUsuario);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const RegisterPage = () => (
+
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      <img className="mx-auto h-10 w-auto" src="" />
+      <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
+        Registrarse
+      </h2>
+    </div>
+
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form className="space-y-6" action="#" method="POST">
+        <div className="flex flex-col">
+          <label htmlFor="NombreUsuario" className="text-sm font-large leading-6 ">
+            Nombre Usuario
+          </label>
+          <div className="mt-2">
+            <input
+              id="usernameRegistro"
+              name="username"
+              type="text"
+              required
+              onChange={handleUsernameChange2}
+              value={usuarioRegistrar.usernameRegistro}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="password" className="text-sm font-large leading-6 text-white">
+            Password
+          </label>
+          <div className="mt-2">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Sign in
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+);
+
   return (
     <div className="container">
-      <center>
+        <center>
+    {!showRegisterPage &&
+      <div>
         <div className="lej">
           <img src={Logo} className="Logo" alt="Logo" />
 
-          <input id="nombreUsuario"
+          <input
+            id="nombreUsuario"
             type="text"
             value={username}
             className="inputt"
             onChange={handleUsernameChange}
             placeholder="Nombre de usuario"
           />
-          
+
           <br />
           <input
             type="password"
@@ -111,54 +161,24 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
           />
         </div>
         <br />
-        <button className="btn btn-primary" onClick={handleLogin}>Iniciar sesión</button>
-      
-        <p className="text-danger" style={{marginTop: "10px"}}>{incorrecto}</p>
+        <button className="btn btn-primary" onClick={handleLogin}>
+          Iniciar sesión
+        </button>
+
+        <p className="text-danger" style={{ marginTop: "10px" }}>
+          {incorrecto}
+        </p>
         <br />
         <p className="text-white">
           ¿Aún no tienes una cuenta?{" "}
-          <a className="underline" onClick={openRegisterModal}>
+          <a className="underline cursor-pointer" onClick={openRegisterPage}>
             Registrarte
           </a>
         </p>
+        </div>
+    }
 
-        <Modal show={showRegisterModal} onHide={closeRegisterModal} animation={false}>
-          <Modal.Header closeButton>
-            <Modal.Title>Registrarse</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div>
-              <p className="form-group text-form-group">
-                Nombre De Usuario:{" "}
-                <input
-                  className="form-control"
-                  onChange={handleUsernameChange2}
-                  value={usuarioRegistrar.usernameRegistro}
-                />
-                {usernameError && <span className="error-message">El nombre de usuario no puede contener espacios.</span>}
-              </p>
-              
-              <p className="form-group text-form-group">
-                Contraseña: <input className="form-control" type="password" id="contraseña"/>
-              </p>
-              <p className="form-group text-form-group">
-                Nombre: <input className="form-control" id="Nombre"/>
-              </p>
-              <p className="form-group text-form-group">
-                Apellido: <input className="form-control" id="apellido" />
-              </p>
-              <p className="form-group text-form-group">
-                Nacimiento: <input type="date" className="form-control" id="Nacimiento"/>
-              </p>
-              <p className="form-group text-form-group">
-                Dirección: <input className="form-control" id="Direccion"/>
-              </p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={handleRegister}>Registrar</Button>
-          </Modal.Footer>
-        </Modal>
+        {showRegisterPage && <RegisterPage />}
       </center>
     </div>
   );

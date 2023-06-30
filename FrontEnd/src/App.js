@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import "./App.css";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.css';
 import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn";

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { format } from 'date-fns';
 import Calendario2 from '../icons/Calendario2.png'
 import "../App.css";
-import { Button, Modal } from "react-bootstrap";
 
 function MostrarEvento({ evento, participantesEvento }) {
    
