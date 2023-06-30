@@ -7,39 +7,37 @@ import CalendarioIcon from "../icons/Calendario.png";
 
 function NavBar({ usuario }) {
   return (
-    <div className="navbar-container">
-      <nav className="navbar navbar-white">
-        <div className="">
-          <ul className="navbar-nav flex-row ">
-            <li className="nav-item col-3">
-              <Link to="/" className="nav-link">
-                <i className="fas fa-home"></i> <img src={HomeIcon} className="fotoHome"></img>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/friends" className="nav-link">
-                <i className="fas fa-users"></i> <img src={AmigosIcon} className="fotoAmigos"></img>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/profile" className="nav-link">
-                <i className="fas fa-user"></i> <img src={usuario.FotoPerfil} className="fotoPerfil"></img>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/entradas" className="nav-link">
-                <i className="fas fa-file-alt"></i> <img src={EntradaIcon} className="fotoEntrada"></img>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/calendar" className="nav-link">
-                <i className="fas fa-calendar-alt"></i> <img src={CalendarioIcon} className="fotoCalendario"></img>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <div class="btm-nav">
+  <button>
+  <Link to="/" className="nav-link">
+  <img src = {HomeIcon} class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"></img>
+    </Link>
+  </button>
+
+  <button class="active">
+  <Link to="/friends" className="nav-link">
+    <img src = {AmigosIcon} class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"></img>
+  </Link>
+  </button>
+
+  <button class="active">
+  <Link to="/profile" className="nav-link">
+    <img src = {usuario.FotoPerfil} class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"></img>
+  </Link>
+  </button>
+
+  <button class="active">
+  <Link to="/entradas" className="nav-link">
+    <img src = {EntradaIcon} class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"></img>
+  </Link>
+  </button>
+
+  <button>
+  <Link to="/calendar" className="nav-link">
+  <img src = {CalendarioIcon} class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"></img>
+  </Link>
+  </button>
+</div>
   );
 }
 
