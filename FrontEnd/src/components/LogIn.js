@@ -177,11 +177,9 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
           </a>
         </p>
 
-        <p className="text-danger" style={{ marginTop: "10px" }}>
-          {incorrecto}
-        </p>
+        
         <br />
-        <p className="text-white">
+        <p className="text-black">
           ¿Aún no tienes una cuenta?{" "}
           <a className="underline cursor-pointer" onClick={openRegisterPage}>
             Registrarte
