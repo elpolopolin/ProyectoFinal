@@ -139,14 +139,14 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
         <center>
     {!showRegisterPage &&
       <div>
-        <div className="lej">
+        <div className="my-20">
           <img src={Logo} className="Logo" alt="Logo" />
-
+          <div className="my-4">
           <input
             id="nombreUsuario"
             type="text"
             value={username}
-            className="inputt"
+            className="input input-bordered w-full max-w mb-6"
             onChange={handleUsernameChange}
             placeholder="Nombre de usuario"
           />
@@ -155,15 +155,27 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
           <input
             type="password"
             value={password}
-            className="inputt"
+            className="input input-bordered w-full max-w "
             onChange={handlePasswordChange}
             placeholder="Contraseña"
           />
+          </div>
         </div>
         <br />
-        <button className="btn btn-primary" onClick={handleLogin}>
+        <button className="btn btn-outline btn-wide" onClick={handleLogin}>
           Iniciar sesión
         </button>
+
+        <p className="text-danger" style={{ marginTop: "10px" }}>
+          {incorrecto}
+        </p>
+        <br />
+        <p className="text-white">
+          ¿Olvidaste tu contraseña?{" "}
+          <a className="underline cursor-pointer" onClick={openRegisterPage}>
+            Restablecer
+          </a>
+        </p>
 
         <p className="text-danger" style={{ marginTop: "10px" }}>
           {incorrecto}
@@ -175,6 +187,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
             Registrarte
           </a>
         </p>
+
         </div>
     }
 
