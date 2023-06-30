@@ -13,7 +13,38 @@ function MostrarEvento({ evento, participantesEvento }) {
     <div key={evento.Id}>
         <center>
         <h1 className="title">{evento.Nombre}</h1>
-        <img src={evento.ImagenEvento} className="imagenEvento"></img>
+
+        <div class="carousel w-full">
+          <div id="slide1" class="carousel-item relative w-full">
+            <img src={evento.ImagenEvento} class="w-full" />
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide4" class="btn btn-circle">❮</a> 
+              <a href="#slide2" class="btn btn-circle">❯</a>
+            </div>
+          </div> 
+          <div id="slide2" class="carousel-item relative w-full">
+            <img src={evento.Imagen2Evento} class="w-full" />
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide1" class="btn btn-circle">❮</a> 
+              <a href="#slide3" class="btn btn-circle">❯</a>
+            </div>
+          </div> 
+          <div id="slide3" class="carousel-item relative w-full">
+            <img src={evento.Imagen3Evento} class="w-full" />
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide2" class="btn btn-circle">❮</a> 
+              <a href="#slide4" class="btn btn-circle">❯</a>
+            </div>
+          </div> 
+          <div id="slide4" class="carousel-item relative w-full">
+            <img src={evento.Imagen4Evento} class="w-full" />
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide3" class="btn btn-circle">❮</a> 
+              <a href="#slide1" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+        </div>
+        
         <p className="text-white">{evento.Descripcion}</p>
         <hr className="hr1"></hr>
         </center>
@@ -64,17 +95,9 @@ function MostrarEvento({ evento, participantesEvento }) {
                           <div key={participante.IdUsuario}>
                             <center>
                               </center>
-                              <div class="card mb-3" className="card mb-3">
-                                <div class="row g-0">
-                                  <div class="col-md-4">
-                                  <img src={participante.FotoPerfil} alt="Participante" className="foto-perfil-participantes"/>
-                                  <h5 class="card-title1">{participante.NombreUsuario}</h5>
-                                  </div>
-                                  <div class="col-md-8">
-                                    <div class="card-body1">
-                                      <p class="card-text1">{participante.Descripcion[1]}</p></div>
-                                  </div>
-                                </div>
+                              <div class="alert alert-info">
+                                <img src = {participante.FotoPerfil} fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"></img>
+                                <span>{participante.Descripcion[1]}</span>
                               </div>
                             
                             

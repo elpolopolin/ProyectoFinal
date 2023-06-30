@@ -87,5 +87,14 @@ rgba(0, 0, 0, 1);
   bottom: 2.3%;
   left: 0;
   width: 100%;
-  
+}
+
+/* Participantes X Evento */
+
+.title-participantes-evento{
+  margin-bottom: 35px;
+}
+
+.alert-info{
+  margin-top: 15px;
 }
