@@ -135,18 +135,18 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
 );
 
   return (
-    <div className="container">
-        <center>
+    <div className="">
+      <center>
     {!showRegisterPage &&
-      <div>
-        <div className="my-20">
+      <div className="">
+        <div className="my-8">
           <img src={Logo} className="Logo" alt="Logo" />
           <div className="my-4">
           <input
             id="nombreUsuario"
             type="text"
             value={username}
-            className="input input-bordered w-full max-w mb-6"
+            className="input input-bordered w-full max-w mb-4 h-9 bg-pink-300 text-white"
             onChange={handleUsernameChange}
             placeholder="Nombre de usuario"
           />
@@ -155,31 +155,25 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
           <input
             type="password"
             value={password}
-            className="input input-bordered w-full max-w "
+            className="input input-bordered w-full max-w bg-pink-300 text-white h-9"
             onChange={handlePasswordChange}
             placeholder="Contraseña"
           />
           </div>
         </div>
-        <br />
-        <button className="btn btn-outline btn-wide" onClick={handleLogin}>
+        
+        <button className="btn btn-outline  btn-wide text-pink-200" onClick={handleLogin}>
           Iniciar sesión
         </button>
 
-        <p className="text-danger" style={{ marginTop: "10px" }}>
+        <p className=" text-pink-500 mt-2" >
           {incorrecto}
         </p>
-        <br />
-        <p className="text-white">
-          ¿Olvidaste tu contraseña?{" "}
-          <a className="underline cursor-pointer" onClick={openRegisterPage}>
-            Restablecer
-          </a>
-        </p>
+      
 
         
         <br />
-        <p className="text-black">
+        <p className="text-pink-200 text-center" >
           ¿Aún no tienes una cuenta?{" "}
           <a className="underline cursor-pointer" onClick={openRegisterPage}>
             Registrarte
@@ -190,7 +184,7 @@ function LogIn({ username, password, setUsername, setPassword, onLogin, incorrec
     }
 
         {showRegisterPage && <RegisterPage />}
-      </center>
+        </center>
     </div>
   );
 }

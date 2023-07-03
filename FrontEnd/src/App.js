@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
 import Calendar from "./components/Calendar";
@@ -65,8 +66,8 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
-        <div className="App container">
-          <br />
+        <div className="font-sans px-8 flex justify-center items-center">
+         
           {!isLoggedIn && (
             <div className="logIn">
               <LogIn

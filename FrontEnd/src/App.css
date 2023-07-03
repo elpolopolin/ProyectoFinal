@@ -1,109 +1,16 @@
-.card {
-  border-radius: 8px;
-  max-height: 220px;
-}
 
-body{
- 
-}
-.card-title {
-  font-family: "Inter", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 100%;
-  color: #000000;
-}
 
-.card-text {
-  font-family: 'Inter', sans-serif;
-font-style: normal;
-font-weight: 600;
-font-size: 60%;
-line-height: 1.5;
-/* or 333% */
-color: 
-rgba(0, 0, 0, 1);
-}
-
-.card-text-line {
-  border-bottom: 1px solid black;
-  padding-bottom: 0.5rem; /* Ajusta el valor según tus necesidades */
-  margin-bottom: 0.5rem; 
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: center;
+  .card-container {
+    margin-top: 25px;
+    display: flex;
+    max-height: 80vh; /* Establece la altura máxima del contenedor */
+  }
   
-}
-
-.navbar-white {
-  background-color: white;
-  border-radius: 12px;
-  width: 90%;
-  height: 45px;
-  margin-bottom: auto;
-}
-
-.fotoPerfil {
-  position: fixed;
-  bottom: 2.5%;
-  left: 45%;
-  border-radius: 40px;
-  height: 40px;
-  width: 40px;
-}
-.fotoHome {
-  position: fixed;
-  bottom: 2.5%;
-  left: 11.5%;
-  height: 40px;
-  width: 40px;
-}
-.fotoAmigos {
-  position: fixed;
-  bottom: 2.5%;
-  left: 25%;
-  height: 40px;
-  width: 40px;
-}
-.fotoEntrada {
-  position: fixed;
-  bottom: 2.5%;
-  right: 25%;
-  height: 40px;
-  width: 40px;
-}
-.fotoCalendario {
-  position: fixed;
-  bottom: 2.5%;
-  right: 11.5%;
-  height: 40px;
-  width: 40px;
-}
-
-.bottom-navbar {
-  position: fixed;
-  bottom: 2.3%;
-  left: 0;
-  width: 100%;
-}
-
-/* Mostar evento */
-.Datos{
-  margin-bottom: 20px;
-}
-
-/* Participantes X Evento */
-
-.title-participantes-evento{
-  margin-bottom: 35px;
-}
-
-.alert-info{
-  margin-top: 15px;
-}
-
-.Fecha-Evento{
-
-}
+  .column {
+    padding: 0 6px;
+  }
+  
+  .card {
+    width: 180px;
+    height: 220px;
+  }
