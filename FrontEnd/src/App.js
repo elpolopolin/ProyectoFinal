@@ -66,7 +66,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
-        <div className="font-sans px-8 flex justify-center items-center">
+        <div className="bg-[#252525] w-full min-h-screen font-sans px-6  justify-center items-center">
          
           {!isLoggedIn && (
             <div className="logIn">
