@@ -12,46 +12,56 @@ function MostrarEvento({ evento, participantesEvento }) {
       {!MostrarParticipantes &&
         <div key={evento.Id}>
           <center>
-            <h1 className="title">{evento.Nombre}</h1>
 
-            <div class="carousel w-full">
-              <div id="slide1" class="carousel-item relative w-full">
-                <img src={evento.ImagenEvento} class="w-full" />
-                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide4" class="btn btn-circle">❮</a>
-                  <a href="#slide2" class="btn btn-circle">❯</a>
+            <p className="titulo-evento">{evento.Nombre}</p>
+              <div class="mb-5" >
+                <div class="carousel w-full">
+                  <div id="slide1" class="carousel-item relative w-full">
+                    <img src={evento.ImagenEvento} class="w-full" />
+                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                      <a href="#slide4" class="btn btn-circle">❮</a>
+                      <a href="#slide2" class="btn btn-circle">❯</a>
+                    </div>
+                  </div>
+                  <div id="slide2" class="carousel-item relative w-full">
+                    <img src={evento.Imagen2Evento} class="w-full" />
+                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                      <a href="#slide1" class="btn btn-circle">❮</a>
+                      <a href="#slide3" class="btn btn-circle">❯</a>
+                    </div>
+                  </div>
+                  <div id="slide3" class="carousel-item relative w-full">
+                    <img src={evento.Imagen3Evento} class="w-full" />
+                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                      <a href="#slide2" class="btn btn-circle">❮</a>
+                      <a href="#slide4" class="btn btn-circle">❯</a>
+                    </div>
+                  </div>
+                  <div id="slide4" class="carousel-item relative w-full">
+                    <img src={evento.Imagen4Evento} class="w-full" />
+                    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                      <a href="#slide3" class="btn btn-circle">❮</a>
+                      <a href="#slide1" class="btn btn-circle">❯</a>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div id="slide2" class="carousel-item relative w-full">
-                <img src={evento.Imagen2Evento} class="w-full" />
-                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide1" class="btn btn-circle">❮</a>
-                  <a href="#slide3" class="btn btn-circle">❯</a>
-                </div>
-              </div>
-              <div id="slide3" class="carousel-item relative w-full">
-                <img src={evento.Imagen3Evento} class="w-full" />
-                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide2" class="btn btn-circle">❮</a>
-                  <a href="#slide4" class="btn btn-circle">❯</a>
-                </div>
-              </div>
-              <div id="slide4" class="carousel-item relative w-full">
-                <img src={evento.Imagen4Evento} class="w-full" />
-                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                  <a href="#slide3" class="btn btn-circle">❮</a>
-                  <a href="#slide1" class="btn btn-circle">❯</a>
-                </div>
-              </div>
-            </div>
-
+            <div class="mb-5" >
             <p className="text-white">{evento.Descripcion}</p>
+            </div>
+            
+
+            <div class="mb-5">
             <hr className="hr1"></hr>
+            </div>
+            
           </center>
+
+
 
           <div class="flex w-full">
             <div class="grid h-80 flex-grow card bg-base-300 rounded-box place-items-left">
-
+             
               <div className="Dat-izq">
                 <p className="Datos">Organizador: {evento.organizador}</p>
                 <p className="Datos"><a className="link" onClick={() => setMostrarParticipantes(true)}>Personas que asisten </a></p>
@@ -60,12 +70,11 @@ function MostrarEvento({ evento, participantesEvento }) {
                 <p className="Datos">Amigos:</p>
                 {/* fotos de destacados */}
               </div>
-              
             </div>
 
             <div class="divider divider-horizontal"></div>
 
-            <div class="grid h-80 flex-grow card bg-base-300 rounded-box place-items-right">
+            <div class="grid h-60 flex-grow card bg-base-300 rounded-box place-items-right">
               <p className="Datos">Precio: ${evento.Precio}</p>
               <p className="Datos">Categoria: {evento.idcategoria}</p>
               <p className="Datos">Locacion: {evento.Direccion}</p>
