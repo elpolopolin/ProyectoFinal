@@ -7,16 +7,14 @@ import CalendarioIcon from "../icons/Calendario.png";
 import EntradaIcon from "../icons/Entrada.png";
 import PinIcon from "../icons/pin.png";
 
-
 function Eventos({ eventos }) {
-  let numColumns = 2; // Número de columnas predeterminado
+  
   const [searchTerm, setSearchTerm] = useState("");
-  if (eventos.length <= 2) {
-    numColumns = eventos.length; // Mostrar 2 eventos en una fila
-  }
+  const [mostrar, setMostrar] = useState(true);
   const [mostrarEvento, setMostrarEvento] = useState(false);
   const [eventoMostrar, setEventoMostrar] = useState({});
   const [participantes, setParticipantes] = useState({});
+  const [categorias, setCategorias] = useState([]);
 
   const { isLoggedIn, userLogged } = useContext(AuthContext); //usuarioLoggeado y si esta loggeado true sino hay user logged false
 
@@ -46,7 +44,20 @@ function Eventos({ eventos }) {
       });
   };
 
+  const cargarCategorias = () => {
+    axios
+      .get("http://localhost:3000/Categorias")
+      .then((result) => {
+        const cat = result.data;
+        setCategorias(cat);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
+    cargarCategorias();
     eventos.forEach((evento) => {
       cargarParticipantes(evento.Id);
     });
@@ -54,6 +65,13 @@ function Eventos({ eventos }) {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    if (event.target.value != null){
+      setMostrar(false)
+    }
+    if (event.target.value == ""){
+      setMostrar(true)
+    }
+  
   };
 
   const filteredEventos = eventos.filter((evento) => {
@@ -71,67 +89,83 @@ function Eventos({ eventos }) {
         />
       )}
 
-            {!mostrarEvento && (
-              <div className="text-sm">
-                <div className="card-container overflow-y-auto">
-                  <div className="card-grid">
-                    {filteredEventos.map((evento, index) => {
+      {!mostrarEvento && (
+        <div className="text-sm">
+          <div className="card-container overflow-y-auto ">
+          {categorias.map((categoria) => (
+            <div key={categoria.IdCategoria}>
+              {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
+              <div className=" ">
+                <div className="flex overflow-x-auto " style={{gap: "10px"}}>
+                  
+                  {filteredEventos
+                    .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
+                    .map((eventop) => {
                       let privacidad = "";
                       let direccion = "";
 
-                      if (evento.Publico === false) {
+                      if (eventop.Publico === false) {
                         privacidad = "Solo Invitación";
                         direccion = "Privada";
                       } else {
-                        if (evento.Precio != null) {
-                          privacidad = evento.Precio + "$";
-                          direccion = evento.Direccion;
+                        if (eventop.Precio != null) {
+                          privacidad = eventop.Precio + "$";
+                          direccion = eventop.Direccion;
                         } else {
                           privacidad = "Gratis";
-                          direccion = evento.Direccion;
+                          direccion = eventop.Direccion;
                         }
                       }
 
                       return (
                         <div
-                          key={evento.Id}
-                          className="card mb-4 bg-white text-black"
-                          onClick={() => handleClick(evento)} 
+                          key={eventop.Id}
+                          className="card  mb-4  bg-white text-black"
+                          onClick={() => handleClick(eventop)}
                         >
-                      <div className="">
-                        <figure>
-                          <img
-                            src={evento.ImagenEvento}
-                            alt="..."
-                            className="h-20 w-full"
-                          />
-                        </figure>
-                        <div className="card-text px-2 m-2 font-semibold">
-                          <h4 className="font-black mb-1">{evento.Nombre}</h4>
+                          <div className="">
+                            <figure>
+                              <img
+                                src={eventop.ImagenEvento}
+                                alt="..."
+                                className="h-20 w-full"
+                              />
+                            </figure>
+                            <div className="card-text px-2 m-2 font-semibold">
+                              <h4 className="font-black mb-1">{eventop.Nombre}</h4>
 
-                          <p className="card-text card-text-line flex items-center overflow-hidden">
-                            <img src={CalendarioIcon} className="h-3 w-3 mr-1" />
-                            {format(new Date(evento.Fecha), "dd'/'MM'/'yyyy")}
-                          </p>
+                              <p className="card-text card-text-line flex items-center overflow-hidden">
+                                <img
+                                  src={CalendarioIcon}
+                                  className="h-3 w-3 mr-1"
+                                />
+                                {format(new Date(eventop.Fecha), "dd'/'MM'/'yyyy")}
+                              </p>
 
-                          <p className="card-text card-text-line flex items-center">
-                            <img src={EntradaIcon} className="h-3 w-3 mr-1" />
-                            {privacidad}
-                          </p>
-                          <p className="card-text card-text-line flex items-center">
-                            <img src={PinIcon} className="h-3 w-3 mr-1" />
-                            {direccion}
-                          </p>
+                              <p className="card-text card-text-line flex items-center">
+                                <img
+                                  src={EntradaIcon}
+                                  className="h-3 w-3 mr-1"
+                                />
+                                {privacidad}
+                              </p>
+                              <p className="card-text card-text-line flex items-center">
+                                <img src={PinIcon} className="h-3 w-3 mr-1" />
+                                {direccion}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  
-                  );
-                })}
+                      );
+                    })}
+                </div>
+               
               </div>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
+        </div>
+      )}
 
       {mostrarEvento && (
         <div className="container">

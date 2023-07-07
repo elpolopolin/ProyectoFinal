@@ -1,21 +1,17 @@
 .card-container {
   margin-top: 25px;
-  display: flex;
   max-height: 80vh; /* Establece la altura máxima del contenedor */
   max-width: 100%;
- overflow-x: auto;
 
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Espacio entre las tarjetas */
-}
+
+
+
 
 .card {
-  width: 100%;
-  height: 100%;
+ 
+ 
 }
 
 .titulo-evento{
