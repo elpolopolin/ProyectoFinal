@@ -12,10 +12,25 @@ class EventoService {
         try {
             let pool    = await sql.connect(config);
             let result  = await pool.request()
-                                                .query('SELECT * FROM Evento ')
+                                                .query('SELECT * FROM Evento')
                                                         
             returnEntity = result.recordset;
             console.log(returnEntity);
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    }
+
+    Categorias = async () => {
+        let returnEntity = null;
+        try {
+            let pool    = await sql.connect(config);
+            let result  = await pool.request()
+                                                .query('SELECT * FROM Categoria')
+                                                        
+            returnEntity = result.recordset;
+            
         } catch (error) {
             console.log(error);
         }

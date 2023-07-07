@@ -13,6 +13,13 @@ router.get('/getAll', async (req, res) => {
     console.log(resultado);
   })
 
+  router.get('/Categorias', async (req, res) => {
+    console.log("Estoy en eventoControllerCategorias");
+    let resultado = await svc.Categorias();
+    return res.status(200).json(resultado);
+   
+  })
+
   router.get('/getbyid/:id', async (req, res) => {
     try {
       let resultado = await svc.getById(req.params.id);
