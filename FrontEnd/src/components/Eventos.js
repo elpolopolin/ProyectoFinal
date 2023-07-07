@@ -95,8 +95,8 @@ function Eventos({ eventos }) {
           {categorias.map((categoria) => (
             <div key={categoria.IdCategoria}>
               {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
-              <div className=" ">
-                <div className="flex overflow-x-auto " style={{gap: "10px"}}>
+              <div className="categorias ">
+                <div className="flex overflow-x-auto  " style={{gap: "10px"}}>
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
