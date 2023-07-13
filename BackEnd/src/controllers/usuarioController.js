@@ -1,3 +1,4 @@
+import config from "../../dbconfig.js";
 import { Router } from "express";
 import Usuario from "./../models/usuario.js";
 import UsuarioService from "./../services/usuario-service.js"
@@ -10,6 +11,36 @@ router.get('/getAll', async (req, res) => {
     return res.status(200).json(resultado);
     console.log(resultado);
   })
+
+  router.get('/getbyid/:id', async (req, res) => {
+    try {
+      let resultado = await svc.getById(req.params.id);
+      return res.status(200).json(resultado);
+      console.log(resultado);
+    } catch (error) {
+      console.log(error);
+    }
+     
+    })
+
+  router.post('/login', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const resultado = await svc.login(username, password);
+    
+      if (resultado && resultado.length > 0) {
+        return res.status(200).json(resultado);
+      } else {
+        return res.status(400).send('Usuario no existe');
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send('Error interno del servidor');
+    }
+  });
+   
+   
+  
 
   
 //insert de usuario

@@ -28,7 +28,7 @@ router.get('/getAll', async (req, res) => {
     } catch (res) {
       console.log(error);
     }
-     
+      
     })
 
     router.get('/AsistentesXEvento', async (req, res) => {

@@ -1,6 +1,7 @@
 import config from "../../dbconfig.js";
 import sql from 'mssql';
 import Usuario from '../models/usuario.js'
+import bcrypt from 'bcrypt';
 
 
 class UsuarioService {
@@ -13,12 +14,63 @@ class UsuarioService {
             let result  = await pool.request()
                                                 .query('SELECT * FROM Usuario')
             returnEntity = result.recordset;
-            console.log(returnEntity);
+        
+           // Encriptar la contraseña si existe
+    if (returnEntity && returnEntity.length > 0) {
+        for (const Usuario of returnEntity) {
+          if (Usuario.Contrasena) {
+            const encryptedPassword = await bcrypt.hash(Usuario.Contrasena, 10);
+            Usuario.Contrasena = encryptedPassword;
+          }
+        }
+    }
+        
         } catch (error) {
             console.log(error);
         }
         return returnEntity;
     }
+
+    login = async (nombre, contrasena) => { 
+        let returnEntity = null;
+        console.log('estoy en EventoService.LogIN');
+        try {
+          let pool = await sql.connect(config);
+          let result = await pool.request()
+            .input('pNombre', sql.VarChar, nombre)
+            .input('pContrasena', sql.VarChar, contrasena)
+            .query('SELECT * FROM Usuario WHERE NombreUsuario = @pNombre AND Contrasena = @pContrasena');
+          returnEntity = result.recordset;
+        } catch (error) {
+          console.log(error);
+        }
+        return returnEntity;
+      }
+
+      getById = async (id) => {
+        let returnEntity = null;
+        console.log('Estoy en: Usuario.getById(id)');
+        try {
+          let pool = await sql.connect(config);
+          let result = await pool
+            .request()
+            .input('pId', sql.Int, id)
+            .query('SELECT * FROM Usuario WHERE Id = @pId');
+          returnEntity = result.recordsets[0];
+      
+          if (returnEntity && returnEntity.length > 0) {
+            for (const Usuario of returnEntity) {
+              if (Usuario.Contrasena) {
+                const encryptedPassword = await bcrypt.hash(Usuario.Contrasena, 10);
+                Usuario.Contrasena = encryptedPassword;
+              }
+            }
+        }
+        } catch (error) {
+          console.log(error);
+        }
+        return returnEntity;
+      };
 
 
     insert = async (usuario) => {
