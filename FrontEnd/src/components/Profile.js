@@ -1,48 +1,72 @@
 import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
 
-function Profile({ usuario }) {
 
-    const [descripcion, setDescripcion] = useState(false)
+function Profile({ usuario}) {
+  const [descripcion, setDescripcion] = useState(false);
 
-    useEffect(() => {
-        if (usuario.Descripcion != ""){
-            setDescripcion(true);
-        }
-        else {
-            setDescripcion(false);
-        }
-      }, []);
-    
+
+  useEffect(() => {
+    console.log(usuario)
+    if (usuario.Descripcion != ""){
+      setDescripcion(true);
+  }
+  else {
+      setDescripcion(false);
+  }
+  }, []);
 
 
   return (
-    <div className="profile-container text-white">
-      <img src={usuario.FotoPerfil} className="profile-image fotoperfil" alt="Profile" /> 
-      <h1 className="profile-name text-center">
-        {usuario.Nombre} {usuario.Apellido}
-      </h1>
-      <p className="profile-username text-center">@{usuario.NombreUsuario}</p>
-    
-    {descripcion &&
-
-        <div className="container mx-auto border-2 border-double border-fuchsia-500">
-        <p className="profile-descripcion">{usuario.Descripcion}</p>
-        <p className="profile-username text-left">Soltero</p>
-        <p className="profile-username text-left">Intereses: </p>
-        <p className="profile-username text-left">MIS EVENTOS</p>
-        <p className="profile-username text-left ">EVENTOS ASISTIDOS</p>
+    <div className="profile-container" >
+      <img src={usuario.FotoPerfil} className=" " alt="Profile" />
+            <div className="flex items-center gap-4 mt-5  ring-2 ring-pink-300 rounded-md mx-2">
+        <div className="grid w-1/2 mx-2 mt-2">
+            <img src={usuario.FotoPerfil} className="profile-image rounded-full ring-2" alt="Profile" />
+            <div className="grid grid-cols-2 mt-2">
+              <h1 className="profile-name col-start-1">
+                {usuario.Nombre} {usuario.Apellido}
+              </h1>
+              <h1 className="profile-username col-start-2 mr-20">@{usuario.NombreUsuario}</h1>
+            </div>
         </div>
-    }
-
-    {!descripcion &&
-        <div className="caja-descripcion">
-        <p className="profile-descripcion"><a className="underline">Agregar descripcion</a></p>
+        <div className="grid w-5/6">
+          {descripcion && (
+            <div>
+              <div className="caja-descripcion rounded-md">
+                <p className="">{usuario.Descripcion}</p>
+              </div>
+            </div>
+          )}
+          {!descripcion && (
+            <div className="caja-descripcion rounded-md">
+              <p className="profile-descripcion">
+                <a className="underline">Agregar descripción</a>
+              </p>
+            </div>
+          )}
         </div>
-    }
-     <p className="profile-nacimiento">{usuario.FechaNacimiento}</p>
-    
+        </div>
+      <div className="profile-descripcion">
+        
+
+        <p className="mb-2 mt-2 font-bold caja-descripcion2">
+          
+        </p>
+        <p className="mb-2 mt-2 caja-descripcion2">Soltero </p>
+        <p className="mb-2 mt-2 caja-descripcion2">Intereses: </p>
+        <p className="mb-2 mt-2 caja-descripcion2">MIS EVENTOS</p>
+        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
+        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
+        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
+        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
+      </div>
+ 
     </div>
+
   );
 }
 
 export default Profile;
+
+

@@ -93,10 +93,10 @@ function Eventos({ eventos }) {
         <div className="text-sm">
           <div className="card-container overflow-y-auto ">
           {categorias.map((categoria) => (
-            <div key={categoria.IdCategoria}>
+            <div key={categoria.IdCategoria} className="">
               {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
-              <div className="categorias ">
-                <div className="flex overflow-x-auto  " style={{gap: "10px"}}>
+
+                <div className="flex  overflow-x-auto" style={{gap: "10px"}}>
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -120,7 +120,7 @@ function Eventos({ eventos }) {
                       return (
                         <div
                           key={eventop.Id}
-                          className="card  mb-4  bg-white text-black"
+                          className="card  mb-4   bg-white text-black "
                           onClick={() => handleClick(eventop)}
                         >
                           <div className="">
@@ -131,10 +131,10 @@ function Eventos({ eventos }) {
                                 className="h-20 w-full"
                               />
                             </figure>
-                            <div className="card-text px-2 m-2 font-semibold">
-                              <h4 className="font-black mb-1">{eventop.Nombre}</h4>
+                            <div className="card-text  px-2 m-2 font-semibold ">
+                              <h4 className="font-black mb-1 overflow-hidden">{eventop.Nombre}</h4>
 
-                              <p className="card-text card-text-line flex items-center overflow-hidden">
+                              <p className="card-text card-text-line flex items-center ">
                                 <img
                                   src={CalendarioIcon}
                                   className="h-3 w-3 mr-1"
@@ -145,7 +145,7 @@ function Eventos({ eventos }) {
                               <p className="card-text card-text-line flex items-center">
                                 <img
                                   src={EntradaIcon}
-                                  className="h-3 w-3 mr-1"
+                                  className="h-3 w-3 mr-1 "
                                 />
                                 {privacidad}
                               </p>
@@ -156,12 +156,13 @@ function Eventos({ eventos }) {
                             </div>
                           </div>
                         </div>
+                        
                       );
+                      
                     })}
-                </div>
-               
+                    </div>
               </div>
-            </div>
+            
           ))}
         </div>
         </div>
