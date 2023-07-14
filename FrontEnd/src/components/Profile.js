@@ -19,7 +19,7 @@ function Profile({ usuario}) {
 
   return (
     <div className="profile-container" >
-      <img src={usuario.FotoPerfil} className=" " alt="Profile" />
+     
             <div className="flex items-center gap-4 mt-5  ring-2 ring-pink-300 rounded-md mx-2">
         <div className="grid w-1/2 mx-2 mt-2">
             <img src={usuario.FotoPerfil} className="profile-image rounded-full ring-2" alt="Profile" />
