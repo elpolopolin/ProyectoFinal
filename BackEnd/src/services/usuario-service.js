@@ -16,14 +16,14 @@ class UsuarioService {
             returnEntity = result.recordset;
         
            // Encriptar la contraseña si existe
-    if (returnEntity && returnEntity.length > 0) {
+        if (returnEntity) {
         for (const Usuario of returnEntity) {
           if (Usuario.Contrasena) {
             const encryptedPassword = "******";
             Usuario.Contrasena = encryptedPassword;
           }
         }
-    }
+         }
         
         } catch (error) {
             console.log(error);
@@ -40,7 +40,12 @@ class UsuarioService {
             .input('pNombre', sql.VarChar, nombre)
             .input('pContrasena', sql.VarChar, contrasena)
             .query('SELECT * FROM Usuario WHERE NombreUsuario = @pNombre AND Contrasena = @pContrasena');
-          returnEntity = result.recordset;
+          returnEntity = result.recordset[0];
+
+          if (returnEntity) {
+            const encryptedPassword = "******";
+              returnEntity.Contrasena = encryptedPassword;
+          }
         } catch (error) {
           console.log(error);
         }

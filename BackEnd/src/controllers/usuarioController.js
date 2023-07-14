@@ -18,7 +18,7 @@ router.get('/getAll', async (req, res) => {
       return res.status(200).json(resultado);
       console.log(resultado);
     } catch (error) {
-      console.log(error);
+      console.log(error); 
     }
      
     })
@@ -28,7 +28,7 @@ router.get('/getAll', async (req, res) => {
       const { username, password } = req.body;
       const resultado = await svc.login(username, password);
     
-      if (resultado && resultado.length > 0) {
+      if (resultado) {
         return res.status(200).json(resultado);
       } else {
         return res.status(400).send('Usuario no existe');
