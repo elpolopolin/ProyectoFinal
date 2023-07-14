@@ -50,18 +50,20 @@ function Profile({ usuario}) {
         
         </div>
           
-        <p className="mb-2 mt-2 caja-descripcion2">Soltero </p>
+        <p className="mb-2 mt-2 caja-descripcion2">{usuario.estado} </p>
         <p className="mb-2 mt-2 caja-descripcion2">Intereses: </p>
         <div className="flex w-full">
-          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">content</div>
+          <div className="grid-intereses h-20 flex-grow card bg-base-0 rounded-box place-items-center">{usuario.interes1}</div>
+          <div className="divider-horizontal"></div>
+          <div className="grid-intereses flex-grow card bg-base-0 rounded-box place-items-center">{usuario.interes1}</div>
           <div className="divider divider-horizontal"></div>
-          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">content</div>
+          <div className="grid-intereses h-20 flex-grow card bg-base-0 rounded-box place-items-center">{usuario.interes1}</div>
         </div>
-        <p className="mb-2 mt-2 caja-descripcion2">MIS EVENTOS</p>
-        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
-        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
-        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
-        <p className="mb-2 mt-2 caja-descripcion2">EVENTOS ASISTIDOS</p>
+
+        <div className="flex joinButtons">
+          <button className="btn join-item">MIS EVENTOS +</button>
+          <button className="btn join-item">EVENTOS ASISTIDOS</button>
+        </div>
       </div>
  
     </div>

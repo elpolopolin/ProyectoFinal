@@ -33,7 +33,7 @@ function App() {
       setUserLogged(user);
     }
 
-        localStorage.clear();
+    //localStorage.clear();
     
     
   }, []);

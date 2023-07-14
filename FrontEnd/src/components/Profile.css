@@ -53,6 +53,8 @@
     height: auto; /* Cambio a 'auto' en lugar de '100%' */
     color: #ffffff;
     overflow-x: auto; /* Agregado 'overflow' para permitir desplazamiento si el contenido excede el tamaño */
+    vertical-align: middle;
+    
 }
   
 .profile-descripcion {
@@ -64,6 +66,11 @@
     color: #ffffff;
 }
 
-.divider{
-    color: #ffffff;
+.grid-intereses{
+    border: 1px solid #ffffff;
+}
+
+.joinButtons{
+    margin-top: 5%;
+    background-color: black;
 }
