@@ -1,5 +1,11 @@
 # Getting Started with Create React App
 
+//falta agregar tabla de intereses por usuario la cual contenga las categorias que le gustan y el id de el usuario que le gusta esa categoria.
+
+cuando las muestra en el profile estan como usuario.interes1, 2 etc. Ponelo asi o cambialo en profile tmb.
+
+Tambien falta que pueda poner su ESTADO(soltero, en pareja, etc)
+
 ## https://tailwindcss.com
 https://tailwindcss.com/docs/customizing-colors
 
