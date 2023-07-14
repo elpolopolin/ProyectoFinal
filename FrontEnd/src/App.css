@@ -39,68 +39,7 @@
 }
 
 
-/* Profile */ 
 
-.profile-container {
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-.profile-image {
-  width: 75%;
-  height: 100%;
- 
-  object-fit: cover;
- 
-}
-
-.profile-name {
-  font-size: small;
-  text-align: center;
-  color: #ffffff;
-  font-weight: bold;
- 
-}
-
-.profile-username {
-  text-align: center;
-  font-size: small;
-  color: #888888;
-
-}
-
-.caja-descripcion {
- 
-  border: 2px solid #ffffff;
-  padding: 5px;
-  width: 90%;
-  max-height: 10vh; /* Cambio a 'auto' en lugar de '100%' */
-  color: #ffffff;
-  overflow-x: auto; /* Agregado 'overflow' para permitir desplazamiento si el contenido excede el tamaño */
-}
-
-.caja-descripcion2 {
-  text-align: center;
-  border: 1px solid #ffffff;
-  padding: 5px;
-  width: 100%;
-  height: auto; /* Cambio a 'auto' en lugar de '100%' */
-  color: #ffffff;
-  overflow-x: auto; /* Agregado 'overflow' para permitir desplazamiento si el contenido excede el tamaño */
-}
-
-.profile-descripcion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  width: 300px; /* Cambio a '100%' para ocupar todo el ancho disponible */
-  color: #ffffff;
-
-}
 
 

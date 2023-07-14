@@ -81,7 +81,7 @@ function App() {
       window.location.reload(false)
       })
       .catch(({ response }) => {
-      console.log(response)
+  
       })
     }
   
@@ -140,8 +140,6 @@ function App() {
 
           {isLoggedIn && (
             <div className="Home">
-           
-              <h1 className="text-white">hola {userLogged.NombreUsuario}</h1>
               <Routes>
                 <Route path="/" element={<Eventos eventos={eventos} />} />
                 <Route path="/friends" element={<Friends />} />
