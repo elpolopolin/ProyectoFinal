@@ -1,7 +1,7 @@
 import config from "../../dbconfig.js";
 import sql from 'mssql';
 import Usuario from '../models/usuario.js'
-import bcrypt from 'bcrypt';
+//importar algun bcript o algo pa encriptar la data de los users
 
 
 class UsuarioService {
@@ -19,7 +19,7 @@ class UsuarioService {
     if (returnEntity && returnEntity.length > 0) {
         for (const Usuario of returnEntity) {
           if (Usuario.Contrasena) {
-            const encryptedPassword = await bcrypt.hash(Usuario.Contrasena, 10);
+            const encryptedPassword = "******";
             Usuario.Contrasena = encryptedPassword;
           }
         }
@@ -61,7 +61,7 @@ class UsuarioService {
           if (returnEntity && returnEntity.length > 0) {
             for (const Usuario of returnEntity) {
               if (Usuario.Contrasena) {
-                const encryptedPassword = await bcrypt.hash(Usuario.Contrasena, 10);
+                const encryptedPassword = "******";
                 Usuario.Contrasena = encryptedPassword;
               }
             }
