@@ -33,13 +33,9 @@ function App() {
       setUserLogged(user);
     }
 
-<<<<<<< HEAD
-   localStorage.clear();
-=======
-    //localStorage.clear();
+        localStorage.clear();
     
     
->>>>>>> c20de56bec6dcf7ccaf7a09cd21fbd82ef411e58
   }, []);
 
 
@@ -100,10 +96,10 @@ function App() {
         </Routes>
       <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
      
-        <div className="bg-[#252525] w-full min-h-screen font-sans justify-center items-center">
+        <div className="bg-[#252525] w-full min-h-screen font-sans justify-items-center">
          
         {!isLoggedIn &&  (
-            <div className="logIn px-8">
+            <div className="logIn  p-10 ">
               <center>
               <form onSubmit={onSubmit}>
               <div className="">
@@ -141,7 +137,7 @@ function App() {
             </p>
             
           
-            <p className="absolute bottom-0 left-0 right-0 text-pink-200 text-center mb-40 " >
+            <p className="absolute bottom-0 left-0 right-0 text-pink-200 text-center mb-10 " >
               ¿Aún no tienes una cuenta?{" "}
               <Link to="/Registrarse" className="">
               <a className="underline cursor-pointer">

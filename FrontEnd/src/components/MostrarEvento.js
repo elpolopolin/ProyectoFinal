@@ -57,32 +57,43 @@ function MostrarEvento({ evento, participantesEvento }) {
           </center>
 
 
-
+          
           <div className="flex w-full">
-            <div className="grid h-50 flex-grow card text-white place-items-left">
-             
-              <div className="Dat-izq">
-                <p className="Datos">Organizador: Charly Garcia{evento.organizador}</p>
-                <p className="Datos"><a className="link" onClick={() => setMostrarParticipantes(true)}>Personas que asisten </a></p>
-                <p className="Datos">Amigos: </p>
-                {/* fotos de destacados */}
-              </div>
-            </div>
+          <div className="grid h-50 flex-grow card text-white place-items-left">
+  <div className="Dat-izq">
+  <div className="overflox-x-auto">
+    <table className="table-auto">
+      <thead>
+        <tr>
+          <th className="Datos p-2 sm:p-4">Organizador</th>
+          <th className="Datos p-2 sm:p-4">Conocidos</th>
+          <th className="Datos p-2 sm:p-4">Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="Datos p-2 sm:p-4">Charly García {evento.organizador}</td>
+          <td className="Datos p-2 sm:p-4"><a className="link" onClick={() => setMostrarParticipantes(true)}>Personas que asisten</a></td>
+          <td className="Datos p-2 sm:p-4">Precio: ${evento.Precio}</td>
+        </tr>
+      </tbody>
+      <tr>
+          <th className="Datos p-2 sm:p-4">Locación:</th>
+          <th className="Datos p-2 sm:p-4">Rango de edad:</th>
+          <th className="Datos p-2 sm:p-4">Amigos</th>
+        </tr> 
+        <tr>
+          <td className="Datos p-2 sm:p-4">San Isidro {evento.Locacion}</td>
+          <td className="Datos p-2 sm:p-4">{evento.EdadMinima} - {evento.EdadMaxima}</td>
+          <td className="Datos p-2 sm:p-4">"colocar amigos q asisten"</td>
+        </tr>
+    </table>
+  </div>
+</div>
+</div>
 
-            <div className="divider divider-horizontal"></div>
 
-            <div className="grid h-50 flex-grow  text-white  place-items-right">
-              <p className="Datos">Precio: ${evento.Precio}</p>
-              <p className="Datos">Categoria: {evento.idCategoria}</p>
-              <p className="Datos">Locacion: {evento.Direccion}</p>
-              <p className="Datos">Rangos de edad: {evento.EdadMinima} - {evento.EdadMaxima}</p>
-              <p className="Fecha-Evento w-40 justify-end">
-                  {format(
-                    new Date(evento.Fecha),
-                    "MMMM dd  yyyy ' ' HH'hs'"
-                  )}
-                </p>
-              </div>
+
           </div>
 
               <div className="Logo-Fecha text-white">
