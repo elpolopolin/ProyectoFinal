@@ -3,12 +3,13 @@ import axios from "axios";
 import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 import Logo from "./icons/Logo.png";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import Registrarse from "./components/Registrarse.js";
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
 import Calendar from "./components/Calendar";
 import Entradas from "./components/Entradas";
+
 
 export const AuthContext = createContext();
 
@@ -21,9 +22,8 @@ function App() {
   const [userLogged, setUserLogged] = useState({});
 
   useEffect(() => {
+   
     cargarEventos();
-
-
     const token = localStorage.getItem('auth');// Verificar si existe un token de autenticación en el almacenamiento local
     const userJson = localStorage.getItem('userLogged');
     const user = JSON.parse(userJson);
@@ -33,8 +33,9 @@ function App() {
       setUserLogged(user);
     }
 
-   // localStorage.clear();
+   localStorage.clear();
   }, []);
+
 
   const cargarEventos = () => {
     axios
@@ -79,21 +80,29 @@ function App() {
       window.location.reload(false)
       })
       .catch(({ response }) => {
-  
+        setIncorrecto("Usuario o contraseña incorrecto")
       })
     }
+
+   
   
 
   return (
     <BrowserRouter>
+     <Routes>
+            <Route path="/Registrarse" element={<Registrarse />} />
+        </Routes>
       <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
-        <div className="bg-[#252525] w-full min-h-screen font-sans px-6  justify-center items-center">
+     
+        <div className="bg-[#252525] w-full min-h-screen font-sans justify-center items-center">
          
-          {!isLoggedIn && (
-            <div className="logIn">
-              <div className="my-8">
+        {!isLoggedIn &&  (
+            <div className="logIn px-8">
+              <center>
               <form onSubmit={onSubmit}>
-                <img src={Logo} className="Logo" alt="Logo" />
+              <div className="">
+                <br></br>
+                <img src={Logo} className="Logo mt-3" alt="Logo" />
                 <div className="my-4">
                 <input
                   id="nombreUsuario"
@@ -119,20 +128,24 @@ function App() {
               <button className="btn btn-outline  btn-wide text-pink-200" type="submit">
                 Iniciar sesión
               </button>
-
+              </div>
             </form>
-            <p className=" text-pink-500 mt-2" >
+            <p className=" text-pink-500 mt-10 " >
               {incorrecto}
             </p>
             
-            <br />
-            <p className="text-pink-200 text-center" >
+          
+            <p className="absolute bottom-0 left-0 right-0 text-pink-200 text-center mb-40 " >
               ¿Aún no tienes una cuenta?{" "}
+              <Link to="/Registrarse" className="">
               <a className="underline cursor-pointer">
                 Registrarte
               </a>
+              </Link>
             </p>
-        </div>
+           
+        
+        </center>
             </div>
           )}
 
