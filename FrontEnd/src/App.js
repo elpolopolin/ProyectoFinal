@@ -33,13 +33,9 @@ function App() {
       setUserLogged(user);
     }
 
-<<<<<<< HEAD
-   localStorage.clear();
-=======
     //localStorage.clear();
     
     
->>>>>>> c20de56bec6dcf7ccaf7a09cd21fbd82ef411e58
   }, []);
 
 
