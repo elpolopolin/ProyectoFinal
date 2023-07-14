@@ -32,6 +32,8 @@ function App() {
       setIsLoggedIn(true);
       setUserLogged(user);
     }
+
+    //localStorage.clear();
     
     
   }, []);

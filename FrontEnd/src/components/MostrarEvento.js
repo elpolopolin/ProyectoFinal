@@ -75,16 +75,18 @@ function MostrarEvento({ evento, participantesEvento }) {
               <p className="Datos">Precio: ${evento.Precio}</p>
               <p className="Datos">Categoria: {evento.idCategoria}</p>
               <p className="Datos">Locacion: {evento.Direccion}</p>
-              <p className="Datos">Rangos de edad: {evento.EdadMinima} - {evento.EdadMaxima}</p></div>
-          </div>
-
-              <div className="Logo-Fecha text-white">
-                <p className="Fecha-Evento w-40 justify-end">
+              <p className="Datos">Rangos de edad: {evento.EdadMinima} - {evento.EdadMaxima}</p>
+              <p className="Fecha-Evento w-40 justify-end">
                   {format(
                     new Date(evento.Fecha),
                     "MMMM dd  yyyy ' ' HH'hs'"
                   )}
                 </p>
+              </div>
+          </div>
+
+              <div className="Logo-Fecha text-white">
+                
           </div>
           <center>
             <hr className="hr2"></hr>
