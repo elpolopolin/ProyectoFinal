@@ -61,22 +61,17 @@ class UsuarioService {
             .request()
             .input('pId', sql.Int, id)
             .query('SELECT * FROM Usuario WHERE Id = @pId');
-          returnEntity = result.recordsets[0];
-      
-          if (returnEntity && returnEntity.length > 0) {
-            for (const Usuario of returnEntity) {
-              if (Usuario.Contrasena) {
-                const encryptedPassword = "******";
-                Usuario.Contrasena = encryptedPassword;
-              }
-            }
-        }
+          returnEntity = result.recordsets[0]; // Obtener el primer elemento del arreglo
+            
+          if (returnEntity && returnEntity.Contrasena) {
+            const encryptedPassword = "******";
+            returnEntity.Contrasena = encryptedPassword;
+          }
         } catch (error) {
           console.log(error);
         }
         return returnEntity;
       };
-
 
     insert = async (usuario) => {
         let rowsAffected = 0;

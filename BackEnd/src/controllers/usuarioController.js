@@ -15,13 +15,16 @@ router.get('/getAll', async (req, res) => {
   router.get('/getbyid/:id', async (req, res) => {
     try {
       let resultado = await svc.getById(req.params.id);
-      return res.status(200).json(resultado);
-      console.log(resultado);
+      if (resultado && resultado.length > 0) {
+        return res.status(200).json(resultado[0]); // Devuelve el primer elemento del arreglo
+      } else {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
     } catch (error) {
-      console.log(error); 
+      console.log(error);
+      return res.status(500).json({ message: 'Error en el servidor' });
     }
-     
-    })
+  });
 
   router.post('/login', async (req, res) => {
     try {
