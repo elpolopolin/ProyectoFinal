@@ -8,7 +8,7 @@ import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
 import Calendar from "./components/Calendar";
-import Entradas from "./components/Entradas";
+import Entradas from "./components/MisEventos";
 
 export const AuthContext = createContext();
 
@@ -137,6 +137,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/Registrarse" element={<Registrarse />} />
+      
     </Routes>
     <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
       <div className="bg-[#252525] w-full min-h-screen font-sans justify-items-center">
@@ -191,8 +192,9 @@ function App() {
               <Route path="/" element={<Eventos eventos={eventos} />} />
               <Route path="/friends" element={<Friends />} />
               <Route path="/profile" element={<Profile usuario={userLogged} logout={logout}/>} />
-              <Route path="/entradas" element={<Entradas />} />
+              <Route path="/entradas" element={<Entradas usuario={userLogged}/>} />
               <Route path="/calendar" element={<Calendar />} />
+              <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
             <div className="bottom-navbar">
