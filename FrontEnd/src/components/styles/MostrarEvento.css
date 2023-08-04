@@ -1,0 +1,19 @@
+.Datos {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px; /* Espacio entre las líneas */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100%; /* Opcional si deseas que las celdas tengan la misma altura */
+}
+  
+.table-auto {
+    width: 100%; /* Ajusta el ancho de la tabla según tus necesidades */
+}
+  
+  /* Si es necesario, ajusta el ancho de las celdas en función de la resolución */
+.Dat-izq td {
+    width: 33.33%; /* Distribuye el ancho en tres columnas */
+}
