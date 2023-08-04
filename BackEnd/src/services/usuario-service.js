@@ -1,6 +1,7 @@
 import config from "../../dbconfig.js";
 import sql from 'mssql';
 import Usuario from '../models/usuario.js'
+
 //importar algun bcript o algo pa encriptar la data de los users
 
 
@@ -44,8 +45,24 @@ class UsuarioService {
 
           if (returnEntity) {
             const encryptedPassword = "******";
-              returnEntity.Contrasena = encryptedPassword;
+              returnEntity.Contrasena = encryptedPassword;T
           }
+        } catch (error) {
+          console.log(error);
+        }
+        return returnEntity;
+      }
+
+      getEventosXUsuario = async (id) => {
+        let returnEntity = null;
+        console.log('Estoy en: Usuario.getEventosXUsuario (id)');
+        try {
+          let pool = await sql.connect(config);
+          let result = await pool
+            .request()
+            .input('pId', sql.Int, id)
+            .query('SELECT IdEvento FROM Usuario INNER JOIN Participante_x_Evento ON Usuario.Id = Participante_x_Evento.IdUsuario WHERE Id = @pId');
+          returnEntity = result.recordsets[0]; // Obtener el primer elemento del arreglo
         } catch (error) {
           console.log(error);
         }
@@ -63,9 +80,13 @@ class UsuarioService {
             .query('SELECT * FROM Usuario WHERE Id = @pId');
           returnEntity = result.recordsets[0]; // Obtener el primer elemento del arreglo
             
-          if (returnEntity && returnEntity.Contrasena) {
-            const encryptedPassword = "******";
-            returnEntity.Contrasena = encryptedPassword;
+          if (returnEntity) {
+            for (const Usuario of returnEntity) {
+              if (Usuario.Contrasena) {
+                const encryptedPassword = "******";
+                Usuario.Contrasena = encryptedPassword;
+              }
+            }
           }
         } catch (error) {
           console.log(error);

@@ -31,6 +31,17 @@ router.get('/getAll', async (req, res) => {
       
     })
 
+    router.get('/getbyidEvento/:id', async (req, res) => {
+      try {
+        let resultado = await svc.getByIdEvento(req.params.id);
+        return res.status(200).json(resultado);
+        
+      } catch (error) {
+        console.log(error);
+      }
+        
+      })
+
     router.get('/AsistentesXEvento', async (req, res) => {
       try {
         let resultado = await svc.AsistentesXEvento();

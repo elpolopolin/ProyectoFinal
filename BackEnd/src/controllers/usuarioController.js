@@ -26,6 +26,11 @@ router.get('/getAll', async (req, res) => {
     }
   });
 
+  router.get('/EventosXUser/:id', async (req, res) => {
+    let resultado = await svc.getEventosXUsuario(req.params.id);
+    return res.status(200).json(resultado);
+  })
+
   router.post('/login', async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -33,6 +38,7 @@ router.get('/getAll', async (req, res) => {
     
       if (resultado) {
         return res.status(200).json(resultado);
+
       } else {
         return res.status(400).send('Usuario no existe');
       }
