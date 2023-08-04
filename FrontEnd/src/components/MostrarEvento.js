@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { format } from 'date-fns';
 import Calendario2 from '../icons/Calendario2.png'
 import "../App.css";
+import './styles/MostrarEvento.css';
 
 function MostrarEvento({ evento, participantesEvento }) {
 
@@ -60,37 +61,45 @@ function MostrarEvento({ evento, participantesEvento }) {
           
           <div className="flex w-full">
           <div className="grid h-50 flex-grow card text-white place-items-left">
-  <div className="Dat-izq">
-  <div className="overflox-x-auto">
-    <table className="table-auto">
-      <thead>
-        <tr>
-          <th className="Datos p-2 sm:p-4">Organizador</th>
-          <th className="Datos p-2 sm:p-4">Conocidos</th>
-          <th className="Datos p-2 sm:p-4">Precio</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="Datos p-2 sm:p-4">Charly García {evento.organizador}</td>
-          <td className="Datos p-2 sm:p-4"><a className="link" onClick={() => setMostrarParticipantes(true)}>Personas que asisten</a></td>
-          <td className="Datos p-2 sm:p-4">Precio: ${evento.Precio}</td>
-        </tr>
-      </tbody>
-      <tr>
-          <th className="Datos p-2 sm:p-4">Locación:</th>
-          <th className="Datos p-2 sm:p-4">Rango de edad:</th>
-          <th className="Datos p-2 sm:p-4">Amigos</th>
-        </tr> 
-        <tr>
-          <td className="Datos p-2 sm:p-4">San Isidro {evento.Locacion}</td>
-          <td className="Datos p-2 sm:p-4">{evento.EdadMinima} - {evento.EdadMaxima}</td>
-          <td className="Datos p-2 sm:p-4">"colocar amigos q asisten"</td>
-        </tr>
-    </table>
-  </div>
-</div>
-</div>
+            <div className="Dat-izq">
+            <div className="overflox-x-auto">
+            <table className="table-auto">
+            <tbody>
+              <tr>
+                <td>
+                  <div className="Datos">Organizador</div>
+                  <div className="Datos">Charly García {evento.organizador}</div>
+                </td>
+                <td>
+                  <div className="Datos">Conocidos</div>
+                  <div className="Datos">
+                    <a className="link" onClick={() => setMostrarParticipantes(true)}>Asistentes</a>
+                  </div>
+                </td>
+                <td>
+                  <div className="Datos">Precio</div>
+                  <div className="Datos">${evento.Precio}</div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div className="Datos">Locación:</div>
+                  <div className="Datos">San Isidro {evento.Locacion}</div>
+                </td>
+                <td>
+                  <div className="Datos">Rango de edad:</div>
+                  <div className="Datos">{evento.EdadMinima} - {evento.EdadMaxima}</div>
+                </td>
+                <td>
+                  <div className="Datos">Amigos</div>
+                  <div className="Datos">"colocar amigos que asisten"</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+            </div>
+          </div>
+          </div>
 
 
 
