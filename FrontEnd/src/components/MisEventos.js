@@ -16,44 +16,81 @@ function MisEventos({ usuario }) {
       .then((result) => {
         const idEventos = result.data;
         setEventosIds(idEventos);
-        cargarDetallesEventos(idEventos);
+        cargarEventos(idEventos);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const cargarDetallesEventos = async (ids) => {
-    const eventosData = await Promise.all(
-      ids.map(async (eventoIdObj) => {
-        const eventoId = eventoIdObj.IdEvento;
-        const link = "http://localhost:3000/getbyidEvento/" + eventoId;
-        try {
-          const response = await axios.get(link);
-          return response.data;
-        } catch (error) {
-          console.log(error);
-          return null;
-        }
-      })
-    );
+  const cargarEventos = (eventosIds) => {
+    if (eventosIds.length === 0) {
+      console.log("No hay eventos para cargar.");
+      return;
+    }
 
-    setEventos(eventosData.filter((evento) => evento !== null));
+    const linkBase = "http://localhost:3000/getbyidEvento/";
+
+    const obtenerDatosEventos = async () => {
+      const eventosPromises = eventosIds.map(async (eventoId) => {
+        const response = await axios.get(linkBase + eventoId.IdEvento);
+        return response.data;
+       
+      });
+     
+      const datosEventos = await Promise.all(eventosPromises);
+       //console.log(datosEventos)
+      setEventos(datosEventos);
+    };
+
+    obtenerDatosEventos().catch((error) => {
+      console.log(error);
+    });
   };
 
+  if (eventos.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-900">
+      <div className="text-white font-bold text-center">Loading...</div>
+    </div>
+    );
+  }
+
   return (
-    <>
-      <h1 className="text-white">Mis Eventos</h1>
-      {eventos.map((evento) => (
-        <div key={evento.Id} className="card">
-          {evento.ImagenEvento && (
-            <img src={evento.ImagenEvento} alt={evento.Nombre} />
-          )}
-          <h2>{evento.Nombre}</h2>
-          <button>VER MÁS</button>
-        </div>
-      ))}
-    </>
+    <div className=" p-10">
+      <h1 className="text-white text-4xl font-bold text-center mb-8">
+        Mis Eventos
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+        {eventos.map((evento) => (
+          <div
+            key={evento.Id}
+            className="rounded-lg shadow-md bg-white text-black cursor-pointer hover:shadow-lg"
+          >
+            {evento.ImagenEvento && (
+              <figure className="h-40">
+                <img
+                  src={evento.ImagenEvento}
+                  alt="..."
+                  className="h-full w-full object-cover"
+                />
+              </figure>
+            )}
+            <div className="p-4">
+              <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4>
+              <div className="flex justify-between">
+                <button className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">
+                  Código QR
+                </button>
+                <button className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">
+                  Ver Más
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
