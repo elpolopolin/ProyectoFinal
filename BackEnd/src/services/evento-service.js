@@ -46,7 +46,8 @@ class EventoService {
             let result  = await pool.request()
                                                 .input('pId', sql.Int, id)
                                                 .query('SELECT * FROM Evento WHERE Id = @pId');
-            returnEntity = result.recordsets[0]; //
+            returnEntity = result.recordsets[0][0]; //
+            console.log('Esto es el evento', returnEntity)
         } catch (error) {
             console.log(error);
         }
