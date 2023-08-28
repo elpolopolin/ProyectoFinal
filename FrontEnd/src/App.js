@@ -4,11 +4,12 @@ import Eventos from "./components/Eventos.js";
 import NavBar from "./components/NavBar";
 import Logo from "./icons/Logo.png";
 import Registrarse from "./components/Registrarse.js";
-import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Link, BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
 import Calendar from "./components/Calendar";
 import Entradas from "./components/MisEventos";
+import MostrarEvento from "./components/MostrarEvento";
 
 export const AuthContext = createContext();
 
@@ -22,6 +23,7 @@ function App() {
   });
   const [incorrecto, setIncorrecto] = useState("");
   const [userLogged, setUserLogged] = useState({});
+  const [participantes, setParticipantes] = useState({});
 
   useEffect(() => {
     cargarEventos();
@@ -55,6 +57,8 @@ function App() {
       });
   };
 
+
+
   const cargarUsuarios = () => {
     axios
       .get("http://localhost:3000/usuarios/getAll")
@@ -79,6 +83,8 @@ function App() {
         console.log(error);
       });
   };
+
+
 
   const inputChange = ({ target }) => {
     const { name, value } = target;
@@ -190,6 +196,7 @@ function App() {
           <div className="Home">
             <Routes>
               <Route path="/" element={<Eventos eventos={eventos} />} />
+              <Route path="/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
               <Route path="/friends" element={<Friends />} />
               <Route path="/profile" element={<Profile usuario={userLogged} logout={logout}/>} />
               <Route path="/entradas" element={<Entradas usuario={userLogged}/>} />
@@ -207,5 +214,43 @@ function App() {
   </BrowserRouter>
   );
 }
+
+//link para ver eventos LOGICA
+
+const cargarParticipantes = async (idEvento) => {
+  let link = "http://localhost:3000/getById/";
+  link += idEvento;
+  
+  try {
+    const result = await axios.get(link);
+    const participantesEvento = result.data;
+    return participantesEvento;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+function MostrarEventoWrapper({ eventos }) {
+  const { id } = useParams();
+  const eventoMostrar = eventos.find((evento) => evento.Id === parseInt(id));
+  const [participantesEvento, setParticipantesEvento] = useState({});
+
+  useEffect(() => {
+    cargarParticipantes(eventoMostrar.Id)
+      .then((participantesCargados) => {
+        setParticipantesEvento(participantesCargados);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [eventoMostrar.Id]);
+
+  return (
+    <MostrarEvento evento={eventoMostrar} participantesEvento={participantesEvento} />
+  );
+}
+
+//
 
 export default App;

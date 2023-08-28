@@ -8,16 +8,33 @@ function MostrarEvento({ evento, participantesEvento }) {
 
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
 
+  const comprarButton = (
+    <div className="flex justify-center mt-5 ">
+      {evento.Precio > 0 ? (
+        <div>
+        <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"> Comprar </button>
+        </div>
+      ) : (
+        <div>
+          <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"> Entrar </button>
+        </div>
+      )}
+    </div>
+  );
+
+
   return (
     <div>
       {!MostrarParticipantes &&
-        <div key={evento.Id} className="card-container overflow-y-auto ">
-          <center>
+        <div key={evento.Id} className="mx-2 overflow-y-auto ">
+          
+          <div className="flex justify-center mt-5">
             <p className="titulo-evento">{evento.Nombre}</p>
+            </div>
               <div className="mb-5" >
                 <div className="carousel w-full">
                   <div id="slide1" class="carousel-item relative w-full">
-                    <img src={evento.ImagenEvento} class="w-full" />
+                    <img src={evento.ImagenEvento} class="w-full " />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                       <a href="#slide4" class="btn btn-circle">❮</a>
                       <a href="#slide2" class="btn btn-circle">❯</a>
@@ -47,15 +64,15 @@ function MostrarEvento({ evento, participantesEvento }) {
                 </div>
               </div>
             <div className="mb-5" >
-            <p className="text-white">{evento.Descripcion}</p>
+            <p className="text-white flex justify-center">{evento.Descripcion}</p>
             </div>
-            
+          
 
             <div className="mb-5">
             <hr className="hr1"></hr>
             </div>
             
-          </center>
+          
 
 
           
@@ -68,7 +85,7 @@ function MostrarEvento({ evento, participantesEvento }) {
               <tr>
                 <td>
                   <div className="Datos">Organizador</div>
-                  <div className="Datos">Charly García {evento.organizador}</div>
+                  <div className="Datos"> {evento.IdOrganizador}</div>
                 </td>
                 <td>
                   <div className="Datos">Conocidos</div>
@@ -112,6 +129,9 @@ function MostrarEvento({ evento, participantesEvento }) {
             <hr className="hr2"></hr>
           </center>
 
+          {comprarButton}
+
+         
         </div>
         
       }

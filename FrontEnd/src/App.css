@@ -5,6 +5,11 @@
  
 }
 
+.nana-container {
+  max-height: 83vh; /* Establece la altura máxima del contenedor */
+  max-width: 100%;
+ 
+}
 
 .fotoperfil{
   width: 300px;

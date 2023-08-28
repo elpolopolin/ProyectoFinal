@@ -6,6 +6,7 @@ import axios from "axios";
 import CalendarioIcon from "../icons/Calendario.png";
 import EntradaIcon from "../icons/Entrada.png";
 import PinIcon from "../icons/pin.png";
+import { Link, BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
 function Eventos({ eventos }) {
   
@@ -118,11 +119,17 @@ function Eventos({ eventos }) {
                       }
 
                       return (
+                       
                         <div
                           key={eventop.Id}
                           className="card  mb-4   bg-white text-black "
                           onClick={() => handleClick(eventop)}
                         >
+                           <Link
+                        key={eventop.Id}
+                        to={`VerEvento/${eventop.Id}`}
+                        className="cursor-pointer"
+                      >
                           <div className="">
                             <figure>
                               <img
@@ -155,8 +162,9 @@ function Eventos({ eventos }) {
                               </p>
                             </div>
                           </div>
+                          </Link>
                         </div>
-                        
+                     
                       );
                       
                     })}
@@ -168,19 +176,10 @@ function Eventos({ eventos }) {
         </div>
       )}
 
-      {mostrarEvento && (
-        <div className="container">
-          <button onClick={handleClick2} className="btn-transparent">
-            &lt;
-          </button>
-          <MostrarEvento
-            evento={eventoMostrar}
-            participantesEvento={participantes[eventoMostrar.Id]}
-          />
-        </div>
-      )}
     </div>
   );
 }
+
+
 
 export default Eventos;
