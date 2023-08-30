@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-
+//falta agregar userContext dentro de la app.js padre asi el usuario lo tienen todos los componentes sin necesidad de mandarlo por parametro.
 //falta agregar tabla de intereses por usuario la cual contenga las categorias que le gustan y el id de el usuario que le gusta esa categoria.
 
 cuando las muestra en el profile estan como usuario.interes1, 2 etc. Ponelo asi o cambialo en profile tmb.
