@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {  useContext ,useState, useEffect } from "react";
 import axios from "axios";
+import { UsuarioContext, HostContext } from "../App";
 
-function MisEventos({ usuario }) {
+function MisEventos() {
   const [eventosIds, setEventosIds] = useState([]);
   const [eventos, setEventos] = useState([]);
+  const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
+  const usuario = useContext(UsuarioContext);
 
   useEffect(() => {
     cargarEventosIds();
   }, []);
 
   const cargarEventosIds = () => {
-    const link = "http://localhost:3000/usuarios/EventosXUser/" + usuario.Id;
+    const link = host + "/usuarios/EventosXUser/" + usuario.Id;
     axios
       .get(link)
       .then((result) => {
@@ -29,7 +32,7 @@ function MisEventos({ usuario }) {
       return;
     }
 
-    const linkBase = "http://localhost:3000/getbyidEvento/";
+    const linkBase = host + "/getbyidEvento/";
 
     const obtenerDatosEventos = async () => {
       const eventosPromises = eventosIds.map(async (eventoId) => {

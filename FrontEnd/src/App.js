@@ -10,8 +10,12 @@ import Profile from "./components/Profile";
 import Calendar from "./components/Calendar";
 import Entradas from "./components/MisEventos";
 import MostrarEvento from "./components/MostrarEvento";
+import CrearEvento from "./components/CrearEvento.js"
 
-export const AuthContext = createContext();
+export const UsuarioContext = createContext();
+export const HostContext = createContext(); 
+
+const host = "http://192.168.0.119:3000";
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -24,6 +28,9 @@ function App() {
   const [incorrecto, setIncorrecto] = useState("");
   const [userLogged, setUserLogged] = useState({});
   const [participantes, setParticipantes] = useState({});
+
+  
+  
 
   useEffect(() => {
     cargarEventos();
@@ -47,7 +54,7 @@ function App() {
 
   const cargarEventos = () => {
     axios
-      .get("http://localhost:3000/getAll")
+      .get(host + "/getAll")
       .then((result) => {
         const events = result.data;
         setEventos(events);
@@ -61,7 +68,7 @@ function App() {
 
   const cargarUsuarios = () => {
     axios
-      .get("http://localhost:3000/usuarios/getAll")
+      .get(host + "/usuarios/getAll")
       .then((result) => {
         const users = result.data;
         setUsuarios(users);
@@ -72,7 +79,7 @@ function App() {
   };
 
   const cargarUsuarioId = async (user) => {
-    const link = "http://localhost:3000/usuarios/getbyid/" + user.Id;
+    const link = host + "/usuarios/getbyid/" + user.Id;
     console.log(link);
     axios
       .get(link)
@@ -96,7 +103,7 @@ function App() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:3000/usuarios/login', body)
+    axios.post(host + '/usuarios/login', body)
       .then((result) => {
         const user = result.data;
         setIsLoggedIn(true);
@@ -122,7 +129,7 @@ function App() {
     const storedBody = localStorage.getItem('body');
     if (storedBody) {
         const storedCredentials = JSON.parse(storedBody);
-        axios.post('http://localhost:3000/usuarios/login', body)
+        axios.post(host + '/usuarios/login', body)
         .then((result) => {
 
         
@@ -140,12 +147,12 @@ function App() {
 
 
   return (
+    <HostContext.Provider value={host}> 
     <BrowserRouter>
-    <Routes>
-      <Route path="/Registrarse" element={<Registrarse />} />
-      
-    </Routes>
-    <AuthContext.Provider value={{ isLoggedIn, userLogged }}>
+      <Routes>
+        <Route path="/Registrarse" element={<Registrarse />} />
+      </Routes>
+    
       <div className="bg-[#252525] w-full min-h-screen font-sans justify-items-center">
         {!isLoggedIn && (
           <div className="logIn p-10">
@@ -193,32 +200,36 @@ function App() {
         )}
 
         {isLoggedIn && (
+          <UsuarioContext.Provider value={userLogged}> 
           <div className="Home">
             <Routes>
               <Route path="/" element={<Eventos eventos={eventos} />} />
               <Route path="/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
+              <Route path="/CrearEvento" element={<CrearEvento />} />
               <Route path="/friends" element={<Friends />} />
-              <Route path="/profile" element={<Profile usuario={userLogged} logout={logout}/>} />
-              <Route path="/entradas" element={<Entradas usuario={userLogged}/>} />
+              <Route path="/profile" element={<Profile logout={logout}/>} />
+              <Route path="/entradas" element={<Entradas />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
             <div className="bottom-navbar">
-              <NavBar usuario={userLogged} />
+              <NavBar />
             </div>
           </div>
+        </UsuarioContext.Provider>
         )}
       </div>
-    </AuthContext.Provider>
+    
   </BrowserRouter>
+  </HostContext.Provider>
   );
 }
 
 //link para ver eventos LOGICA
 
 const cargarParticipantes = async (idEvento) => {
-  let link = "http://localhost:3000/getById/";
+  let link = host + "/getById/"; //en el caso de ser ort cambiar por localhost o ip de ort
   link += idEvento;
   
   try {

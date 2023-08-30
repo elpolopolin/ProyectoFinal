@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { AuthContext } from "../App";
+import { HostContext } from "../App";
 import { format } from "date-fns";
 import MostrarEvento from "./MostrarEvento";
 import axios from "axios";
@@ -17,8 +17,9 @@ function Eventos({ eventos }) {
   const [participantes, setParticipantes] = useState({});
   const [categorias, setCategorias] = useState([]);
 
-  const { isLoggedIn, userLogged } = useContext(AuthContext); //usuarioLoggeado y si esta loggeado true sino hay user logged false
+  const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
 
+  
   const handleClick = (evento) => {
     setMostrarEvento(true);
     setEventoMostrar(evento);
@@ -29,7 +30,7 @@ function Eventos({ eventos }) {
   };
 
   const cargarParticipantes = (idEvento) => {
-    let link = "http://localhost:3000/getById/";
+    let link = host + "/getById/";
     link += idEvento;
     axios
       .get(link)
@@ -47,7 +48,7 @@ function Eventos({ eventos }) {
 
   const cargarCategorias = () => {
     axios
-      .get("http://localhost:3000/Categorias")
+      .get(host + "/Categorias")
       .then((result) => {
         const cat = result.data;
         setCategorias(cat);

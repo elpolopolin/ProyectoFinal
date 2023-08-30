@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext ,useEffect, useState } from "react";
 import { format } from "date-fns";
 import './styles/Profile.css';
+import { UsuarioContext } from "../App";
 
-function Profile({ usuario, logout }) { // Receive logout prop
+function Profile({ logout }) { // Receive logout prop
+
   const [descripcion, setDescripcion] = useState(false);
+  const usuario = useContext(UsuarioContext); //llama a usuario del context, este puede ser llamado desde toda la app..
 
   useEffect(() => {
     if (usuario.Descripcion !== "") {
