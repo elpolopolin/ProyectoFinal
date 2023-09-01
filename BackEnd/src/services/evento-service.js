@@ -93,7 +93,7 @@ class EventoService {
                                             .input('pidCategoria', sql.Int, evento.IdCategoria)
 
 
-                                            .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, IdCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
+                                            .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
             rowsAffected = result.rowsAffected;
         } catch (error) {
             console.log(error);

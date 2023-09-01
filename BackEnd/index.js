@@ -9,16 +9,6 @@ import multer from "multer";
 import cors from "cors";
 
 
-const storage = multer.diskStorage({
-  destination: '/public/uploads',
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '.jpg');
-  }
-});
-
-
-
-const upload = multer({ storage: storage });
 
 const app = new express();
 
