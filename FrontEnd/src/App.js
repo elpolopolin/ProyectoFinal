@@ -15,7 +15,7 @@ import CrearEvento from "./components/CrearEvento.js"
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://192.168.0.119:3000";
+const host = "http://10.152.2.109:3000";
 
 function App() {
   const [eventos, setEventos] = useState([]);

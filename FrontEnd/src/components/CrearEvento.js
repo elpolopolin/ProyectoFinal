@@ -1,19 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CheckCircle } from "feather-icons-react";
+import axios from "axios";
+import { HostContext } from "../App";
 
 function CrearEvento() {
+  const [categorias, setCategorias] = useState([]);
   const [evento, setEvento] = useState({
-    nombre: "",
-    fecha: "",
-    precio: "",
-    participantes: "",
-    descripcion: "",
-    direccion: "",
-    privacidad: false,
-    edadMinima: 0,
-    imagenEvento: null,
-    categoria: "",
+    Nombre: "",
+    Fecha: "",
+    Precio: "",
+    Participantes: "",
+    Descripcion: "",
+    Direccion: "",
+    Privacidad: false,
+    EdadMinima: 0,
+    ImagenEvento: null,
+    Categoria: 0,
   });
+
+  const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
+
+
+  const cargarCategorias = () => {
+    axios
+      .get(host + "/Categorias")
+      .then((result) => {
+        const cat = result.data;
+        setCategorias(cat);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const subirEvento = () => {
+    axios
+    .post(host + "/insert", evento, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${evento._boundary}`,
+      }})
+    .then((response) => {
+      console.log("Evento creado exitosamente:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error al crear el evento:", error);
+      // Maneja errores aquí.
+    });
+  }
+
+  useEffect(() => { 
+    cargarCategorias();
+  },[] );
 
   const handleInputChange = (event) => {
     const { name, value, type } = event.target;
@@ -31,15 +70,20 @@ function CrearEvento() {
     const imageFile = event.target.files[0];
     setEvento((prevEvento) => ({
       ...prevEvento,
-      imagenEvento: imageFile,
+      ImagenEvento: imageFile,
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Aquí puedes enviar los datos del evento a tu API o realizar cualquier otra acción necesaria
+    subirEvento();
     console.log(evento);
+
   };
+
+  
+
 
   return (
     <div className="p-10 min-h-screen tracking-wide">
@@ -48,15 +92,15 @@ function CrearEvento() {
       <h1 className="text-white  text-4xl font-bold text-center mb-8">Crear Evento</h1>
             </label>
 
-        <form onSubmit={handleSubmit} className="max-w-lg ">
+        <form onSubmit={handleSubmit} className="max-w-lg" enctype="multipart/form-data">
             <div className="mb-4 bg-pink-300 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="nombre">
                 Nombre
             </label>
             <input
                 type="text"
-                name="nombre"
-                value={evento.nombre}
+                name="Nombre"
+                value={evento.Nombre}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
@@ -67,8 +111,8 @@ function CrearEvento() {
             </label>
             <input
                 type="date"
-                name="fecha"
-                value={evento.fecha}
+                name="Fecha"
+                value={evento.Fecha}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
@@ -79,8 +123,8 @@ function CrearEvento() {
             </label>
             <input
                 type="number"
-                name="precio"
-                value={evento.precio}
+                name="Precio"
+                value={evento.Precio}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
@@ -91,8 +135,8 @@ function CrearEvento() {
             </label>
             <input
                 type="number"
-                name="participantes"
-                value={evento.participantes}
+                name="Participantes"
+                value={evento.Participantes}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
@@ -103,8 +147,8 @@ function CrearEvento() {
             </label>
             <input
                 type="text"
-                name="descripcion"
-                value={evento.descripcion}
+                name="Descripcion"
+                value={evento.Descripcion}
                 onChange={handleInputChange}
                 className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
             />
@@ -115,8 +159,8 @@ function CrearEvento() {
             </label>
             <input
                 type="text"
-                name="direccion"
-                value={evento.direccion}
+                name="Direccion"
+                value={evento.Direccion}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
@@ -131,7 +175,7 @@ function CrearEvento() {
               </label>
               <input
                 type="file"
-                name="imagenEvento"
+                name="ImagenEvento"
                 onChange={handleImageChange}
                 className="w-full ml-1"
               />
@@ -144,8 +188,8 @@ function CrearEvento() {
                 <div className="flex items-center justify-center ml-1">
                   <input
                     type="checkbox"
-                    name="privacidad"
-                    checked={evento.privacidad}
+                    name="Privacidad"
+                    checked={evento.Privacidad}
                     onChange={handleInputChange}
                     className="mr-2"
                   />
@@ -160,15 +204,15 @@ function CrearEvento() {
               Categoría
             </label>
             <select
-              name="categoria"
-              value={evento.categoria}
+              name="Categoria"
+              value={evento.Categoria}
               onChange={handleInputChange}
               className="w-full bg-white text-black rounded-md py-2 px-3"
             >
               <option value="">Seleccionar Categoría</option>
-              <option value="musica">Música</option>
-              <option value="deportes">Deportes</option>
-              {/* ...agregar más opciones de categoría */}
+            {categorias.map((categoria) =>
+            <option value={categoria.IdCategoria}>{categoria.NombreCategoria}</option>
+            )}
             </select>
           </div>
           
