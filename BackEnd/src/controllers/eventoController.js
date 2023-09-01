@@ -83,8 +83,8 @@ router.get('/getAll', async (req, res) => {
           evento.publico = req.body.Privacidad;
           evento.edadMinima = req.body.EdadMinima;
           evento.edadMinima = req.body.EdadMaxima;
-          evento.imagenEvento = "";//req.body.ImagenEvento; // Accede al nombre del archivo subido
-          evento.categoria = req.body.Categoria;
+          evento.imagenEvento = "filename";//req.body.ImagenEvento; // Accede al nombre del archivo subido
+          evento.idCategoria = req.body.Categoria;
       
           
           console.log(evento);

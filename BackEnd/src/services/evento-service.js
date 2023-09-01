@@ -90,7 +90,7 @@ class EventoService {
                                             .input('pEdadMinima', sql.Float, evento.edadMinima)
                                             .input('pEdadMaxima', sql.Float, evento.edadMaxima)
                                             .input('pImagenEvento', sql.VarChar, evento.imagenEvento)
-                                            .input('pidCategoria', sql.Int, evento.IdCategoria)
+                                            .input('pidCategoria', sql.Int, evento.idCategoria)
 
 
                                             .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
