@@ -5,6 +5,7 @@ const router = Router();
 const svc = new EventoService();
 import multer from 'multer'; // Utiliza import en lugar de require
 import path from 'path'; // Utiliza import en lugar de require
+import sharp from 'sharp';
 
 
 const storage = multer.diskStorage({
@@ -20,8 +21,22 @@ const storage = multer.diskStorage({
   },
 });
 
+  // Define una función para filtrar archivos de imagen
+  const fileFilter = (req, file, cb) => {
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif']; // Agrega las extensiones permitidas aquí
+    const extname = path.extname(file.originalname).toLowerCase();
 
-const upload = multer({ storage });
+    if (allowedExtensions.includes(extname)) {
+      cb(null, true); // Acepta el archivo
+    } else {
+      cb(new Error('Solo se permiten archivos de imagen con extensiones .jpg, .jpeg, .png o .gif'), false); // Rechaza el archivo
+    }
+  }
+
+const host = "http://192.168.0.119:3000";
+
+
+const upload = multer({ storage, fileFilter });
 
 router.get('/getAll', async (req, res) => {
     console.log("Estoy en EventoController");
@@ -74,6 +89,7 @@ router.get('/getAll', async (req, res) => {
         try {
           let resultado = null;
           let evento = new Evento();
+          //datos del evento traidos del form del front paaa
           evento.nombre = req.body.Nombre;
           evento.fecha = req.body.Fecha;
           evento.precio = req.body.Precio;
@@ -83,20 +99,24 @@ router.get('/getAll', async (req, res) => {
           evento.publico = req.body.Privacidad;
           evento.edadMinima = req.body.EdadMinima;
           evento.edadMinima = req.body.EdadMaxima;
-          evento.imagenEvento = "filename";//req.body.ImagenEvento; // Accede al nombre del archivo subido
+      
+          // Obtén la ruta completa de la imagen guardada
+          const extname = path.extname(req.file.filename);
+          const imagenRuta = `${host}/imagenesEventos/${req.file.filename}`;
+          
+          evento.imagenEvento = imagenRuta;
+      
           evento.idCategoria = req.body.Categoria;
       
-          
           console.log(evento);
           console.log("-----------------req.body.ImagenEvento begin");          
           console.log(req);
-          console.log(req);
-          console.log("-----------------req.body.ImagenEvento end");          
-          //console.log(req.body.ImagenEvento);
-
-
-      
+          console.log("-----------------req.body.ImagenEvento end");   
+          
+          // Redimensionar la imagen si es necesario
+        
           resultado = await svc.insert(evento);
+          
           return res.status(200).json(resultado);
         } catch (error) {
           console.log(error);
