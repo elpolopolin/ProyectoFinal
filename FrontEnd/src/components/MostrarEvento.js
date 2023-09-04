@@ -28,37 +28,38 @@ function MostrarEvento({ evento, participantesEvento }) {
       {!MostrarParticipantes &&
         <div key={evento.Id} className="mx-2 overflow-y-auto ">
           
-          <div className="flex justify-center mt-5">
+          <div className="nana-container">
+            <div className="flex justify-center mt-5 ">
             <p className="titulo-evento">{evento.Nombre}</p>
             </div>
               <div className="mb-5" >
-                <div className="carousel w-full">
-                  <div id="slide1" class="carousel-item relative w-full">
-                    <img src={evento.ImagenEvento} class="w-full " />
+                <div className="carousel w-full ">
+                  <div id="slide1" class="carousel-item relative flex justify-center w-full" >
+                    <img src={evento.ImagenEvento} className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                       <a href="#slide4" class="btn btn-circle">❮</a>
                       <a href="#slide2" class="btn btn-circle">❯</a>
                     </div>
                   </div>
                   <div id="slide2" class="carousel-item relative w-full">
-                    <img src={evento.Imagen2Evento} class="w-full" />
+                    <img src={evento.Imagen2Evento} className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide1" class="btn btn-circle">❮</a>
-                      <a href="#slide3" class="btn btn-circle">❯</a>
+                      <a href="#slide1" className="btn btn-circle">❮</a>
+                      <a href="#slide3" className="btn btn-circle">❯</a>
                     </div>
                   </div>
-                  <div id="slide3" class="carousel-item relative w-full">
-                    <img src={evento.Imagen3Evento} class="w-full" />
+                  <div id="slide3" className="carousel-item relative w-full">
+                    <img src={evento.Imagen3Evento} className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide2" class="btn btn-circle">❮</a>
-                      <a href="#slide4" class="btn btn-circle">❯</a>
+                      <a href="#slide2" className="btn btn-circle">❮</a>
+                      <a href="#slide4" className="btn btn-circle">❯</a>
                     </div>
                   </div>
                   <div id="slide4" class="carousel-item relative w-full">
-                    <img src={evento.Imagen4Evento} class="w-full" />
+                    <img src={evento.Imagen4Evento} className="w-full" />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide3" class="btn btn-circle">❮</a>
-                      <a href="#slide1" class="btn btn-circle">❯</a>
+                      <a href="#slide3" className="btn btn-circle">❮</a>
+                      <a href="#slide1" className="btn btn-circle">❯</a>
                     </div>
                   </div>
                 </div>
@@ -132,6 +133,7 @@ function MostrarEvento({ evento, participantesEvento }) {
           {comprarButton}
 
          
+        </div>
         </div>
         
       }

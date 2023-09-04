@@ -59,6 +59,7 @@ function Eventos({ eventos }) {
   };
 
   useEffect(() => {
+    
     cargarCategorias();
     eventos.forEach((evento) => {
       cargarParticipantes(evento.Id);
@@ -123,7 +124,7 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card  mb-4   bg-white text-black "
+                          className="card  mb-4 w-auto   bg-white text-black "
                           onClick={() => handleClick(eventop)}
                         >
                            <Link
