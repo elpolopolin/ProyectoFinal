@@ -19,6 +19,7 @@ function CrearEvento() {
   });
   const [showModal, setShowModal] = useState(false);
 
+
   const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
 
 
@@ -44,13 +45,12 @@ function CrearEvento() {
       }})
     .then((response) => {
       console.log("Evento creado exitosamente:", response.data);
-      if(response.data === [1])
-      {
-        setShowModal(true)
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        setShowModal(true);
+      }else {
+        alert("!Alguno de los campos es INVALIDO!")
       }
-      else{
-
-      }
+      
       
     })
     .catch((error) => {
@@ -252,23 +252,26 @@ function CrearEvento() {
           
         </form>
         </div>
-        {showModal && (
-          <div className={`fixed inset-0 flex items-center justify-center ${showModal ? "" : "hidden"}`}>
-          <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
-          <div className="modal-content bg-white w-96 p-4 rounded-md">
-            <h2 className="text-xl font-semibold mb-4">Evento creado exitosamente</h2>
-            <p>Tu evento se ha creado con éxito.</p>
-            <button
-              onClick={setShowModal(false)}
-              className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-md"
-            >
-              Cerrar
-            </button>
-          </div>
+        
+          {showModal && (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
+        <div className="text-center">
+          <CheckCircle className="text-green-500 mx-auto" size={64} />
+          <p className="text-xl font-semibold mt-4">Evento creado exitosamente.</p>
         </div>
-        )}
-        
-        
+        <div className="text-center mt-6">
+          <button
+            onClick={() => setShowModal(false)}
+            className="bg-green-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+
     </div>
     </div>
   );
