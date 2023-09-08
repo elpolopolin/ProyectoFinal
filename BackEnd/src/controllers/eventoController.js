@@ -5,8 +5,24 @@ const router = Router();
 const svc = new EventoService();
 import multer from 'multer'; // Utiliza import en lugar de require
 import path from 'path'; // Utiliza import en lugar de require
-import sharp from 'sharp';
+import os from 'os';
 
+// Función para obtener la dirección IPv4
+function getIPv4Address() {
+  const networkInterfaces = os.networkInterfaces();
+  for (const interfaceName in networkInterfaces) {
+    const interfaceInfo = networkInterfaces[interfaceName];
+    for (const info of interfaceInfo) {
+      if (info.family === 'IPv4' && !info.internal) {
+        return info.address;
+      }
+    }
+  }
+  return 'https://localhost:3000'; // Valor por defecto si no se encuentra ninguna dirección IPv4 válida
+}
+
+const ipv4Address = getIPv4Address();
+const host = `http://${ipv4Address}:3000`;
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -33,7 +49,7 @@ const storage = multer.diskStorage({
     }
   }
 
-const host = "http://192.168.0.119:3000";
+
 
 
 const upload = multer({ storage, fileFilter });
