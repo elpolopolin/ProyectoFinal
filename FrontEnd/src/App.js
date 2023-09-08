@@ -228,6 +228,20 @@ function App() {
 
 //link para ver eventos LOGICA
 
+const cargarEventoMostrar = async (idEvento) => {
+  let link = host + "/getbyidEvento/"; //en el caso de ser ort cambiar por localhost o ip de ort
+  link += idEvento;
+  
+  try {
+    const result = await axios.get(link);
+    const evento = result.data;
+    return evento;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const cargarParticipantes = async (idEvento) => {
   let link = host + "/getById/"; //en el caso de ser ort cambiar por localhost o ip de ort
   link += idEvento;
@@ -242,25 +256,31 @@ const cargarParticipantes = async (idEvento) => {
   }
 };
 
-function MostrarEventoWrapper({ eventos }) {
+function MostrarEventoWrapper() {
   const { id } = useParams();
-  const eventoMostrar = eventos.find((evento) => evento.Id === parseInt(id));
+  const idd = parseInt(id); // Cambié let a const
+  
+  const [eventoMostrar, setEventoMostrar] = useState({}); // Definimos eventoMostrar
   const [participantesEvento, setParticipantesEvento] = useState({});
-
+  
   useEffect(() => {
-    cargarParticipantes(eventoMostrar.Id)
-      .then((participantesCargados) => {
-        setParticipantesEvento(participantesCargados);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [eventoMostrar.Id]);
+    const cargarDatos = async () => {
+      const evento = await cargarEventoMostrar(idd);
+      const participantesCargados = await cargarParticipantes(evento.Id);
+      setEventoMostrar(evento); // Actualizamos eventoMostrar
+      setParticipantesEvento(participantesCargados);
+    };
+
+    cargarDatos();
+  }, [idd]);
+
+  
 
   return (
     <MostrarEvento evento={eventoMostrar} participantesEvento={participantesEvento} />
   );
 }
+
 
 //
 

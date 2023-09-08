@@ -152,7 +152,7 @@ function MostrarEvento({ evento, participantesEvento }) {
                   </center>
                   <div className="alert alert-info">
                     <img src={participante.FotoPerfil} fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"></img>
-                    <span>{participante.Descripcion[1]}</span>
+                    <span>{participante.Descripcion}</span>
                   </div>
 
 

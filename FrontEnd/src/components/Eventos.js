@@ -17,6 +17,9 @@ function Eventos({ eventos }) {
   const [participantes, setParticipantes] = useState({});
   const [categorias, setCategorias] = useState([]);
 
+  const [ubicacionFilter, setUbicacionFilter] = useState("");
+  const [fechaFilter, setFechaFilter] = useState("");
+
   const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
 
   
@@ -78,19 +81,45 @@ function Eventos({ eventos }) {
   };
 
   const filteredEventos = eventos.filter((evento) => {
-    return evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
+    const nombreMatches = evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
+    const ubicacionMatches = evento.Direccion.toLowerCase().includes(ubicacionFilter.toLowerCase());
+    const fechaMatches = format(new Date(evento.Fecha), "dd'/'MM'/'yyyy").includes(fechaFilter);
+  
+    return nombreMatches && ubicacionMatches && fechaMatches;
   });
 
   return (
     <div>
-      {!mostrarEvento && (
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearch}
-          placeholder="Buscar eventos por nombre"
-        />
-      )}
+
+  {!mostrarEvento && (
+  <div className="w-full flex space-x-2">
+    <input
+      type="text"
+      value={searchTerm}
+      onChange={handleSearch}
+      placeholder="Buscar eventos por nombre"
+      className="flex-grow mt-2 h-10"
+    />
+    <select
+      value={ubicacionFilter}
+      onChange={(e) => setUbicacionFilter(e.target.value)}
+      className="flex-grow mt-2 h-10"
+    >
+      <option value="">Filtrar por ubicación</option>
+      <option value="guardia vieja">Guardia Vieja</option>
+      <option value="bosques de palermo">Bosques de Palermo</option>
+      <option value="indonesia">Indonesia</option>
+    </select>
+    <input
+      type="date"
+      value={fechaFilter}
+      onChange={(e) => setFechaFilter(e.target.value)}
+      placeholder="Filtrar por fecha"
+      className="flex-grow mt-2 h-10"
+    />
+  </div>
+)}
+
 
       {!mostrarEvento && (
         <div className="text-sm mx-2">
