@@ -8,8 +8,8 @@ function CrearEvento() {
   const [evento, setEvento] = useState({
     Nombre: "",
     Fecha: "",
-    Precio: "",
-    Participantes: "",
+    Precio: null,
+    Participantes: null,
     Descripcion: "",
     Direccion: "",
     Privacidad: false,
@@ -17,6 +17,7 @@ function CrearEvento() {
     ImagenEvento: null,
     Categoria: 0,
   });
+  const [showModal, setShowModal] = useState(false);
 
   const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
 
@@ -43,6 +44,14 @@ function CrearEvento() {
       }})
     .then((response) => {
       console.log("Evento creado exitosamente:", response.data);
+      if(response.data === [1])
+      {
+        setShowModal(true)
+      }
+      else{
+
+      }
+      
     })
     .catch((error) => {
       console.error("Error al crear el evento:", error);
@@ -68,10 +77,22 @@ function CrearEvento() {
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    setEvento((prevEvento) => ({
-      ...prevEvento,
-      ImagenEvento: imageFile,
-    }));
+  
+    if (imageFile) {
+      const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+      const fileExtension = imageFile.name.split('.').pop().toLowerCase();
+  
+      // Verificar si la extensión está en la lista de extensiones permitidas
+      if (allowedExtensions.includes(`.${fileExtension}`)) {
+        setEvento((prevEvento) => ({
+          ...prevEvento,
+          ImagenEvento: imageFile,
+        }));
+      } else {
+        alert('Por favor, selecciona un archivo de imagen válido (ej. JPG, JPEG, PNG, GIF).');
+        event.target.value = '';
+      }
+    }
   };
 
   const handleSubmit = (event) => {
@@ -86,6 +107,7 @@ function CrearEvento() {
 
 
   return (
+    <div className="flex items-center justify-center h-screen">
     <div className="p-10 min-h-screen tracking-wide">
         <div className="nana-container overflow-y-auto">
             <label className="block text-white font-bold mb-2 bg-pink-500 rounded-md">
@@ -103,7 +125,7 @@ function CrearEvento() {
                 value={evento.Nombre}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
-            />
+            required/>
             </div>
             <div className="mb-4 bg-pink-300 rounded-md" >
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="fecha">
@@ -151,7 +173,7 @@ function CrearEvento() {
                 value={evento.Descripcion}
                 onChange={handleInputChange}
                 className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
-            />
+                required/>
             </div>
             <div className="mb-4 bg-pink-300 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="direccion">
@@ -163,7 +185,7 @@ function CrearEvento() {
                 value={evento.Direccion}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
-            />
+                required/>
             </div>
 
            
@@ -178,7 +200,7 @@ function CrearEvento() {
                 name="ImagenEvento"
                 onChange={handleImageChange}
                 className="w-full ml-1"
-              />
+                required/>
             </div>
             <div className="w-1/2 ml-2">
               <div className="mb-4 text-center">
@@ -230,6 +252,24 @@ function CrearEvento() {
           
         </form>
         </div>
+        {showModal && (
+          <div className={`fixed inset-0 flex items-center justify-center ${showModal ? "" : "hidden"}`}>
+          <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
+          <div className="modal-content bg-white w-96 p-4 rounded-md">
+            <h2 className="text-xl font-semibold mb-4">Evento creado exitosamente</h2>
+            <p>Tu evento se ha creado con éxito.</p>
+            <button
+              onClick={setShowModal(false)}
+              className="mt-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-md"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+        )}
+        
+        
+    </div>
     </div>
   );
 }
