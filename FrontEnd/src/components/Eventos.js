@@ -91,9 +91,15 @@ function Eventos({ eventos }) {
     const nombreMatches = evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
     const ubicacionMatches = evento.Direccion.toLowerCase().includes(ubicacionFilter.toLowerCase());
     const fechaEvento = new Date(evento.Fecha);
+    const categoriaMatches = evento.idCategoria.toString().includes(selectedCategory);
+
+      
+   
+      
+    
 
     if (fechaFilterOption === "") {
-      return nombreMatches && ubicacionMatches;
+      return nombreMatches && ubicacionMatches && categoriaMatches;
     } else if (fechaFilterOption === "Hoy") {
       const hoy = new Date();
       return nombreMatches && ubicacionMatches && fechaEvento.toDateString() === hoy.toDateString();
@@ -125,13 +131,15 @@ function Eventos({ eventos }) {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              className="flex-shrink-0 w-32 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium  text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               <option value="">Categorias</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Images">Images</option>
-              <option value="News">News</option>
-              <option value="Finance">Finance</option>
+              {categorias.map((categoria) => (
+              <option className=" " key={categoria.IdCategoria} value={categoria.IdCategoria}>
+                {categoria.NombreCategoria}
+              </option>
+            ))}
+              
             </select>
             <div class="relative w-full">
               <input
