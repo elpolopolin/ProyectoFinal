@@ -8,6 +8,9 @@ export default function App() {
       <WebView
         source={{ uri: 'http://192.168.0.119:3001' }}
         style={styles.webView}
+        bounces={false} // Deshabilitar el zoom (rebote) en iOS
+        scalesPageToFit={false} // Deshabilitar el escalado de la página
+        javaScriptEnabled={true} // Habilitar JavaScript en la WebView
       />
     </View>
   );
@@ -19,9 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#252525', // Fondo negro
   },
   webView: {
-    backgroundColor: '#252525',  
+    backgroundColor: '#252525',
     margin: 10,
-    marginTop: 40, // Espacio superior para evitar el notch y dar espacio
-   
+    marginTop: 45, // Espacio superior para evitar el notch y dar espacio
   },
 });
