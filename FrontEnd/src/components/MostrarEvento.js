@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { format } from 'date-fns';
 import Calendario2 from '../icons/Calendario2.png'
 import "../App.css";
 import './styles/MostrarEvento.css';
+import { HostContext } from "../App";
+import axios from "axios";
 
 function MostrarEvento({ evento, participantesEvento }) {
 
+  const host = useContext(HostContext);
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
+  const [organizador, setOrganizador] = useState([]);
 
   const comprarButton = (
     <div className="flex justify-center mt-5 ">
@@ -22,6 +26,29 @@ function MostrarEvento({ evento, participantesEvento }) {
     </div>
   );
 
+  useEffect(() => {
+  
+    Organizador()
+  }, []);
+
+
+  const Organizador = () => {
+    if(evento.IdOrganizador != null) {
+      let link = host + "/usuarios/getById/";
+      link += evento.IdOrganizador;
+      axios
+        .get(link)
+        .then((result) => {
+          const org = result.data;
+          setOrganizador(org);
+          });
+    } else (
+      console.log("no hay organizador")
+    )
+   
+      
+  }
+
 
   return (
     <div>
@@ -33,9 +60,9 @@ function MostrarEvento({ evento, participantesEvento }) {
             <p className="titulo-evento">{evento.Nombre}</p>
             </div>
               <div className="mb-5" >
-                <div className="carousel w-full ">
+                <div className="carousel w-full h-1/4">
                   <div id="slide1" class="carousel-item relative flex justify-center w-full" >
-                    <img src={evento.ImagenEvento} className="w-full" />
+                    <img src={evento.ImagenEvento} className="w-full " />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                       <a href="#slide4" class="btn btn-circle">❮</a>
                       <a href="#slide2" class="btn btn-circle">❯</a>
@@ -81,36 +108,38 @@ function MostrarEvento({ evento, participantesEvento }) {
           <div className="grid h-50 flex-grow card text-white place-items-left">
             <div className="Dat-izq">
             <div className="overflox-x-auto">
-            <table className="table-auto">
+            <table className="table-auto text-center">
             <tbody>
               <tr>
                 <td>
-                  <div className="Datos">Organizador</div>
-                  <div className="Datos"> {evento.IdOrganizador}</div>
+                  
+                  <div className="Datos"> <a className="text-blue-600 link">Organizador: {organizador.NombreUsuario} </a></div>
                 </td>
                 <td>
-                  <div className="Datos">Conocidos</div>
+                  
                   <div className="Datos">
-                    <a className="link" onClick={() => setMostrarParticipantes(true)}>Asistentes</a>
+                    <a className="link text-blue-600" onClick={() => setMostrarParticipantes(true)}>Asistentes</a>
                   </div>
                 </td>
-                <td>
-                  <div className="Datos">Precio</div>
-                  <div className="Datos">${evento.Precio}</div>
+                <td className="">
+                  
+                  <div className="Datos">{evento.Direccion}</div>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <div className="Datos">Locación:</div>
-                  <div className="Datos">San Isidro {evento.Locacion}</div>
+                  
+                  <div className="Datos">
+                  {evento.Fecha}
+                    </div>
                 </td>
                 <td>
                   <div className="Datos">Rango de edad:</div>
                   <div className="Datos">{evento.EdadMinima} - {evento.EdadMaxima}</div>
                 </td>
                 <td>
-                  <div className="Datos">Amigos</div>
-                  <div className="Datos">"colocar amigos que asisten"</div>
+                  
+                  <div className="Datos">0/{evento.Participantes}</div>
                 </td>
               </tr>
             </tbody>
