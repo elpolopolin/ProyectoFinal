@@ -61,7 +61,7 @@ class UsuarioService {
           let result = await pool
             .request()
             .input('pId', sql.Int, id)
-            .query('SELECT IdEvento FROM Usuario INNER JOIN Participante_x_Evento ON Usuario.Id = Participante_x_Evento.IdUsuario WHERE Id = @pId');
+            .query('SELECT IdEvento, Participante_x_Evento.QrImage  FROM Usuario INNER JOIN Participante_x_Evento ON Usuario.Id = Participante_x_Evento.IdUsuario WHERE Id = @pId');
           returnEntity = result.recordsets[0]; // Obtener el primer elemento del arreglo
         } catch (error) {
           console.log(error);

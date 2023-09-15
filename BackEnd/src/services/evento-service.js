@@ -102,6 +102,69 @@ class EventoService {
         return rowsAffected;
     }
 
+
+    ingresarEnEvento = async (IdUsuario, IdEvento, idDeEntrada, qrCodeImage) => {
+        let rowsAffected = 0;
+        console.log('Ingresar En Evento');
+        console.log(IdUsuario, IdEvento, idDeEntrada);
+      
+        try {
+          let pool = await sql.connect(config);
+      
+          // Verificar si el usuario ya participa en el evento
+          const verificaQuery = `
+            SELECT COUNT(*) AS count FROM Participante_X_Evento
+            WHERE IdUsuario = @pIdUsuario AND IdEvento = @pIdEvento
+          `;
+      
+          const verificaResult = await pool
+            .request()
+            .input('pIdUsuario', sql.Int, IdUsuario)
+            .input('pIdEvento', sql.Int, IdEvento)
+            .query(verificaQuery);
+      
+          const participacionExistente = verificaResult.recordset[0].count > 0;
+      
+          if (!participacionExistente) {
+            // El usuario no participa todavía, realizar la inserción
+            const insertQuery = `
+              INSERT INTO Participante_X_Evento (IdUsuario, IdEvento, IdEntrada, QrImage)
+              VALUES (@pIdUsuario, @pIdEvento, @pIdEntrada, @pQrImage)
+            `;
+      
+            const result = await pool
+              .request()
+              .input('pIdUsuario', sql.Int, IdUsuario)
+              .input('pIdEvento', sql.Int, IdEvento)
+              .input('pIdEntrada', sql.VarChar, idDeEntrada)
+              .input('pQrImage', sql.VarChar, qrCodeImage)
+              .query(insertQuery);
+      
+            rowsAffected = result.rowsAffected;
+
+             // Actualizar el contador de participantes en el evento
+             const updateEventoQuery = `
+             UPDATE Evento
+             SET Participando = Participando + 1
+             WHERE Id = @pIdEvento
+           `;
+       
+           await pool
+             .request()
+             .input('pIdEvento', sql.Int, IdEvento)
+             .query(updateEventoQuery);
+             // Fin
+
+          } else {
+            console.log('El usuario ya participa en el evento');
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      
+        return rowsAffected;
+      };
+
     AsistentesXEvento = async () => {
         let returnEntity = null;
 

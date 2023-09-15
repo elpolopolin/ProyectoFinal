@@ -6,6 +6,8 @@ const svc = new EventoService();
 import multer from 'multer'; // Utiliza import en lugar de require
 import path from 'path'; // Utiliza import en lugar de require
 import os from 'os';
+import { v4 as uuidv4 } from 'uuid';
+import QRCode from 'qrcode';
 
 // Función para obtener la dirección IPv4
 function getIPv4Address() {
@@ -21,7 +23,8 @@ function getIPv4Address() {
   return 'https://localhost:3000'; // Valor por defecto si no se encuentra ninguna dirección IPv4 válida
 }
 
-const ipv4Address = getIPv4Address();
+// const ipv4Address = getIPv4Address();
+const ipv4Address = "192.168.0.119";
 const host = `http://${ipv4Address}:3000`;
 
 const storage = multer.diskStorage({
@@ -101,6 +104,39 @@ router.get('/getAll', async (req, res) => {
        
       })
 
+      
+      router.post('/IngresarEnEvento', async (req, res) => {
+        try {
+          // Paso 1: Parsear los valores del cuerpo de la solicitud
+          const { IdUsuario, IdEvento } = req.body;
+      
+          // Paso 2: Generar un ID único para la entrada
+          const idDeEntrada = uuidv4();
+      
+          // Paso 3: Generar el código QR
+          const qrCodeData = { IdUsuario, IdEvento, idDeEntrada };
+          const qrCodeImage = await QRCode.toDataURL(JSON.stringify(qrCodeData));
+      
+          // Paso 4: Insertar los valores en la tabla Participante_X_Evento
+          const rowsAffected = await svc.ingresarEnEvento(IdUsuario, IdEvento, idDeEntrada, qrCodeImage);
+      
+          // Comprueba si la inserción fue exitosa
+          if (rowsAffected > 0) {
+            // Paso 5: Envía una respuesta al cliente
+            res.status(200).json({
+              message: 'Entrada generada',
+              idDeEntrada: idDeEntrada,
+              qrCode: qrCodeImage,
+            });
+          } else {
+            res.status(500).json({ error: 'Error al generar la entrada' });
+          }
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({ error: 'Error interno del servidor' });
+        }
+      });
+
       router.post('/insert', upload.single('ImagenEvento'), async (req, res, next) => {
         try {
           let resultado = null;
@@ -140,4 +176,14 @@ router.get('/getAll', async (req, res) => {
         }
       });
   
+
+      /*filter eventos con base de datos 
+
+      SELECT *
+      FROM Evento
+      WHERE Nombre LIKE '%f%'; 
+      (usarlo para buscar eventos en algun momento ya que filter es una porong*)
+      
+      */
+
 export default router;

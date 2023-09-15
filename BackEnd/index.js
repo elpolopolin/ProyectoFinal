@@ -1,12 +1,12 @@
 import config from "./dbconfig.js";
 import sql from 'mssql';
-import Pizza from "./src/models/evento.js";
 import Usuario from "./src/models/usuario.js";
 import EventoRouter from "./src/controllers/eventoController.js"
 import UsuarioRouter from "./src/controllers/usuarioController.js"
 import express from "express";
 import multer from "multer";
 import cors from "cors";
+import mercadopago from "mercadopago";
 
 
 
@@ -25,42 +25,47 @@ app.use("/", EventoRouter);
 app.use("/usuarios", UsuarioRouter);
 
 
- 
-//1
-/*
+//Mercado Pago:
 
-//GET ALL USUARIOS
-
-
-
-
-
-
-app.post('/upload', upload.single('avatar'), (req, res) => {
-  res.send('Archivo subido correctamente');
+mercadopago.configure({
+  access_token: "your_acces_token",
 });
 
-app.put('/update/:id', async function (req,res) {
+app.get("/", function (req, res) {
+  res.send("el servidor de mercado pago funciona! :)");
+});
 
-  let pizza = new Pizza ();
-    pizza.id = req.params.id;
-    pizza.nombre = req.body.Nombre;
-     pizza.libreGluten = req.body.LibreGluten;
-     pizza.importe = req.body.Importe;
-     pizza.descripcion = req.body.Descripcion;
-    console.log(pizza);
-    let resultado = null;
-   resultado = await svc.update(pizza)
-  res.send(resultado);
-})
-  
-//revisar
-app.delete('/delete/:id', async (req, res) => {
-  let resultado = await svc.deleteById(req.params.id);
-  res.send(resultado);
-})
+app.post("/create_preference", (req, res) => {
+  let preference = {
+    items: [
+      {
+        title: req.body.description,
+        unit_price: Number(req.body.price),
+        quantity: Number(req.body.quantity),
+      },
+    ],
+    back_urls: {
+      success: "http://localhost:3001/",
+      failure: "http://localhost:3001/nofunciono",
+      pending: "",
+    },
+    auto_return: "approved",
+  };
 
-*/
+  mercadopago.preferences
+    .create(preference)
+    .then(function (response) {
+      res.json({
+        id: response.body.id,
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
