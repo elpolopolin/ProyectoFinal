@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link, useNavigate  } from "react-router-dom";
 import { format } from 'date-fns';
 import Calendario2 from '../icons/Calendario2.png'
 import "../App.css";
@@ -7,24 +8,16 @@ import { HostContext } from "../App";
 import axios from "axios";
 
 function MostrarEvento({ evento, participantesEvento }) {
-
+  
+  const navigate = useNavigate();
   const host = useContext(HostContext);
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
   const [organizador, setOrganizador] = useState([]);
 
-  const comprarButton = (
-    <div className="flex justify-center mt-5 ">
-      {evento.Precio > 0 ? (
-        <div>
-        <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"> Comprar </button>
-        </div>
-      ) : (
-        <div>
-          <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"> Entrar </button>
-        </div>
-      )}
-    </div>
-  );
+  const handleComprar = () => {
+    // Utiliza navigate para redirigir a la página deseada
+    navigate(`/comprar/evento/${evento.Id}`);
+  }
 
   useEffect(() => {
   
@@ -149,17 +142,25 @@ function MostrarEvento({ evento, participantesEvento }) {
           </div>
 
 
-
           </div>
-
-              <div className="Logo-Fecha text-white">
-                
+              <div className="Logo-Fecha text-white">    
           </div>
           <center>
             <hr className="hr2"></hr>
           </center>
 
-          {comprarButton}
+            <div className="flex justify-center mt-5"> {/* mismo link pa los dos */}
+        
+          {evento.Precio > 0 ? (
+            <button onClick={handleComprar } className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+               Comprar 
+            </button>
+          ) : (
+            <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+              Entrar
+            </button>
+          )}
+        </div>
 
          
         </div>

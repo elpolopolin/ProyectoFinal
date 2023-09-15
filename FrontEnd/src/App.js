@@ -11,11 +11,12 @@ import Calendar from "./components/Calendar";
 import Entradas from "./components/MisEventos";
 import MostrarEvento from "./components/MostrarEvento";
 import CrearEvento from "./components/CrearEvento.js"
+import Comprar from "./components/comprar";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://192.168.0.119:3000";
+const host = "http://10.146.0.41:3000";
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -210,6 +211,7 @@ function App() {
               <Route path="/profile" element={<Profile logout={logout}/>} />
               <Route path="/entradas" element={<Entradas />} />
               <Route path="/calendar" element={<Calendar />} />
+              <Route path="/comprar/evento/:id" element={<Comprar />} />
               <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
