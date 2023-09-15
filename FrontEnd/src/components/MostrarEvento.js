@@ -6,9 +6,12 @@ import "../App.css";
 import './styles/MostrarEvento.css';
 import { HostContext } from "../App";
 import axios from "axios";
+import { UsuarioContext } from "../App";
+
 
 function MostrarEvento({ evento, participantesEvento }) {
-  
+
+  const usuario = useContext(UsuarioContext);
   const navigate = useNavigate();
   const host = useContext(HostContext);
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
@@ -17,6 +20,24 @@ function MostrarEvento({ evento, participantesEvento }) {
   const handleComprar = () => {
     // Utiliza navigate para redirigir a la página deseada
     navigate(`/comprar/evento/${evento.Id}`);
+  }
+
+  const handleEntrar = () => {
+    const IdUsuario = usuario.Id;
+    const IdEvento = evento.Id
+    const data = {
+      IdUsuario: IdUsuario,
+      IdEvento: IdEvento
+    };
+  
+    axios
+    .post(host + "/IngresarEnEvento", data )
+    .then((response) => {
+      
+    })  .catch((error) => {
+      console.error("Error:", error);
+      
+    });
   }
 
   useEffect(() => {
@@ -156,7 +177,7 @@ function MostrarEvento({ evento, participantesEvento }) {
                Comprar 
             </button>
           ) : (
-            <button  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
+            <button onClick={handleEntrar}  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
               Entrar
             </button>
           )}

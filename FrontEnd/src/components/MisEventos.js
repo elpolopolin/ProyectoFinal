@@ -11,6 +11,17 @@ function MisEventos() {
   const [cargandoEventos, setCargandoEventos] = useState(true); // Estado para controlar la carga de eventos
   const host = useContext(HostContext);
   const usuario = useContext(UsuarioContext);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [qrImage, setQrImage] = useState(null);
+
+  const abrirModal = (evento) => {
+    setQrImage(evento.QrCode);
+    setModalVisible(true);
+    console.log(eventos)
+  };
+  const cerrarModal = () => {
+    setModalVisible(false);
+  };
 
   useEffect(() => {
     cargarEventosIds();
@@ -22,7 +33,8 @@ function MisEventos() {
       .get(link)
       .then((result) => {
         const idEventos = result.data;
-        setEventosIds(idEventos);
+        
+        setEventosIds(result.data);
         cargarEventos(idEventos);
       })
       .catch((error) => {
@@ -31,6 +43,7 @@ function MisEventos() {
   };
 
   const cargarEventos = (eventosIds) => {
+
     if (eventosIds.length === 0) {
       console.log("No hay eventos para cargar.");
       setCargandoEventos(false); // Actualiza el estado cuando se completó la carga de eventos
@@ -42,10 +55,14 @@ function MisEventos() {
     const obtenerDatosEventos = async () => {
       const eventosPromises = eventosIds.map(async (eventoId) => {
         const response = await axios.get(linkBase + eventoId.IdEvento);
-        return response.data;
+        const eventoData = response.data;
+        // Aquí agregamos el campo qrcode al evento si QrImage está presente
+        eventoData.QrCode = eventoId.QrImage;
+        return eventoData;
       });
 
       const datosEventos = await Promise.all(eventosPromises);
+      
       setEventos(datosEventos);
       setCargandoEventos(false); // Actualiza el estado cuando se completó la carga de eventos
     };
@@ -95,7 +112,7 @@ function MisEventos() {
                   <div className="p-4">
                     <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4>
                     <div className="flex justify-between">
-                      <button className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">
+                      <button onClick={() => abrirModal(evento)} className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">
                         Código QR
                       </button>
                       <Link
@@ -114,6 +131,25 @@ function MisEventos() {
             )}
           </div>
         </div>
+       {/* Modal */} 
+       {modalVisible && (
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="modal-container">
+      {/* Contenido del modal */}
+      <div className="bg-white p-4">
+        {/* Muestra la imagen del código QR */}
+        {qrImage && <img src={qrImage} alt="Código QR" />}
+        <button
+          onClick={cerrarModal}
+          className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-4"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     );
    }
