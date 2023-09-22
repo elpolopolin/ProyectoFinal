@@ -232,8 +232,7 @@ function MostrarEvento({ evento, participantesEvento }) {
 
        {/* Modal */}
        {modalVisible && (
-        <div>
-        <div className="overlay"></div>
+        
         <div className="fixed inset-0 flex items-center justify-center  text-center z-50">
           <div className="modal-container bg-white w-1/2 mx-auto p-6 rounded shadow-lg">
             <div className="mb-4">{modalMessage}</div>
@@ -245,7 +244,7 @@ function MostrarEvento({ evento, participantesEvento }) {
             </button>
           </div>
         </div>
-        </div>
+        
       )}
 
     </div>

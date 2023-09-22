@@ -181,29 +181,50 @@ function Eventos({ eventos }) {
           </div>
         
       ) : (
-        // Si no es un dispositivo móvil o si se muestran los filtros, mostrar los filtros adicionales
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearch}
-            placeholder="Buscar eventos por nombre"
-            className="flex-grow mt-2 h-10"
-          />
+       
+        <div className="flex space-x-2 p-2">
+
+      
+        <form onSubmit={handleSearch} className="">
+
+            <input
+              type="search"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              placeholder="Buscar eventos por nombre"
+              className="py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300 focus:outline-none w-full"
+            />
+        </form>
+
+          <div className="flex ">
+          
           <select
             value={ubicacionFilter}
             onChange={(e) => setUbicacionFilter(e.target.value)}
-            className="flex-grow mt-2 h-10"
+            className=" border border-gray-500 focus:ring focus:ring-indigo-300 focus:outline-none "
           >
             <option value="">Filtrar por ubicación</option>
             <option value="guardia vieja">Guardia Vieja</option>
             <option value="bosques de palermo">Bosques de Palermo</option>
             <option value="indonesia">Indonesia</option>
+          </select> 
+
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="w-1/8"
+          >
+            <option value="">Categorías</option>
+            {categorias.map((categoria) => (
+              <option key={categoria.IdCategoria} value={categoria.IdCategoria}>
+                {categoria.NombreCategoria}
+              </option>
+            ))}
           </select>
-          <div className="flex-grow mt-2 h-10">
-            <select
+          <select
               value={fechaFilterOption}
               onChange={(e) => setFechaFilterOption(e.target.value)}
+              className=" border border-gray-300  focus:ring focus:ring-indigo-300 focus:outline-none "
             >
               <option value="">Filtrar Por Fecha</option>
               <option value="Hoy">Hoy</option>
@@ -216,11 +237,13 @@ function Eventos({ eventos }) {
                 value={fechaFilter}
                 onChange={(e) => setFechaFilter(e.target.value)}
                 placeholder="Fecha específica"
-                className=" h-10"
+                className=" h-10 px-4 py-2 border border-gray-300 focus:ring focus:ring-indigo-300 focus:outline-none"
               />
             )}
-          </div>
+          
         </div>
+      
+      </div>
       )}
 
       {showFilters && isMobile && (
