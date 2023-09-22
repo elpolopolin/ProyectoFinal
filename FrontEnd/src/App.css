@@ -1,4 +1,14 @@
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semi-transparente */
+  z-index: 49; /* Asegura que esté detrás del modal (z-index del modal es 50) */
+}
+
 .card-container {
   margin-top: 25px;
   max-height: 80vh; /* Establece la altura máxima del contenedor */

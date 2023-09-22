@@ -42,6 +42,11 @@ function MisEventos() {
       });
   };
 
+  const formatDateDDMMYY = (dateString) => {
+    const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   const cargarEventos = (eventosIds) => {
 
     if (eventosIds.length === 0) {
@@ -110,7 +115,9 @@ function MisEventos() {
                     </figure>
                   )}
                   <div className="p-4">
-                    <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4>
+                  <div className="flex justify-between">
+                    <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4> <p className="semi-bold">{formatDateDDMMYY(evento.Fecha)}</p>
+                    </div>
                     <div className="flex justify-between">
                       <button onClick={() => abrirModal(evento)} className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">
                         Código QR
@@ -133,20 +140,23 @@ function MisEventos() {
         </div>
        {/* Modal */} 
        {modalVisible && (
+         <div>
+         <div className="overlay"></div>
   <div className="fixed inset-0 flex items-center justify-center z-50">
-    <div className="modal-container">
+    <div className="modal-container ">
       {/* Contenido del modal */}
       <div className="bg-white p-4">
         {/* Muestra la imagen del código QR */}
-        {qrImage && <img src={qrImage} alt="Código QR" />}
+        {qrImage && <img src={qrImage} className="p-5 bg-black" alt="Código QR" />}
         <button
           onClick={cerrarModal}
-          className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-4"
+          className="bg-pink-500 hover:bg-red-200 text-white py-2 px-4 rounded-lg mt-4 "
         >
           Cerrar
         </button>
       </div>
     </div>
+  </div>
   </div>
 )}
 
