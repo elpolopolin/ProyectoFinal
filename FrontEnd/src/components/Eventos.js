@@ -25,7 +25,7 @@ function Eventos({ eventos }) {
   const usuario = useContext(UsuarioContext)
 
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [categoriesUser, setCategoriesUser] = useState([]);
+  
 
   const isMobile = window.innerWidth <= 768; // Define el ancho máximo para considerar como dispositivo móvil
 
@@ -60,37 +60,53 @@ function Eventos({ eventos }) {
       });
   };
 
-  const cargarCategorias = () => {
-    axios
-      .get(host + "/Categorias")
-      .then((result) => {
-        const cat = result.data;
-        setCategorias(cat);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
-  const cargarCategoriasUsuario = () => {
+
+  const cargarCategorias = () => { //logica de cargado de categorias ordenadas por categoriasDeUsuario
     const link = "http://localhost:3000/EventosCategoriaUsuario/" + usuario.Id;
     axios
       .get(link)
       .then((result) => {
-        setCategoriesUser(result.data);
-        console.log("categorias de usuario: " + result.data)
+        const categoriesUser = result.data;
+        console.log("Categorías de usuario:", categoriesUser);
+  
+        axios
+          .get(host + "/Categorias")
+          .then((result) => {
+            const categoriasServidor = result.data;
+  
+            // Mapear las categorías del usuario
+            const categoriasUsuarioMapped = categoriesUser.map(userCategory =>
+              categoriasServidor.find(category => category.IdCategoria === userCategory.IdCategoria)
+            );
+  
+            // Filtrar categorías del usuario y ordenarlas
+            const categoriasUsuario = categoriasUsuarioMapped.filter(categoria => categoria);
+  
+            // Filtrar categorías que no son del usuario
+            const categoríasNoUsuario = categoriasServidor.filter(categoria =>
+              !categoriasUsuario.some(userCategory => userCategory.IdCategoria === categoria.IdCategoria)
+            );
+  
+            // Concatenar categorías del usuario y categorías no usuario
+            const categoriasOrdenadas = categoriasUsuario.concat(categoríasNoUsuario);
+  
+            // Establece las categorías ordenadas en el estado
+            setCategorias(categoriasOrdenadas);
+          })
+          .catch((error) => {
+            console.log("Error al obtener categorías del servidor:", error);
+          });
       })
       .catch((error) => {
-        console.log(error);
+        console.log("Error al obtener categorías del usuario:", error);
       });
-  }
+  };
 
   useEffect(() => {
     cargarCategorias();
-    cargarCategoriasUsuario()
     eventos.forEach((evento) => {
       cargarParticipantes(evento.Id);
-        
     });
   }, [eventos]);
 
@@ -111,19 +127,8 @@ function Eventos({ eventos }) {
     const fechaEvento = new Date(evento.Fecha);
     const categoriaMatches = evento.idCategoria.toString().includes(selectedCategory);
 
-      
-   
-  /*
-  eventos.forEach((evento) => {
-    if (categoriasUsuario[i].includes(evento.idCategoria)) {
-      eventosCategoriaUsuario.push(evento);
-    } else {
-      otrosEventos.push(evento);
-    }
-    i++;
-  });
-      
-    */
+
+ 
 
     if (fechaFilterOption === "") {
       return nombreMatches && ubicacionMatches && categoriaMatches;
