@@ -62,7 +62,7 @@ function Eventos({ eventos }) {
 
 
 
-  const cargarCategorias = () => { //logica de cargado de categorias ordenadas por categoriasDeUsuario
+  const cargarCategorias = () => { //logica de cargado de categorias ordenadas por categoriasDeUsuario 
     const link = "http://localhost:3000/EventosCategoriaUsuario/" + usuario.Id;
     axios
       .get(link)

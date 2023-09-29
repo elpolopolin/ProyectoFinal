@@ -14,6 +14,7 @@ import CrearEvento from "./components/CrearEvento.js"
 import Comprar from "./components/comprar";
 import CategoriasProvider from './context/CategoriasContext';
 import Comentarios from "./components/comentarios.js";
+import QrScanner from "./components/QrScanner.jsx";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
@@ -216,6 +217,7 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/comprar/evento/:id" element={<Comprar />} />
               <Route path="/comentarios/:id" element={<Comentarios />}  />
+              <Route path="/QrScanner" element={<QrScanner />}  />
               <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
