@@ -136,12 +136,11 @@ function MisEventos() {
   <div className="fixed inset-0 flex items-center justify-center z-50">
     <div className="modal-container">
       {/* Contenido del modal */}
-      <div className="bg-white p-4">
-        {/* Muestra la imagen del código QR */}
+      <div className="bg-gray-700 p-4">
         {qrImage && <img src={qrImage} alt="Código QR" />}
         <button
           onClick={cerrarModal}
-          className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-4"
+          className="bg-red-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg mt-4  w-full"
         >
           Cerrar
         </button>
