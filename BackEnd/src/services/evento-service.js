@@ -54,6 +54,26 @@ class EventoService {
         return returnEntity;
     }
 
+    EventosCategoriaUsuario = async (id) => { //laburo aca
+        
+      let returnEntity = null;
+      console.log('Estoy en: Evento.EventosCategoriaUsuario(id)');
+      try {
+          let pool    = await sql.connect(config);
+          let result  = await pool.request()
+                                              .input('pId', sql.Int, id)
+                                              .query(`SELECT IdCategoria FROM Categorias_x_Usuario WHERE IdUsuario = @pId
+                                             
+                                             `);
+
+          returnEntity = result.recordsets[0]; //
+          console.log('categoriass del usuario: ', returnEntity)
+      } catch (error) {
+          console.log(error);
+      }
+      return returnEntity;
+  }
+
 
     getById = async (id) => {
         

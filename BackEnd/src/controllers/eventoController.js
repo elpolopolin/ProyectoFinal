@@ -104,6 +104,17 @@ router.get('/getAll', async (req, res) => {
        
       })
 
+      router.get('/EventosCategoriaUsuario/:id', async (req, res) => {
+        try {
+          let resultado = await svc.EventosCategoriaUsuario(req.params.id);
+          return res.status(200).json(resultado);
+          
+        } catch (error) {
+          console.log(error);
+        }
+         
+        })
+
       
       router.post('/IngresarEnEvento', async (req, res) => {
         try {
