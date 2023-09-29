@@ -18,7 +18,7 @@ import Comentarios from "./components/comentarios.js";
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://localhost:3000";
+const host = "http://10.152.2.120:3000";
 
 function App() {
   const [eventos, setEventos] = useState([]);

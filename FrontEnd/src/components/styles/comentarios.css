@@ -1,0 +1,14 @@
+.title{
+    text-align: center;
+    margin-top: 7%;
+    margin-bottom: 7%;
+}
+
+.comentarios-container {
+    padding: 20px; /* Agrega relleno para asegurarte de que el fondo se muestre correctamente alrededor del título */
+}
+
+.card-body{
+    width: 0%;
+    margin: 10%;
+}
