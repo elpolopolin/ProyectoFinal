@@ -16,29 +16,38 @@ function MostrarEvento({ evento, participantesEvento }) {
   const host = useContext(HostContext);
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
   const [organizador, setOrganizador] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const handleComprar = () => {
     // Utiliza navigate para redirigir a la página deseada
     navigate(`/comprar/evento/${evento.Id}`);
   }
 
+  
   const handleEntrar = () => {
     const IdUsuario = usuario.Id;
-    const IdEvento = evento.Id
+    const IdEvento = evento.Id;
     const data = {
       IdUsuario: IdUsuario,
       IdEvento: IdEvento
     };
-  
+
     axios
-    .post(host + "/IngresarEnEvento", data )
-    .then((response) => {
-      
-    })  .catch((error) => {
-      console.error("Error:", error);
-      
-    });
-  }
+      .post(host + '/IngresarEnEvento', data)
+      .then((response) => {
+        // Mostrar modal de "Entrada adquirida"
+        setModalMessage('Entrada adquirida');
+        setModalVisible(true);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+
+        // Mostrar modal de "Ups... Algo salió mal"
+        setModalMessage('Ups... Algo salió mal');
+        setModalVisible(true);
+      });
+  };
 
   useEffect(() => {
   
@@ -66,6 +75,7 @@ function MostrarEvento({ evento, participantesEvento }) {
 
   return (
     <div>
+    
       {!MostrarParticipantes &&
         <div key={evento.Id} className="mx-2 overflow-y-auto ">
           
@@ -219,6 +229,23 @@ function MostrarEvento({ evento, participantesEvento }) {
           
         </div>
       }
+
+       {/* Modal */}
+       {modalVisible && (
+        
+        <div className="fixed inset-0 flex items-center justify-center  text-center z-50">
+          <div className="modal-container bg-white w-1/2 mx-auto p-6 rounded shadow-lg">
+            <div className="mb-4">{modalMessage}</div>
+            <button
+              onClick={() => setModalVisible(false)}
+              className="bg-red-500 hover:bg-red-900 text-white font-bold py-2 px-4 rounded "
+            >
+              x
+            </button>
+          </div>
+        </div>
+        
+      )}
 
     </div>
   );

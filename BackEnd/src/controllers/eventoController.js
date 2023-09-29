@@ -112,9 +112,11 @@ router.get('/getAll', async (req, res) => {
       
           // Paso 2: Generar un ID único para la entrada
           const idDeEntrada = uuidv4();
-      
+
+          const redirectURL = `${host}/verificarEntrada/${IdEvento}/${idDeEntrada}`;
+
           // Paso 3: Generar el código QR
-          const qrCodeData = { IdUsuario, IdEvento, idDeEntrada };
+          const qrCodeData = { redirectURL };
           const qrCodeImage = await QRCode.toDataURL(JSON.stringify(qrCodeData));
       
           // Paso 4: Insertar los valores en la tabla Participante_X_Evento
@@ -130,6 +132,26 @@ router.get('/getAll', async (req, res) => {
             });
           } else {
             res.status(500).json({ error: 'Error al generar la entrada' });
+          }
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({ error: 'Error interno del servidor' });
+        }
+      });
+
+      router.get('/verificarEntrada/:IdEvento/:IdEntrada', async (req, res) => {
+        try {
+          const { IdEvento, IdEntrada } = req.params;
+      
+          // Paso 2: Realizar la verificación en la base de datos
+          // Aquí deberías implementar la lógica para verificar la entrada en tu base de datos
+          // Supongamos que tienes una función 'verificarEntradaEnBD' en 'svc'
+          const entradaValida = await svc.verificarEntradaEnBD(IdEvento, IdEntrada);
+      
+          if (entradaValida) {
+            res.status(200).json({ message: 'Entrada válida' });
+          } else {
+            res.status(400).json({ error: 'Entrada no válida' });
           }
         } catch (error) {
           console.log(error);
