@@ -8,13 +8,13 @@ function Comentarios() {
 
         <div className="comentarios-container"> 
              <h1 className="title text-white centered-title">Comentarios</h1>
-             <div className="card card-side bg-base-100 shadow-xl">
+             <div className="card1 w-96 bg-base-100 shadow-xl">
                 <figure><img src="{usuario.imagen}" alt="Movie"/></figure>
                 <div className="card-body">
-                    <h2 className="card-title">New movie is released!</h2>
-                    <p>Click the button to watch on Jetflix app.</p>
+                    <h2 className="card-title"></h2>
+                    <p></p>
                     <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Watch</button>
+                    <button class="btn btn-accent btn-outline">Three</button>
                     </div>
                 </div>
                 </div>
