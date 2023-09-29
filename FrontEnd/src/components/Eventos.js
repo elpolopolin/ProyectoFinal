@@ -7,6 +7,7 @@ import CalendarioIcon from "../icons/Calendario.png";
 import EntradaIcon from "../icons/Entrada.png";
 import PinIcon from "../icons/pin.png";
 import { Link } from "react-router-dom";
+import { UsuarioContext } from "../App";
 
 function Eventos({ eventos }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,8 +22,10 @@ function Eventos({ eventos }) {
   const [fechaFilterOption, setFechaFilterOption] = useState("");
   const [showFilters, setShowFilters] = useState(false); // Estado para mostrar/ocultar los filtros en dispositivos móviles
   const host = useContext(HostContext);
+  const usuario = useContext(UsuarioContext)
 
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoriesUser, setCategoriesUser] = useState([]);
 
   const isMobile = window.innerWidth <= 768; // Define el ancho máximo para considerar como dispositivo móvil
 
@@ -69,10 +72,25 @@ function Eventos({ eventos }) {
       });
   };
 
+  const cargarCategoriasUsuario = () => {
+    const link = "http://localhost:3000/EventosCategoriaUsuario/" + usuario.Id;
+    axios
+      .get(link)
+      .then((result) => {
+        setCategoriesUser(result.data);
+        console.log("categorias de usuario: " + result.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {
     cargarCategorias();
+    cargarCategoriasUsuario()
     eventos.forEach((evento) => {
       cargarParticipantes(evento.Id);
+        
     });
   }, [eventos]);
 
@@ -95,8 +113,17 @@ function Eventos({ eventos }) {
 
       
    
+  /*
+  eventos.forEach((evento) => {
+    if (categoriasUsuario[i].includes(evento.idCategoria)) {
+      eventosCategoriaUsuario.push(evento);
+    } else {
+      otrosEventos.push(evento);
+    }
+    i++;
+  });
       
-    
+    */
 
     if (fechaFilterOption === "") {
       return nombreMatches && ubicacionMatches && categoriaMatches;

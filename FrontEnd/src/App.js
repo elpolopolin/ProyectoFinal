@@ -12,6 +12,7 @@ import Entradas from "./components/MisEventos";
 import MostrarEvento from "./components/MostrarEvento";
 import CrearEvento from "./components/CrearEvento.js"
 import Comprar from "./components/comprar";
+import CategoriasProvider from './context/CategoriasContext';
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
@@ -202,6 +203,7 @@ function App() {
 
         {isLoggedIn && (
           <UsuarioContext.Provider value={userLogged}> 
+          <CategoriasProvider>
           <div className="Home">
             <Routes>
               <Route path="/" element={<Eventos eventos={eventos} />} />
@@ -219,6 +221,7 @@ function App() {
             <NavBar cargarEventos={cargarEventos} />
             </div>
           </div>
+          </CategoriasProvider>
         </UsuarioContext.Provider>
         )}
       </div>
