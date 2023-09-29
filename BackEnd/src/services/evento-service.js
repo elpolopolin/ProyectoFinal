@@ -54,8 +54,11 @@ class EventoService {
         return returnEntity;
     }
 
-    EventosCategoriaUsuario = async (id) => { //laburo aca
+    VerificarEntradaEnBD = async (IdEvento, IdEntrada) => { //laburo aca
         
+    }
+
+    EventosCategoriaUsuario = async (id) => {
       let returnEntity = null;
       console.log('Estoy en: Evento.EventosCategoriaUsuario(id)');
       try {
