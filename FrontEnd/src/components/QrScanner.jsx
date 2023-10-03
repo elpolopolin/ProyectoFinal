@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { QrReader } from "react-qr-reader";
+
 
 function QrScanner() {
   const [qrData, setQrData] = useState(null);
@@ -20,12 +20,7 @@ function QrScanner() {
 
       <div style={{ border: "2px solid white", padding: "10px", borderRadius: "10px" }}>
         {/* Configura el componente de escáner dentro de un contenedor con borde blanco */}
-        <QrReader
-          delay={300}
-          onError={handleError}
-          onScan={handleScan}
-          style={{ width: "100%" }}
-        />
+       
       </div>
 
       {/* Muestra el resultado del escaneo */}
