@@ -20,9 +20,9 @@ function Home() {
 
   <div id="slide1" className="carousel-item relative w-full m-2 rounded-lg">
     <div className="bg-indigo-200 rounded-lg w-full h-full">
-      <Link to="/novedades">
+      
         <img src={imagenEventop} alt="Imagen de la novedad" className="w-full mb-5"  style={{height: "65%"}}/>
-      </Link>
+      
       <h3 className="text-xl font-semibold text-white  text-center bg-pink-500 mx-2 rounded-lg">Eventop Sneak Peak</h3>
     </div>
   </div>
