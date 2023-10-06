@@ -12,6 +12,11 @@ function Home() {
   const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena
   const host = useContext(HostContext);
   const imagenEventop = host + "/imagenesEventos/Eventop.png";
+  const imagen_categorias = host + "/imagenesEventop/categorias.jpg"
+  const eventosImagen = host + "/imagenesEventop/eventos.png"
+  const imagencaru1 = host + "/imagenesEventop/primerosInversores.jpg"
+  const imagencaru2 = host + "/imagenesEventop/baño.jpg"
+  const imagencaru3 = host + "/imagenesEventop/pindi.jpg"
   const [Eventos, setEventos] = useState([]);
 
   useEffect(() => {
@@ -32,13 +37,15 @@ function Home() {
 
   return (
    
-    <div className=" min-h-screen p-8 text-neutral-300 ">
-         <div className="card-container overflow-y-auto " style={{marginTop: "-10px"}}>
+    <div className=" min-h-screen p-8 text-neutral-300">
+
+         <div className="nana-container overflow-y-auto " style={{marginTop: "-10px"}}>
+
       <div className="container mx-auto">
 
         {/* Sección de Novedades */}
-        <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-3 text-center ">Novedades</h2>
+        <section className="mb-4">
+        <h2 className="text-3xl font-semibold mb-2 text-center ">Novedades</h2>
 
 <div className="carousel w-full h-56">
 
@@ -70,9 +77,58 @@ function Home() {
 </section>
  
   
+        {/* Sección de Categorías */}
+        <section>
+        
+          <Link to="/categorias" className="block mb-6 ">
+            <img
+              src={imagen_categorias}
+              alt="Categorías"
+              className="rounded-lg w-full "
+              style={{maxHeight: "20%"}}
+            />
+            
+          </Link>
+        </section>
+      
+    
+        
+
+        {/* Sección de Calendario */}
+        <section className="mb-6">
+          
+        <Link to="/categorias" className="block position center ">
+            <img
+              src={eventosImagen}
+              alt="Eventos"
+              className="rounded-lg  w-full "
+              style={{maxHeight: "20%"}}
+            />
+            
+          </Link>
+      
+        </section>
+
+
+      <section className="border border-purple p-2 rounded">
+        <p className="text-center font-bold text-purple-400">Imagenes Inneditas</p>
+      <div className="carousel w-full rounded-box h-40">
+  <div id="item1" className="carousel-item w-full">
+    <img src={imagencaru1} className="w-full" />
+  </div> 
+  <div id="item2" className="carousel-item w-full">
+    <img src={imagencaru2} className="w-full" />
+  </div> 
+  <div id="item3" className="carousel-item w-full">
+    <img src={imagencaru3} className="w-full" />
+  </div> 
 </div> 
 
-</div>
+
+      </section>
+
+        </div>
+    </div>
     </div>
   );
 }
