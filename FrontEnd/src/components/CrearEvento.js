@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { CheckCircle } from "feather-icons-react";
 import axios from "axios";
 import { HostContext } from "../App";
+import './styles/CrearEvento.css';
 
 function CrearEvento() {
   const [categorias, setCategorias] = useState([]);
@@ -111,11 +112,45 @@ function CrearEvento() {
     <div className="p-10 min-h-screen tracking-wide">
         <div className="nana-container overflow-y-auto">
             <label className="block text-white font-bold mb-2 bg-pink-500 rounded-md">
-      <h1 className="text-white  text-4xl font-bold text-center mb-8">Crear Evento</h1>
+      
             </label>
 
         <form onSubmit={handleSubmit} className="max-w-lg" enctype="multipart/form-data">
-            <div className="mb-4 bg-pink-300 rounded-md">
+            <div className="mb-4 flex bg-pink-500 rounded-md">
+            <div className=" ImagenEvento w-1/2 mr-2 ml-1 h-auto">
+              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="imagenEvento">
+                Imagen del Evento
+              </label>
+              <input 
+                type="file"
+                name="ImagenEvento"
+                onChange={handleImageChange}
+                className="SeleccionarArchivos w-full"
+                required/>
+            </div>
+          
+            <div className="w-1/2 ml-2">
+              <div className="mb-4 text-center">
+                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
+                  Privacidad
+                </label>
+                <div className="flex items-center justify-center ml-1">
+                  <input
+                    type="checkbox"
+                    name="Privacidad"
+                    checked={evento.Privacidad}
+                    onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  <span className="text-white">Privado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+            <div className="mb-4 bg-pink-500 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="nombre">
                 Nombre
             </label>
@@ -190,36 +225,7 @@ function CrearEvento() {
 
            
           
-            <div className="mb-4 flex bg-pink-300 rounded-md">
-            <div className="w-1/2 mr-2 ml-1">
-              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="imagenEvento">
-                Imagen del Evento
-              </label>
-              <input
-                type="file"
-                name="ImagenEvento"
-                onChange={handleImageChange}
-                className="w-full ml-1"
-                required/>
-            </div>
-            <div className="w-1/2 ml-2">
-              <div className="mb-4 text-center">
-                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
-                  Privacidad
-                </label>
-                <div className="flex items-center justify-center ml-1">
-                  <input
-                    type="checkbox"
-                    name="Privacidad"
-                    checked={evento.Privacidad}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  <span className="text-white">Privado</span>
-                </div>
-              </div>
-            </div>
-          </div>
+            
 
           <div className="mb-4">
             <label className="block text-white font-semibold mb-2" htmlFor="categoria">
