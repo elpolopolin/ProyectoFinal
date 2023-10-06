@@ -22,6 +22,24 @@ class EventoService {
         return returnEntity;
     }
 
+    getAllxFecha = async () => {
+        let returnEntity = null;
+        console.log('Estoy en EventoService.getAllxFecha');
+        try {
+            const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' '); // Obtén la fecha actual en el formato 'YYYY-MM-DD HH:MM:SS'
+    
+            const pool = await sql.connect(config);
+            const result = await pool.request()
+                .query(`SELECT * FROM Evento WHERE Fecha > '${currentDate}'`);
+    
+            returnEntity = result.recordset;
+            console.log(returnEntity);
+        } catch (error) {
+            console.log(error);
+        }
+        return returnEntity;
+    };
+
     Categorias = async () => {
         let returnEntity = null;
         try {
