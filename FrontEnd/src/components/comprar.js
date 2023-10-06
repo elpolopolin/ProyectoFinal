@@ -68,9 +68,9 @@ function Comprar() {
 
   return (
     <>
-    <div className="flex flex-col items-center justify-center min-h-screen py-10 bg-pink-500 rounded ">
+    <div className="flex flex-col items-center justify-center min-h-screen py-10  rounded ">
       <div className=" w-full lg:w-3/4 md:w-1/2">
-        <div className="bg-fuchsia-700 p-6 rounded-lg shadow-lg text-white mb-4 mx-6 text-center">
+        <div className="bg-pink-500 p-6 rounded-lg shadow-lg text-white mb-4 mx-6 text-center">
           <h2 className="text-2xl font-bold mb-4 text-center">{evento.Nombre}</h2>
 
           <div className="flex flex-wrap text-l ">
@@ -104,7 +104,7 @@ function Comprar() {
 
         
       </div>
-      <button className="bg-red-700 m-2 p-4 rounded rounded text-white hover:bg--600" onClick={handleBuy}>Comprar</button>
+      <button className="bg-pink-500 hover:bg-gray-800  font-bold m-2 p-4 rounded rounded text-white" onClick={handleBuy}>Comprar</button>
       {preferenceId && <Wallet initialization={{ preferenceId }} />}
     </div>
   </>
