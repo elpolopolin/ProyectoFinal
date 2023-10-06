@@ -70,67 +70,9 @@ function Home() {
 </section>
  
   
-        
+</div> 
 
-        {/* Sección de Calendario */}
-        <section className="mb-8">
-          <h2 className="text-3xl font-semibold mb-4 text-center">Eventos</h2>
-
-          <div className="carousel w-full bg-pink-200 h-48">
-      
-        {Eventos.map((event) => (
-
-            <div className="card mr-2 h-40 mt-4" style={{width: "50%"}}>
-              <div className="image-container">
-                <div className="first">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span className="wishlist">
-                      <i className="fa fa-heart-o"></i>
-                    </span>
-                  </div>
-                </div>
-                <img
-                  src={event.ImagenEvento}
-                  alt="Event"
-                  className="img-fluid rounded thumbnail-image"
-                />
-              </div>
-              <div className="product-detail-container p-2">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h5 className="dress-name">{event.Nombre}</h5>
-                  <div className="d-flex flex-column mb-2">
-                    <span className="">{format(new Date(event.Fecha), "dd'/'MM'/'yyyy")}</span>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-        ))}
-        
-          </div>
-          <Link to="/eventos-del-dia" className="block">
-            
-          </Link>
-
-        </section>
-
-
-        {/* Sección de Categorías */}
-        <section>
-          <h2 className="text-3xl font-semibold mb-4">Categorías</h2>
-          {/* Enlace interno a la página de categorías */}
-          <Link to="/categorias" className="block">
-            <img
-              src="imagen_categorias.jpg"
-              alt="Categorías"
-              className="rounded-lg"
-            />
-            <p className="mt-2">Explora nuestras categorías</p>
-          </Link>
-        </section>
-      </div>
-    </div>
-
+</div>
     </div>
   );
 }

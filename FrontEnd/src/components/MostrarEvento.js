@@ -129,7 +129,7 @@ function MostrarEvento({ evento, participantesEvento }) {
 
           
           <div className="flex w-full">
-          <div className="grid h-50 flex-grow card text-white place-items-left">
+          <div className="grid h-50 flex-grow  text-white place-items-left">
             <div className="Dat-izq">
             <div className="overflox-x-auto">
             <table className="table-auto text-center">
@@ -137,33 +137,26 @@ function MostrarEvento({ evento, participantesEvento }) {
               <tr>
                 <td>
                   
-                  <div className="Datos"> <a className="text-blue-600 link">Organizador: {organizador.NombreUsuario} </a></div>
+                  <div className="Datos"> <a className="text-blue-600 link">Organizador/es {organizador.NombreUsuario} </a></div>
                 </td>
                 <td>
                   
                   <div className="Datos">
-                    <a className="link text-blue-600" onClick={() => setMostrarParticipantes(true)}>Asistentes</a>
+                    <a className="link text-blue-600" onClick={() => setMostrarParticipantes(true)}>Participantes</a>
                   </div>
                 </td>
                 <td className="">
                   
-                  <div className="Datos">{evento.Direccion}</div>
+                  <div className="Datos"><a className="text-white">{evento.Direccion}</a></div>
                 </td>
               </tr>
               <tr>
-                <td>
-                  
-                  <div className="Datos">
-                  {evento.Fecha}
-                    </div>
+                <td>  
+                <div className="Datos"> <a className="text-white"> {evento.Fecha}</a> </div>
                 </td>
                 <td>
-                  <div className="Datos">Rango de edad:</div>
-                  <div className="Datos">{evento.EdadMinima} - {evento.EdadMaxima}</div>
-                </td>
-                <td>
-                  
-                  <div className="Datos">0/{evento.Participantes}</div>
+                  <div className="Datos"><a className="text-white"> Rango de edad: </a></div>
+                  <div className="Datos"><a className="text-white">{evento.EdadMinima} - {evento.EdadMaxima}</a></div>
                 </td>
               </tr>
             </tbody>
@@ -176,9 +169,6 @@ function MostrarEvento({ evento, participantesEvento }) {
           </div>
               <div className="Logo-Fecha text-white">    
           </div>
-          <center>
-            <hr className="hr2"></hr>
-          </center>
 
             <div className="flex justify-center mt-5"> {/* mismo link pa los dos */}
         
@@ -220,10 +210,7 @@ function MostrarEvento({ evento, participantesEvento }) {
                 </div>
               );
             })}
-          <button
-            onClick={() => setMostrarParticipantes(false)}
-            className="btn btn-primary "
-          >
+          <button onClick={() => setMostrarParticipantes(false)} className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
             Salir
           </button>
           
