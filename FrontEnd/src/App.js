@@ -16,6 +16,7 @@ import CategoriasProvider from './context/CategoriasContext';
 import Comentarios from "./components/comentarios.js";
 import QrScanner from "./components/QrScanner.jsx";
 import Home from "./components/Home.js";
+import Categorias from "./components/Categorias.js";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
@@ -211,6 +212,7 @@ function App() {
             <Routes>
             <Route path="/"  element={<Home />}/>
               <Route path="/eventos" element={<Eventos eventos={eventos} />} />
+              <Route path="/categorias" element={<Categorias />} />
               <Route path="/eventos/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
               <Route path="/CrearEvento" element={<CrearEvento />} />
               <Route path="/friends" element={<Friends />} />

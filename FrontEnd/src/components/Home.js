@@ -1,20 +1,51 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Importa Link para crear enlaces internos
 import { HostContext } from "../App";
+import axios from "axios";
+import CalendarioIcon from "../icons/Calendario.png";
+import EntradaIcon from "../icons/Entrada.png";
+import PinIcon from "../icons/pin.png";
+import { format } from "date-fns";
+import './styles/home.css';
 
 function Home() {
   const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena
   const host = useContext(HostContext);
   const imagenEventop = host + "/imagenesEventos/Eventop.png";
+  const imagen_categorias = host + "/imagenesEventop/categorias.jpg"
+  const eventosImagen = host + "/imagenesEventop/eventos.png"
+  const imagencaru1 = host + "/imagenesEventop/primerosInversores.jpg"
+  const imagencaru2 = host + "/imagenesEventop/baño.jpg"
+  const imagencaru3 = host + "/imagenesEventop/pindi.jpg"
+  const [Eventos, setEventos] = useState([]);
+
+  useEffect(() => {
+    cargarEventos();
+  }, []);
+
+  const cargarEventos = () => {
+    axios
+      .get(host + "/getAll")
+      .then((result) => {
+        const events = result.data;
+        setEventos(events);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
    
-    <div className=" min-h-screen p-8">
-         <div className="card-container overflow-y-auto " style={{marginTop: "-10px"}}>
+    <div className=" min-h-screen p-8 text-neutral-300">
+
+         <div className="nana-container overflow-y-auto " style={{marginTop: "-10px"}}>
+
       <div className="container mx-auto">
 
         {/* Sección de Novedades */}
-        <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-3 text-center">Novedades</h2>
+        <section className="mb-4">
+        <h2 className="text-3xl font-semibold mb-2 text-center ">Novedades</h2>
 
 <div className="carousel w-full h-56">
 
@@ -46,40 +77,58 @@ function Home() {
 </section>
  
   
+        {/* Sección de Categorías */}
+        <section>
+        
+          <Link to="/categorias" className="block mb-6 ">
+            <img
+              src={imagen_categorias}
+              alt="Categorías"
+              className="rounded-lg w-full "
+              style={{maxHeight: "20%"}}
+            />
+            
+          </Link>
+        </section>
+      
+    
         
 
         {/* Sección de Calendario */}
-        <section className="mb-8">
-          <h2 className="text-3xl font-semibold mb-4 text-center">Calendario</h2>
-         
-          <p>Hoy es {fechaActual}</p>
-          {/* Enlace interno a la página de eventos del día */}
-          <Link to="/eventos-del-dia" className="block">
+        <section className="mb-6">
+          
+        <Link to="/categorias" className="block position center ">
             <img
-              src="imagen_calendario.jpg"
-              alt="Calendario"
-              className="rounded-lg"
+              src={eventosImagen}
+              alt="Eventos"
+              className="rounded-lg  w-full "
+              style={{maxHeight: "20%"}}
             />
-            <p className="mt-2">Ver eventos del día</p>
+            
           </Link>
+      
         </section>
 
-        {/* Sección de Categorías */}
-        <section>
-          <h2 className="text-3xl font-semibold mb-4">Categorías</h2>
-          {/* Enlace interno a la página de categorías */}
-          <Link to="/categorias" className="block">
-            <img
-              src="imagen_categorias.jpg"
-              alt="Categorías"
-              className="rounded-lg"
-            />
-            <p className="mt-2">Explora nuestras categorías</p>
-          </Link>
-        </section>
-      </div>
+
+      <section className="border border-purple p-2 rounded">
+        <p className="text-center font-bold text-purple-400">Imagenes Inneditas</p>
+      <div className="carousel w-full rounded-box h-40">
+  <div id="item1" className="carousel-item w-full">
+    <img src={imagencaru1} className="w-full" />
+  </div> 
+  <div id="item2" className="carousel-item w-full">
+    <img src={imagencaru2} className="w-full" />
+  </div> 
+  <div id="item3" className="carousel-item w-full">
+    <img src={imagencaru3} className="w-full" />
+  </div> 
+</div> 
+
+
+      </section>
+
+        </div>
     </div>
-
     </div>
   );
 }
