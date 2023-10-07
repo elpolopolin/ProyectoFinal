@@ -114,35 +114,50 @@ class EventoService {
 
     insert = async (evento) => {
         let rowsAffected = 0;
-        
-        console.log(evento);
-
-        console.log('estoy en:  EventoService.insert(Evento)');
+    
         try {
-            let pool   = await sql.connect(config);
-            let result = await pool.request()
-                                            .input('pNombre', sql.VarChar, evento.nombre)
-                                            .input('pFecha', sql.VarChar, evento.fecha)
-                                            .input('pPrecio', sql.Float, evento.precio)
-                                            .input('pParticipantes', sql.Float, evento.participantes)
-                                            .input('pDescripcion', sql.VarChar, evento.descripcion)
-                                            .input('pDireccion', sql.VarChar, evento.direccion)
-                                            .input('pPublico', sql.Bit, evento.publico)
-                                            .input('pEdadMinima', sql.Float, evento.edadMinima)
-                                            .input('pEdadMaxima', sql.Float, evento.edadMaxima)
-                                            .input('pImagenEvento', sql.VarChar, evento.imagenEvento)
-                                            .input('pidCategoria', sql.Int, evento.idCategoria)
-
-
-                                            .query('Insert into Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria) Values (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)')
+            let pool = await sql.connect(config);
+    
+            // Check if an event with the same idCategoria and Nombre already exists
+            const checkQuery = 'SELECT COUNT(*) AS count FROM Evento WHERE Nombre = @pNombre AND idCategoria = @pidCategoria';
+            const checkResult = await pool.request()
+                .input('pNombre', sql.VarChar, evento.nombre)
+                .input('pidCategoria', sql.Int, evento.idCategoria)
+                .query(checkQuery);
+            const eventCount = checkResult.recordset[0].count;
+    
+            if (eventCount > 0) {
+                // An event with the same name and idCategoria already exists, handle the error
+                throw new Error('An event with the same name and idCategoria already exists');
+            }
+    
+            // If no event with the same name and idCategoria exists, proceed with insertion
+            const insertQuery = `
+                INSERT INTO Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria)
+                VALUES (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)
+            `;
+            const result = await pool.request()
+                .input('pNombre', sql.VarChar, evento.nombre)
+                .input('pFecha', sql.VarChar, evento.fecha)
+                .input('pPrecio', sql.Float, evento.precio)
+                .input('pParticipantes', sql.Float, evento.participantes)
+                .input('pDescripcion', sql.VarChar, evento.descripcion)
+                .input('pDireccion', sql.VarChar, evento.direccion)
+                .input('pPublico', sql.Bit, evento.publico)
+                .input('pEdadMinima', sql.Float, evento.edadMinima)
+                .input('pEdadMaxima', sql.Float, evento.edadMaxima)
+                .input('pImagenEvento', sql.VarChar, evento.imagenEvento)
+                .input('pidCategoria', sql.Int, evento.idCategoria)
+                .query(insertQuery);
+    
             rowsAffected = result.rowsAffected;
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
+            // Handle the error here, e.g., return a custom error code or message
         }
-                                            
+    
         return rowsAffected;
     }
-
 
     ingresarEnEvento = async (IdUsuario, IdEvento, idDeEntrada, qrCodeImage) => {
         let rowsAffected = 0;

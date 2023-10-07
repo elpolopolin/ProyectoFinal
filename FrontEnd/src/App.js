@@ -21,7 +21,7 @@ import Categorias from "./components/Categorias.js";
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://localhost:3000";
+const host = "http://192.168.0.119:3000"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -34,9 +34,8 @@ function App() {
   const [incorrecto, setIncorrecto] = useState("");
   const [userLogged, setUserLogged] = useState({});
   const [participantes, setParticipantes] = useState({});
+  const isMobile = window.innerWidth <= 768;
 
-  
-  
 
   useEffect(() => {
     cargarEventos();
@@ -209,6 +208,15 @@ function App() {
           <UsuarioContext.Provider value={userLogged}> 
           <CategoriasProvider>
           <div className="Home">
+          {isMobile ? (
+            <div className="bottom-navbar">
+            <NavBar cargarEventos={cargarEventos} />
+            </div>
+            ) : ( //pc
+            <div className="">
+              <NavBar cargarEventos={cargarEventos} />
+            </div>
+            )}
             <Routes>
             <Route path="/"  element={<Home />}/>
               <Route path="/eventos" element={<Eventos eventos={eventos} />} />
@@ -225,9 +233,8 @@ function App() {
               <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
-            <div className="bottom-navbar">
-            <NavBar cargarEventos={cargarEventos} />
-            </div>
+           
+
           </div>
           </CategoriasProvider>
         </UsuarioContext.Provider>

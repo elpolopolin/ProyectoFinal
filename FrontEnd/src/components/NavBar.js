@@ -12,17 +12,19 @@ import CalendarioIcon from "../icons/Calendario.png";
 function NavBar({ cargarEventos }) {
 
     const usuario = useContext(UsuarioContext);
-
+    const isMobile = window.innerWidth <= 768; // Define el ancho máximo para considerar como dispositivo móvil
     const handleHomeClick = () => {
         cargarEventos(); // Llama a la función cargarEventos pasada como prop
       };
     
 
   return (
+    <div>
+    {isMobile ? (
     <div className="fixed z-50 w-full h-14 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
     <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <button data-tooltip-target="tooltip-home" type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-100 dark:hover:bg-gray-800 group">
-        <Link to="/" className="nav-link" onClick={handleHomeClick}>
+        <Link to="/" className="nav-link" >
           <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-pink-400 dark:group-hover:text-pink-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 00 1.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
           </svg>
@@ -35,7 +37,7 @@ function NavBar({ cargarEventos }) {
         </div>
 
         <button data-tooltip-target="tooltip-wallet" type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-        <Link to="/eventos" className="nav-link">
+        <Link to="/eventos" className="nav-link" onClick={handleHomeClick}>
         <svg className="w-6 h-6  text-gray-500 dark:text-gray-400 group-hover:text-pink-400 dark:group-hover:text-pink-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5h16V4H0V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5z"/>
            </svg>
@@ -90,6 +92,11 @@ function NavBar({ cargarEventos }) {
         </div>
     </div>
 </div>
+) : ( //pc
+<div>
+</div>
+        )}
+        </div>
   );
 }
 
