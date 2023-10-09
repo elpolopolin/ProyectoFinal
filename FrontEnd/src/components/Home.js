@@ -89,7 +89,7 @@ function Home() {
         {/* Sección de Categorías */}
         <section>
         
-          <Link to="/categorias" className="block mb-6 ">
+          <Link to="/Categorias" className="block mb-6 ">
             <img
               src={imagen_categorias}
               alt="Categorías"

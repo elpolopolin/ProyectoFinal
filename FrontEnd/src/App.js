@@ -21,7 +21,7 @@ import Categorias from "./components/Categorias.js";
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://192.168.0.119:3000"; //en ort cambiar ip por localhost..
+const host = "http://localhost:3000"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);

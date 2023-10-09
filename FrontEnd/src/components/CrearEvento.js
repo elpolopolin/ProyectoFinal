@@ -162,7 +162,7 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             required/>
             </div>
-            <div className="mb-4 bg-pink-300 rounded-md" >
+            <div className="mb-4 bg-pink-500 rounded-md" >
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="fecha">
                 Fecha
             </label>
@@ -174,7 +174,7 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
             </div>
-            <div className="mb-4 bg-pink-300 rounded-md">
+            <div className="mb-4 bg-pink-500 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="precio">
                 Precio
             </label>
@@ -186,7 +186,7 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
             </div>
-            <div className="mb-4 bg-pink-300 rounded-md">
+            <div className="mb-4 bg-pink-500 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="participantes">
                 Participantes
             </label>
@@ -198,7 +198,7 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
             />
             </div>
-            <div className="mb-4 bg-pink-300 rounded-md">
+            <div className="mb-4 bg-pink-500 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="descripcion">
                 Descripcion
             </label>
@@ -210,7 +210,7 @@ function CrearEvento() {
                 className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
                 required/>
             </div>
-            <div className="mb-4 bg-pink-300 rounded-md">
+            <div className="mb-4 bg-pink-500 rounded-md">
             <label className="block text-white font-semibold mb-2 ml-1" htmlFor="direccion">
                 Direccion
             </label>

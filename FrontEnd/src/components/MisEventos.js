@@ -124,7 +124,7 @@ function MisEventos() {
                       </button>
                       <Link
                         key={evento.Id}
-                        to={`/VerEvento/${evento.Id}`}
+                        to={`/eventos/VerEvento/${evento.Id}`}
                         className="cursor-pointer"
                       >
                         <button className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">

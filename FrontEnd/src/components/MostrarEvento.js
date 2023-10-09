@@ -49,28 +49,28 @@ function MostrarEvento({ evento, participantesEvento }) {
       });
   };
 
-  useEffect(() => {
+  // useEffect(() => {
   
-    Organizador()
-  }, []);
+  //   Organizador()
+  // }, []);
 
 
-  const Organizador = () => {
-    if(evento.IdOrganizador != null) {
-      let link = host + "/usuarios/getById/";
-      link += evento.IdOrganizador;
-      axios
-        .get(link)
-        .then((result) => {
-          const org = result.data;
-          setOrganizador(org);
-          });
-    } else (
-      console.log("no hay organizador")
-    )
+  // const Organizador = () => {
+  //   if(evento.IdOrganizador != null) {
+  //     let link = host + "/usuarios/getById/";
+  //     link += evento.IdOrganizador;
+  //     axios
+  //       .get(link)
+  //       .then((result) => {
+  //         const org = result.data;
+  //         setOrganizador(org);
+  //         });
+  //   } else (
+  //     console.log("no hay organizador")
+  //   )
    
       
-  }
+  // }
 
 
   return (
