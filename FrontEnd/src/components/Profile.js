@@ -47,7 +47,7 @@ function Profile({ logout }) { // Receive logout prop
       </div>
     </div>
     <div class="flex justify-center min-h-screen">
-    <div class="h-auto sm:w-96 w-[360px] transition-all bg-white rounded-lg overflow-hidden">
+    <div class="h-auto sm:w-96 w-[360px] transition-all text-white rounded-lg overflow-hidden">
     <div class="h-80 w-full ">
             <img src={usuario.FotoPerfil}/>
         </div>
@@ -60,21 +60,21 @@ function Profile({ logout }) { // Receive logout prop
                 </div>
             </div>
             <div class="flex flex-col gap-1">
-                <div class="flex gap-3 items-center">
-                    <i class="text-gray-400 fa fa-id-card-o"></i>
-                    <p class="font-semibold text-gray-500">{formatDateDDMMYY(usuario.FechaNacimiento)}</p>
+                <div class="flex gap-3 items-center text-gray-200">
+                    <i class="text-gray-100 fa fa-id-card-o"></i>
+                    <p class="font-semibold ">{formatDateDDMMYY(usuario.FechaNacimiento)}</p>
                 </div>
                 <div class="flex gap-3 items-center">
-                    <i class="text-gray-400 fa fa-location-arrow"></i>
-                    <p class="font-semibold text-gray-500">{usuario.Direccion}</p>
+                    <i class="text-gray-100 fa fa-location-arrow"></i>
+                    <p class="font-semibold ">{usuario.Direccion}</p>
                 </div>
                 <div class="flex gap-3 items-center">
-                    <i class="text-gray-400 fa fa-address-card"></i>
-                    <p class="font-semibold text-gray-500">{usuario.Genero}</p>
+                    <i class="text-gray-100 fa fa-address-card"></i>
+                    <p class="font-semibold ">{usuario.Genero}</p>
                 </div>
                 <div class="flex gap-3 items-center">
-                    <i class="text-gray-400"></i>
-                    <p class="font-semibold text-gray-500">{usuario.Descripcion}</p>
+                    <i class="text-gray-100"></i>
+                    <p class="font-semibold ">{usuario.Descripcion}</p>
                 </div>
             </div>
             <button class="my-5 h-12 w-full bg-blue-500 cursor-pointer text-white transition-all hover:bg-blue-800 rounded-lg ">Añadir como amigo</button>
