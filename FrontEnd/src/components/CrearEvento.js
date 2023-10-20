@@ -128,27 +128,9 @@ function CrearEvento() {
                 />
                 <label for="file" className="text-center align-middle" style={{fontSize: '150px', margin: "auto"}}> + </label>
               </div>
-
-
             </div>
 
-            <div className="w-1/2 ml-2">
-              <div className="mb-4 text-center">
-                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
-                  Privacidad
-                </label>
-                <div className="flex items-center justify-center ml-1">
-                  <input
-                    type="checkbox"
-                    name="Privacidad"
-                    checked={evento.Privacidad}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  <span className="text-white">Privado</span>
-                </div>
-              </div>
-            </div>
+            
 
 
 
@@ -187,12 +169,6 @@ function CrearEvento() {
             
                 required />
             </div>
-
-
-
-
-            
-
 
 
 
@@ -273,6 +249,24 @@ function CrearEvento() {
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
               />
+            </div>
+
+            <div className="w-1/2 ml-2">
+              <div className="mb-4 text-center">
+                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
+                  Privacidad
+                </label>
+                <div className="flex items-center justify-center ml-1">
+                  <input
+                    type="checkbox"
+                    name="Privacidad"
+                    checked={evento.Privacidad}
+                    onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  <span className="text-white">Privado</span>
+                </div>
+              </div>
             </div>
           </div>
 
