@@ -128,27 +128,9 @@ function CrearEvento() {
                 />
                 <label for="file" className="text-center align-middle" style={{fontSize: '150px', margin: "auto"}}> + </label>
               </div>
-
-
             </div>
 
-            <div className="w-1/2 ml-2">
-              <div className="mb-4 text-center">
-                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
-                  Privacidad
-                </label>
-                <div className="flex items-center justify-center ml-1">
-                  <input
-                    type="checkbox"
-                    name="Privacidad"
-                    checked={evento.Privacidad}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  <span className="text-white">Privado</span>
-                </div>
-              </div>
-            </div>
+            
 
 
 
@@ -187,12 +169,6 @@ function CrearEvento() {
             
                 required />
             </div>
-
-
-
-
-            
-
 
 
 
@@ -274,6 +250,7 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
               />
             </div>
+<<<<<<< HEAD
             <div className="mb-4 bg-pink-500 rounded-md">
               <label className="block text-white font-semibold mb-2 ml-1" htmlFor="edades1">
                 Edad mínima
@@ -297,6 +274,25 @@ function CrearEvento() {
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
               />
+=======
+
+            <div className="w-1/2 ml-2">
+              <div className="mb-4 text-center">
+                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
+                  Privacidad
+                </label>
+                <div className="flex items-center justify-center ml-1">
+                  <input
+                    type="checkbox"
+                    name="Privacidad"
+                    checked={evento.Privacidad}
+                    onChange={handleInputChange}
+                    className="mr-2"
+                  />
+                  <span className="text-white">Privado</span>
+                </div>
+              </div>
+>>>>>>> 97c53262b75ced6dd5cd42f318d93fc0cccdcc09
             </div>
           </div>
 
