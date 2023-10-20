@@ -2,14 +2,17 @@ import React, { useContext ,useEffect, useState } from "react";
 import { format } from "date-fns";
 import './styles/Profile.css';
 import { UsuarioContext } from "../App";
+import axios from "axios";
+import { HostContext } from "../App";
+import { Link } from "react-router-dom";
 
 
-function Profile({ logout }) { // Receive logout prop
-
+function Profile({ logout, cargarUsuario }) { // Receive logout prop
+  const host = useContext(HostContext);
   const [descripcion, setDescripcion] = useState(false);
-  const usuario = useContext(UsuarioContext); //llama a usuario del context, este puede ser llamado desde toda la app..
+  const usuario = cargarUsuario(); //aca llamamos a cargar usuario asi actualiza desde app.js y podemos acceder a su data correctamente (aunque esto es una mala praxis la app la arme asi y me da paja hacer una buena authentication etc)
   const [mostrarPanelConfiguracion, setMostrarPanelConfiguracion] = useState(false);
- 
+  const [categoriasUser, setCategoriasUser] = useState([]);
 
   useEffect(() => {
     if (usuario.Descripcion !== "") {
@@ -17,13 +20,44 @@ function Profile({ logout }) { // Receive logout prop
     } else {
       setDescripcion(false);
     }
+
   }, [usuario.Descripcion]);
+
+  useEffect(() => {
+    CargarCategoriasDeUsuario();
+  },[]);
 
   const formatDateDDMMYY = (dateString) => {
     const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const CargarCategoriasDeUsuario = () => {
+    if (usuario) {
+      const link = host + "/CategoriasDeUsuario/" + usuario.Id;
+      axios
+      .get(link)
+      .then((result) => { 
+        const ids = result.data;
+          axios
+          .post(`${host}/getCategorias`, { categoriaIds: ids })
+          .then((response) => {
+            console.log("Categorías obtenidas:", response.data);
+            setCategoriasUser(response.data)
+          })
+          .catch((error) => {
+            console.error("Error al obtener categorías:", error);
+          });
+          
+      })
+    }
+  }
+
+  const getRandomColor = () => {
+    const colors = ['red', 'blue', 'green', 'purple', 'indigo', 'pink', 'orange'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    return randomColor;
+  }
 
   return (
     <div className="profile-container overflow-y-auto">
@@ -41,7 +75,10 @@ function Profile({ logout }) { // Receive logout prop
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             <li><a>Editar perfil</a></li>
-            <li><a>Mis Eventos</a></li>
+
+            <Link  to={`/EventosUsuario`} className="cursor-pointer">
+            <li><a className="hover:bg-green-300" >Mis Eventos</a> </li>
+            </Link>
             <li>
               <a className="hover:bg-red-500" onClick={logout}>
                 Cerrar Sesión
@@ -99,6 +136,20 @@ function Profile({ logout }) { // Receive logout prop
                     </div> 
             {    /*   <button class="my-5 h-12 w-full bg-blue-500 cursor-pointer text-white transition-all hover:bg-blue-800 rounded-lg ">Añadir como amigo</button>  esto va solo en verperfil*/ }
         </div>
+
+              <div className="text-center">
+        <h1 className="text-xl font-bold my-4">Categorías:</h1>
+      </div>
+      <div className="flex flex-wrap gap-4">
+        {categoriasUser.map((category, index) => (
+          <div
+            key={category.IdCategoria}
+            className={` text-center p-4 rounded-lg cursor-pointer`}
+          >
+            <h3 className="text-white">{category.NombreCategoria}</h3>
+          </div>
+        ))}
+      </div>
     </div>
 </div>
 
@@ -109,6 +160,7 @@ function Profile({ logout }) { // Receive logout prop
 }
 
 export default Profile;
+
 
 {/*     
     <img src={usuario.FotoPerfil} className="profile-image" alt="Profile" />

@@ -7,7 +7,7 @@ import Registrarse from "./components/Registrarse.js";
 import { Link, BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import Friends from "./components/Friends";
 import Profile from "./components/Profile";
-import Calendar from "./components/Calendar";
+import Calendar from "./components/EventosUsuario.js";
 import Entradas from "./components/MisEventos";
 import MostrarEvento from "./components/MostrarEvento";
 import CrearEvento from "./components/CrearEvento.js"
@@ -17,11 +17,12 @@ import Comentarios from "./components/comentarios.js";
 import QrScanner from "./components/QrScanner.jsx";
 import Home from "./components/Home.js";
 import Categorias from "./components/Categorias.js";
+import EventosDeUsuario from "./components/EventosUsuario.js";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://localhost:3000"; //en ort cambiar ip por localhost..
+const host = "http://192.168.0.119:3000"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -71,17 +72,18 @@ function App() {
 
 
 
-  const cargarUsuarios = () => {
-    axios
-      .get(host + "/usuarios/getAll")
-      .then((result) => {
-        const users = result.data;
-        setUsuarios(users);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  function cargarUsuario() {
+    const token = localStorage.getItem('auth');
+    const userJson = localStorage.getItem('userLogged');
+  
+    if (token && userJson != null) {
+      const user = JSON.parse(userJson);
+      return user;
+    } else {
+      return null;
+    }
+  }
+  
 
   const cargarUsuarioId = async (user) => {
     const link = host + "/usuarios/getbyid/" + user.Id;
@@ -220,13 +222,13 @@ function App() {
             <Routes>
             <Route path="/"  element={<Home />}/>
               <Route path="/eventos" element={<Eventos eventos={eventos} />} />
-              <Route path="/categorias" element={<Categorias />} />
+              <Route path="/categorias" element={<Categorias cargarUsuario={cargarUsuario}/>} />
               <Route path="/eventos/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
               <Route path="/CrearEvento" element={<CrearEvento />} />
               <Route path="/friends" element={<Friends />} />
-              <Route path="/profile" element={<Profile logout={logout}/>} />
+              <Route path="/profile" element={<Profile logout={logout} cargarUsuario={cargarUsuario} />} />
               <Route path="/entradas" element={<Entradas />} />
-              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/EventosUsuario" element={<EventosDeUsuario cargarUsuario={cargarUsuario}/>} />
               <Route path="/comprar/evento/:id" element={<Comprar />} />
               <Route path="/comentarios/:id" element={<Comentarios />}  />
               <Route path="/QrScanner" element={<QrScanner />}  />

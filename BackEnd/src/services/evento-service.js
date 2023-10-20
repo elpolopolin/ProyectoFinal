@@ -72,6 +72,24 @@ class EventoService {
         return returnEntity;
     }
 
+    getCategoriasByIds = async (ids) => {
+        let returnEntities = [];
+        try {
+          const pool = await sql.connect(config);
+          for (const id of ids) {
+            const result = await pool.request()
+              .input('pId', sql.Int, id)
+              .query('SELECT * FROM Categoria WHERE IdCategoria = @pId');
+            const categoria = result.recordsets[0][0];
+            returnEntities.push(categoria);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        return returnEntities;
+      }
+
+
     VerificarEntradaEnBD = async (IdEvento, IdEntrada) => { //laburo aca
         
     }
@@ -95,6 +113,35 @@ class EventoService {
       return returnEntity;
   }
 
+  CategoriasDeUsuario = async (id) => {
+    let returnEntity = null;
+    try {
+      let pool = await sql.connect(config);
+      let result = await pool.request()
+        .input('pId', sql.Int, id)
+        .query(`SELECT IdCategoria FROM Categorias_x_Usuario WHERE IdUsuario = @pId`);
+      
+      returnEntity = result.recordsets[0].map((row) => row.IdCategoria);
+      console.log('Categorías del usuario: ', returnEntity);
+    } catch (error) {
+      console.log(error);
+    }
+    return returnEntity;
+  }
+
+  eventosUser = async (id) => { 
+    let returnEntity = null;
+    try {
+        let pool    = await sql.connect(config);
+        let result  = await pool.request()
+                                            .input('pId', sql.Int, id)
+                                            .query('SELECT * FROM Evento WHERE IdOrganizador = @pId');
+        returnEntity = result.recordsets[0]; //
+    } catch (error) {
+        console.log(error);
+    }
+    return returnEntity;
+  }
 
     getById = async (id) => {
         
@@ -111,6 +158,66 @@ class EventoService {
         }
         return returnEntity;
     }
+
+    AgregarCategorias = async (userId, CategoriasAgregar) => {
+        try {
+          const pool = await sql.connect(config);
+      
+          // Verificar si el usuario ya tiene categorías en la base de datos
+          const result = await pool.request()
+            .input('userId', sql.Int, userId)
+            .query('SELECT IdCategoria FROM Categorias_x_Usuario WHERE IdUsuario = @userId;');
+          const existingCategories = result.recordset;
+      
+          // Obtener las categorías actuales del usuario
+          const currentCategories = existingCategories.map((row) => row.IdCategoria);
+      
+          // Calcular cuántas categorías adicionales se pueden agregar
+          const maxCategories = 3 - currentCategories.length;
+      
+          if (maxCategories <= 0) {
+            // El usuario ya tiene el máximo de categorías permitidas
+            return { success: false, message: "El usuario ya tiene el máximo de categorías permitidas." };
+          }
+      
+          // Filtrar las categorías a agregar para asegurarse de no agregar duplicados
+          const uniqueCategoriesToAdd = CategoriasAgregar.filter((category) => !currentCategories.includes(category));
+      
+          if (uniqueCategoriesToAdd.length > maxCategories) {
+            // Hay más categorías para agregar de las permitidas
+            return { success: false, message: "No se pueden agregar más categorías de las permitidas." };
+          }
+      
+          // Realizar las inserciones en la tabla Categorias_x_Usuario
+          for (const category of uniqueCategoriesToAdd) {
+            const result = await pool.request()
+              .input('userId', sql.Int, userId)
+              .input('category', sql.Int, category)
+              .query('INSERT INTO Categorias_x_Usuario (IdUsuario, IdCategoria) VALUES (@userId, @category);');
+          }
+      
+          return { success: true, message: "Categorías agregadas con éxito." };
+        } catch (error) {
+          console.error("Error al agregar categorías:", error);
+          return { success: false, message: "Error al agregar categorías." };
+        }
+      };
+
+      DeleteCategoria = async (userId, CategoriaId) => {
+        let rowsAffected = 0;
+        try {
+          const pool = await sql.connect(config);
+          const result = await pool.request()
+            .input('userId', sql.Int, userId)
+            .input('category', sql.Int, CategoriaId)
+            .query('DELETE FROM Categorias_x_Usuario WHERE IdUsuario = @userId AND IdCategoria = @category;'); 
+          rowsAffected = result.rowsAffected;
+        } catch (error) {
+          console.log(error.message);
+        }
+        return rowsAffected;
+      }
+
 
     insert = async (evento) => {
         let rowsAffected = 0;
@@ -133,8 +240,8 @@ class EventoService {
     
             // If no event with the same name and idCategoria exists, proceed with insertion
             const insertQuery = `
-                INSERT INTO Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria)
-                VALUES (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria)
+                INSERT INTO Evento (Nombre, Fecha, Precio, Participantes, Descripcion, Direccion, Publico, EdadMinima, EdadMaxima, ImagenEvento, idCategoria, IdOrganizador)
+                VALUES (@pNombre, @pFecha, @pPrecio, @pParticipantes, @pDescripcion, @pDireccion, @pPublico, @pEdadMinima, @pEdadMaxima, @pImagenEvento, @pidCategoria, @pIdOrganizador)
             `;
             const result = await pool.request()
                 .input('pNombre', sql.VarChar, evento.nombre)
@@ -148,6 +255,7 @@ class EventoService {
                 .input('pEdadMaxima', sql.Float, evento.edadMaxima)
                 .input('pImagenEvento', sql.VarChar, evento.imagenEvento)
                 .input('pidCategoria', sql.Int, evento.idCategoria)
+                .input('pIdOrganizador', sql.Int, evento.Organizador)
                 .query(insertQuery);
     
             rowsAffected = result.rowsAffected;

@@ -89,6 +89,16 @@ router.get('/getAll', async (req, res) => {
       
     })
 
+    router.get('/eventosUser/:id', async (req, res) => {
+      try {
+        let resultado = await svc.eventosUser(req.params.id);
+        return res.status(200).json(resultado);
+      } catch (res) {
+        console.log(error);
+      }
+        
+      })
+
     router.get('/getbyidEvento/:id', async (req, res) => {
       try {
         let resultado = await svc.getByIdEvento(req.params.id);
@@ -99,6 +109,17 @@ router.get('/getAll', async (req, res) => {
       }
         
       })
+
+      router.post('/getCategorias', async (req, res) => {
+        try {
+          const categoriaIds = req.body.categoriaIds; // Recibe la lista de identificadores desde el cuerpo de la solicitud
+          const resultado = await svc.getCategoriasByIds(categoriaIds);
+          return res.status(200).json(resultado);
+        } catch (error) {
+          console.log(error);
+          return res.status(500).json({ message: "Error al obtener categorías por identificadores." });
+        }
+      });
 
     router.get('/AsistentesXEvento', async (req, res) => {
       try {
@@ -122,6 +143,43 @@ router.get('/getAll', async (req, res) => {
          
         })
 
+        router.get('/CategoriasDeUsuario/:id', async (req, res) => {
+          try {
+            let resultado = await svc.CategoriasDeUsuario(req.params.id);
+            return res.status(200).json(resultado);
+            
+          } catch (error) {
+            console.log(error);
+          }
+           
+          })
+
+        router.post('/AgregarCategorias', async (req, res) => {
+          try {
+            let CategoriasAgregar = req.body.categorias; 
+            let userId = req.body.usuario.Id; 
+
+            console.log("agregar categorias: " + CategoriasAgregar);
+            const resultado = await svc.AgregarCategorias(userId, CategoriasAgregar);
+            return res.status(200).json(resultado);
+          } catch (error) {
+            console.error("Error al agregar categorías:", error);
+            return res.status(500).json({ success: false, message: "Error al agregar categorías." });
+          }
+        });
+
+        router.delete('/EliminarCategoria/:categoriaId', async (req, res) => {
+          const categoriaId = req.params.categoriaId;
+          const usuarioId = req.body.usuarioId;
+        
+          try {
+            const resultado = await svc.DeleteCategoria(usuarioId, categoriaId);
+            return res.status(200).json(resultado);
+          } catch (error) {
+            console.error("Error al eliminar categoría:", error);
+            return res.status(500).json({ success: false, message: "Error al eliminar categoría." });
+          }
+        });
       
       router.post('/IngresarEnEvento', async (req, res) => {
         try {
@@ -199,7 +257,8 @@ router.get('/getAll', async (req, res) => {
           evento.imagenEvento = imagenRuta;
       
           evento.idCategoria = req.body.Categoria;
-      
+          evento.Organizador = req.body.Organizador;
+
           console.log(evento);
           console.log("-----------------req.body.ImagenEvento begin");          
           console.log(req);

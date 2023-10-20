@@ -332,12 +332,12 @@ function Eventos({ eventos }) {
 
       {!mostrarEvento && isMobile && (
         <div className="text-sm mx-2">
-          <div className="card-container overflow-y-auto ">
+          <div className="card-container  overflow-y-auto ">
           {categorias.map((categoria) => (
             <div key={categoria.IdCategoria} className="">
               {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
 
-                <div className="flex overflow-x-auto" style={{gap: "10px"}}>
+                <div className="flex overflow-x-auto gap-4" >
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -362,9 +362,9 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card  mb-4 h-48 bg-white text-black "
+                          className="card mb-4 h-48 bg-slate-700 text-gray-200 shadow-gold relative transition-transform transform hover:-translate-y-1 hover:shadow-md "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "33%"}}
+                          style={{width: "32%"}}
                         >
                            <Link
                         key={eventop.Id}
@@ -384,23 +384,23 @@ function Eventos({ eventos }) {
                         {eventop.Nombre}
                         </h4>
 
-                              <p className="card-text card-text-line flex items-center ">
+                              <p className="card-text card-text-line flex items-center " style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                                 <img
                                   src={CalendarioIcon}
-                                  className="h-3 w-3 mr-1"
+                                  className="h-3 w-3 mr-1 "
                                 />
                                 {format(new Date(eventop.Fecha), "dd'/'MM'/'yyyy")}
                               </p>
 
-                              <p className="card-text card-text-line flex items-center">
+                              <p className="card-text card-text-line flex items-center " style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                                 <img
                                   src={EntradaIcon}
                                   className="h-3 w-3 mr-1 "
                                 />
                                 {privacidad}
                               </p>
-                              <p className="card-text card-text-line flex items-center">
-                                <img src={PinIcon} className="h-3 w-3 mr-1" />
+                              <p className="card-text card-text-line flex items-center" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
+                                <img src={PinIcon} className="h-3 w-3 mr-1 " />
                                 Almagro
                               </p>
                             </div>

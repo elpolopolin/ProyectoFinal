@@ -3,8 +3,10 @@ import { CheckCircle } from "feather-icons-react";
 import axios from "axios";
 import { HostContext } from "../App";
 import './styles/CrearEvento.css';
+import { UsuarioContext } from "../App";
 
 function CrearEvento() {
+  const usuario = useContext(UsuarioContext)
   const [categorias, setCategorias] = useState([]);
   const [evento, setEvento] = useState({
     Nombre: "",
@@ -17,6 +19,7 @@ function CrearEvento() {
     EdadMinima: 0,
     ImagenEvento: null,
     Categoria: 0,
+    Organizador: usuario.Id,
   });
   const [showModal, setShowModal] = useState(false);
 
