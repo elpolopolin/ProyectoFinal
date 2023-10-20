@@ -2,6 +2,7 @@ import React, { useContext ,useEffect, useState } from "react";
 import { format } from "date-fns";
 import './styles/Profile.css';
 import { UsuarioContext } from "../App";
+import { Link } from 'react-router-dom';
 
 
 function Profile({ logout }) { // Receive logout prop
@@ -40,8 +41,8 @@ function Profile({ logout }) { // Receive logout prop
         <div className="drawer-side">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            <li><a>Editar perfil</a></li>
-            <li><a>Mis Eventos</a></li>
+            <li><a >Editar perfil</a></li>
+            <Link to="/entradas" className="nav-link"><li><a>Mis Eventos</a></li></Link>
             <li>
               <a className="hover:bg-red-500" onClick={logout}>
                 Cerrar Sesión

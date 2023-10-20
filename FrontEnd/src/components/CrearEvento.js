@@ -274,6 +274,30 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
               />
             </div>
+            <div className="mb-4 bg-pink-500 rounded-md">
+              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="edades1">
+                Edad mínima
+              </label>
+              <input
+                type="number"
+                name="Edad máxima"
+                value={evento.EdadMinima}
+                onChange={handleInputChange}
+                className="w-full bg-white text-black rounded-md py-2 px-3"
+              />
+            </div>
+            <div className="mb-4 bg-pink-500 rounded-md">
+              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="edades1">
+                Edad máxima
+              </label>
+              <input
+                type="number"
+                name="Edad máxima"
+                value={evento.EdadMaxima}
+                onChange={handleInputChange}
+                className="w-full bg-white text-black rounded-md py-2 px-3"
+              />
+            </div>
           </div>
 
 
