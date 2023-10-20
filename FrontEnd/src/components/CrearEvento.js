@@ -151,6 +151,29 @@ function CrearEvento() {
             </div>
 
 
+
+            <div className="mb-4">
+              <label className="block text-white font-semibold mb-2" htmlFor="categoria">
+                Categoría
+              </label>
+              <select
+                name="Categoria"
+                value={evento.Categoria}
+                onChange={handleInputChange}
+                className="w-full bg-white text-black rounded-md py-2 px-3"
+              >
+                <option value="">Seleccionar Categoría</option>
+                {categorias.map((categoria) =>
+                  <option value={categoria.IdCategoria}>{categoria.NombreCategoria}</option>
+                )}
+              </select>
+          </div>
+            
+
+
+
+
+          <div className="form1 ">
             <div className="mb-4 bg-pink-500 rounded-md">
               <label className="block text-white font-semibold mb-2 ml-1" htmlFor="nombre">
                 Nombre
@@ -161,9 +184,60 @@ function CrearEvento() {
                 value={evento.Nombre}
                 onChange={handleInputChange}
                 className="w-full bg-white text-black rounded-md py-2 px-3"
-
+            
                 required />
             </div>
+
+
+
+
+            
+
+
+
+
+
+            <div className="mb-4 bg-pink-500 rounded-md">
+              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="descripcion">
+                Descripcion
+              </label>
+              <input
+                type="text"
+                name="Descripcion"
+                value={evento.Descripcion}
+                onChange={handleInputChange}
+                className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
+                required />
+            </div>
+
+
+
+
+
+          <div className="mb-4 bg-pink-500 rounded-md">
+              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="direccion">
+                Direccion
+              </label>
+              <input
+                type="text"
+                name="Direccion"
+                value={evento.Direccion}
+                onChange={handleInputChange}
+                className="w-full bg-white text-black rounded-md py-2 px-3"
+                required />
+            </div>
+
+
+
+
+
+              
+
+
+
+
+
+
             <div className="mb-4 bg-pink-500 rounded-md" >
               <label className="block text-white font-semibold mb-2 ml-1" htmlFor="fecha">
                 Fecha
@@ -200,51 +274,12 @@ function CrearEvento() {
                 className="w-full bg-white text-black rounded-md py-2 px-3"
               />
             </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="descripcion">
-                Descripcion
-              </label>
-              <input
-                type="text"
-                name="Descripcion"
-                value={evento.Descripcion}
-                onChange={handleInputChange}
-                className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
-                required />
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="direccion">
-                Direccion
-              </label>
-              <input
-                type="text"
-                name="Direccion"
-                value={evento.Direccion}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-                required />
-            </div>
+          </div>
 
 
 
 
-
-            <div className="mb-4">
-              <label className="block text-white font-semibold mb-2" htmlFor="categoria">
-                Categoría
-              </label>
-              <select
-                name="Categoria"
-                value={evento.Categoria}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-              >
-                <option value="">Seleccionar Categoría</option>
-                {categorias.map((categoria) =>
-                  <option value={categoria.IdCategoria}>{categoria.NombreCategoria}</option>
-                )}
-              </select>
-            </div>
+            
 
             <div className="flex justify-center mb-8 mt-10">
               <button
