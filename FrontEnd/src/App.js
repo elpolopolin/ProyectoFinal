@@ -224,7 +224,7 @@ function App() {
               <Route path="/eventos" element={<Eventos eventos={eventos} />} />
               <Route path="/categorias" element={<Categorias cargarUsuario={cargarUsuario}/>} />
               <Route path="/eventos/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
-              <Route path="/CrearEvento" element={<CrearEvento />} />
+              <Route path="/CrearEvento" element={<CrearEvento cargarUsuario={cargarUsuario}/>} />
               <Route path="/friends" element={<Friends />} />
               <Route path="/profile" element={<Profile logout={logout} cargarUsuario={cargarUsuario} />} />
               <Route path="/entradas" element={<Entradas />} />

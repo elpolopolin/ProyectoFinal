@@ -5,8 +5,8 @@ import { HostContext } from "../App";
 import './styles/CrearEvento.css';
 import { UsuarioContext } from "../App";
 
-function CrearEvento() {
-  const usuario = useContext(UsuarioContext)
+function CrearEvento({cargarUsuario}) {
+  const usuario = cargarUsuario();
   const [categorias, setCategorias] = useState([]);
   const [evento, setEvento] = useState({
     Nombre: "",
@@ -111,178 +111,177 @@ function CrearEvento() {
 
 
   return (
-    <div className="flex items-center justify-center h-screen">
-    <div className="p-10 min-h-screen tracking-wide">
-        <div className="nana-container overflow-y-auto">
-            <label className="block text-white font-bold mb-2 bg-pink-500 rounded-md">
-      
-            </label>
+    <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md profile-container overflow-y-auto">
+    <h1 className="text-xl font-bold text-white capitalize dark:text-white mb-4">Crear Evento</h1>
+    <form>
+      <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+        <div>
+          <label className="text-white dark:text-gray-200" for="nombre">
+            Nombre
+          </label>
+          <input
+            id="nombre"
+            type="text"
+            name="Nombre"
+            value={evento.Nombre}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
+          />
+        </div>
 
-        <form onSubmit={handleSubmit} className="max-w-lg" enctype="multipart/form-data">
-            <div className="mb-4 flex bg-pink-500 rounded-md">
-            <div className=" ImagenEvento w-1/2 mr-2 ml-1 h-auto">
-              <label className="block text-white font-semibold mb-2 ml-1" htmlFor="imagenEvento">
-                Imagen del Evento
-              </label>
-              <input 
-                type="file"
-                name="ImagenEvento"
-                onChange={handleImageChange}
-                className="SeleccionarArchivos w-full"
-                required/>
-            </div>
-          
-            <div className="w-1/2 ml-2">
-              <div className="mb-4 text-center">
-                <label className="block text-white font-semibold mb-2 ml-1" htmlFor="privacidad">
-                  Privacidad
-                </label>
-                <div className="flex items-center justify-center ml-1">
-                  <input
-                    type="checkbox"
-                    name="Privacidad"
-                    checked={evento.Privacidad}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  <span className="text-white">Privado</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
+          <label class="text-white dark:text-gray-200" for="fecha">
+            Fecha
+          </label>
+          <input
+            id="fecha"
+            type="date"
+            name="Fecha"
+            value={evento.Fecha}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          />
+        </div>
 
+        <div>
+          <label className="text-white dark:text-gray-200" for="precio">
+            Precio
+          </label>
+          <input
+            id="precio"
+            type="number"
+            name="Precio"
+            value={evento.Precio}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          />
+        </div>
 
+        <div>
+          <label className="text-white dark:text-gray-200" for="participantes">
+            Participantes
+          </label>
+          <input
+            id="participantes"
+            type="number"
+            name="Participantes"
+            value={evento.Participantes}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          />
+        </div>
 
-            <div className="mb-4 bg-pink-500 rounded-md">
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="nombre">
-                Nombre
-            </label>
-            <input
-                type="text"
-                name="Nombre"
-                value={evento.Nombre}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-            required/>
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md" >
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="fecha">
-                Fecha
-            </label>
-            <input
-                type="date"
-                name="Fecha"
-                value={evento.Fecha}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-            />
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="precio">
-                Precio
-            </label>
-            <input
-                type="number"
-                name="Precio"
-                value={evento.Precio}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-            />
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="participantes">
-                Participantes
-            </label>
-            <input
-                type="number"
-                name="Participantes"
-                value={evento.Participantes}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-            />
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="descripcion">
-                Descripcion
-            </label>
-            <input
-                type="text"
-                name="Descripcion"
-                value={evento.Descripcion}
-                onChange={handleInputChange}
-                className="w-full  bg-white text-black rounded-md py-2 px-3 text-top h-40"
-                required/>
-            </div>
-            <div className="mb-4 bg-pink-500 rounded-md">
-            <label className="block text-white font-semibold mb-2 ml-1" htmlFor="direccion">
-                Direccion
-            </label>
-            <input
-                type="text"
-                name="Direccion"
-                value={evento.Direccion}
-                onChange={handleInputChange}
-                className="w-full bg-white text-black rounded-md py-2 px-3"
-                required/>
-            </div>
+        <div>
+          <label className="text-white dark:text-gray-200" for="descripcion">
+            Descripción
+          </label>
+          <textarea
+            id="descripcion"
+            type="textarea"
+            name="Descripcion"
+            value={evento.Descripcion}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            rows="4"
+            required
+          ></textarea>
+        </div>
 
-           
-          
-            
+        <div>
+          <label className="text-white dark:text-gray-200" for="direccion">
+            Dirección
+          </label>
+          <input
+            id="direccion"
+            type="text"
+            name="Direccion"
+            value={evento.Direccion}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
+          />
+        </div>
 
-          <div className="mb-4">
-            <label className="block text-white font-semibold mb-2" htmlFor="categoria">
-              Categoría
-            </label>
-            <select
-              name="Categoria"
-              value={evento.Categoria}
-              onChange={handleInputChange}
-              className="w-full bg-white text-black rounded-md py-2 px-3"
-            >
-              <option value="">Seleccionar Categoría</option>
+        <div>
+          <label className="text-white dark:text-gray-200" for="categoria">
+            Categoría
+          </label>
+          <select
+            id="categoria"
+            name="Categoria"
+            value={evento.Categoria}
+            onChange={handleInputChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
+          >
+            <option value="1">Seleccionar Categoría</option>
             {categorias.map((categoria) =>
             <option value={categoria.IdCategoria}>{categoria.NombreCategoria}</option>
             )}
-            </select>
-          </div>
-          
-          <div className="flex justify-center mb-8 mt-10">
-            <button
-              type="submit"
-              className="bg-pink-500 w-full hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md flex items-center"
-            >
-              <span className="mr-2">
-                <CheckCircle size={16} /> {/* Icono de tick verde */}
-              </span>
-              Crear Evento
-            </button>
-          </div>
-          
-        </form>
+          </select>
         </div>
-        
-          {showModal && (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
-        <div className="text-center">
-          <CheckCircle className="text-green-500 mx-auto" size={64} />
-          <p className="text-xl font-semibold mt-4">Evento creado exitosamente.</p>
+
+        <div>
+          <label className="text-white dark:text-gray-200" for="imagenEvento">
+            Imagen del Evento
+          </label>
+          <input
+            id="imagenEvento"
+            type="file"
+            name="ImagenEvento"
+            onChange={handleImageChange}
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
+          />
         </div>
-        <div className="text-center mt-6">
-          <button
-            onClick={() => setShowModal(false)}
-            className="bg-green-500 text-white font-semibold px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
-          >
-            Cerrar
-          </button>
+
+        <div>
+          <label className="text-white dark:text-gray-200" for="privacidad">
+            Privacidad
+          </label>
+          <div className="relative flex items-center">
+            <input
+              id="privacidad"
+              type="checkbox"
+              name="Privacidad"
+              checked={evento.Privacidad}
+              onChange={handleInputChange}
+              className="mr-2 appearance-none checked:bg-pink-500 checked:border-transparent"
+            />
+            <span className="text-white dark:text-gray-200">Privado</span>
+          </div>
         </div>
       </div>
-    </div>
-  )}
 
-    </div>
-    </div>
+      <div className="flex justify-center ">
+        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600" onClick={handleSubmit}>
+          <span className="">
+            <CheckCircle size={16} />
+          </span>
+          Crear Evento
+        </button>
+      </div>
+    </form>
+    {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
+            <div className="text-center">
+              <CheckCircle className="text-green-500 mx-auto" size={64} />
+              <p className="text-xl font-semibold mt-4">Evento creado exitosamente.</p>
+            </div>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setShowModal(false)}
+                className="bg-green-500 text-white font-semibold px-4 py-2 rounded-md hover-bg-green-600 focus-outline-none focus-ring focus-ring-green-400"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+  </section>
   );
 }
 
