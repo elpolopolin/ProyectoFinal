@@ -22,7 +22,7 @@ import EventosDeUsuario from "./components/EventosUsuario.js";
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://192.168.0.119:3000"; //en ort cambiar ip por localhost..
+const host = "http://34.42.27.222:30001"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);
@@ -251,7 +251,7 @@ function App() {
 //link para ver eventos LOGICA
 
 const cargarEventoMostrar = async (idEvento) => {
-  let link = host + "/getbyidEvento/"; //en el caso de ser ort cambiar por localhost o ip de ort
+  let link = host + "/getbyidEvento/"; 
   link += idEvento;
   
   try {
@@ -265,7 +265,7 @@ const cargarEventoMostrar = async (idEvento) => {
 };
 
 const cargarParticipantes = async (idEvento) => {
-  let link = host + "/getById/"; //en el caso de ser ort cambiar por localhost o ip de ort
+  let link = host + "/getById/"; 
   link += idEvento;
   
   try {

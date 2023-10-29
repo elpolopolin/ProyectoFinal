@@ -9,7 +9,7 @@ const CategoriasProvider = (props) => {
 
     const usuario = useContext(UsuarioContext);
   const [categories, setCategories] = useState([]);
-    const link = "http://localhost:3000/EventosCategoriaUsuario/" + usuario.Id;
+    const link = "http://34.42.27.222:30001/EventosCategoriaUsuario/" + usuario.Id;
     
   useEffect(() => {
     axios
