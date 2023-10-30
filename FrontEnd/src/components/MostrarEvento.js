@@ -24,7 +24,8 @@ function MostrarEvento({ evento, participantesEvento }) {
     navigate(`/comprar/evento/${evento.Id}`);
   }
 
-  
+  const isMobile = window.innerWidth <= 768;
+
   const handleEntrar = () => {
     const IdUsuario = usuario.Id;
     const IdEvento = evento.Id;
@@ -77,116 +78,55 @@ function MostrarEvento({ evento, participantesEvento }) {
     <div>
     
       {!MostrarParticipantes &&
+      <div>
+
+    {isMobile ? (
         <div key={evento.Id} className="mx-2 overflow-y-auto ">
           
-          <div className="nana-container">
+          <div className="">
             <div className="flex justify-center mt-5 ">
             <p className="titulo-evento">{evento.Nombre}</p>
             </div>
               <div className="mb-5" >
-                <div className="carousel w-full h-1/4">
-                  <div id="slide1" class="carousel-item relative flex justify-center w-full" >
-                    <img src={evento.ImagenEvento} className="w-full " />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide4" class="btn btn-circle">❮</a>
-                      <a href="#slide2" class="btn btn-circle">❯</a>
-                    </div>
-                  </div>
-                  <div id="slide2" class="carousel-item relative w-full">
-                    <img src={evento.Imagen2Evento} className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide1" className="btn btn-circle">❮</a>
-                      <a href="#slide3" className="btn btn-circle">❯</a>
-                    </div>
-                  </div>
-                  <div id="slide3" className="carousel-item relative w-full">
-                    <img src={evento.Imagen3Evento} className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide2" className="btn btn-circle">❮</a>
-                      <a href="#slide4" className="btn btn-circle">❯</a>
-                    </div>
-                  </div>
-                  <div id="slide4" class="carousel-item relative w-full">
-                    <img src={evento.Imagen4Evento} className="w-full" />
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                      <a href="#slide3" className="btn btn-circle">❮</a>
-                      <a href="#slide1" className="btn btn-circle">❯</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div className="mb-5" >
-            <p className="text-white flex justify-center">{evento.Descripcion}</p>
-            </div>
-          
+              
+                    <img src={evento.ImagenEvento} className="w-full " style={{maxHeight: "50%"}}/>
 
-            <div className="mb-5">
-            <hr className="hr1"></hr>
+                 </div>
+            <div className="mb-5" >
+            
+
+            <div className="eventodesc-container overflow-y-auto">
+                <p className="text-white flex justify-center text-center">{evento.Descripcion}</p>
+                
+    
+                <div className="mb-5">
+                <hr className="hr1 mt-5"></hr>
+                </div>
+
+              
+            <div className="flex justify-center">
+            {evento.Precio > 0 ? (
+              <button onClick={handleComprar } className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded ">
+                Comprar 
+              </button>
+            ) : (
+              <button onClick={handleEntrar}  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded ">
+                Entrar
+              </button>
+            )}
             </div>
             
-          
-
-
-          
-          <div className="flex w-full">
-          <div className="grid h-50 flex-grow  text-white place-items-left">
-            <div className="Dat-izq">
-            <div className="overflox-x-auto">
-            <table className="table-auto text-center">
-            <tbody>
-              <tr>
-                <td>
-                  
-                  <div className="Datos"> <a className="text-blue-600 link">Organizador/es {organizador.NombreUsuario} </a></div>
-                </td>
-                <td>
-                  
-                  <div className="Datos">
-                    <a className="link text-blue-600" onClick={() => setMostrarParticipantes(true)}>Participantes</a>
-                  </div>
-                </td>
-                <td className="">
-                  
-                  <div className="Datos"><a className="text-white">{evento.Direccion}</a></div>
-                </td>
-              </tr>
-              <tr>
-                <td>  
-                <div className="Datos"> <a className="text-white"> {evento.Fecha}</a> </div>
-                </td>
-                <td>
-                  <div className="Datos"><a className="text-white"> Rango de edad: </a></div>
-                  <div className="Datos"><a className="text-white">{evento.EdadMinima} - {evento.EdadMaxima}</a></div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-            </div>
           </div>
-          </div>
+              </div>
 
-
-          </div>
-              <div className="Logo-Fecha text-white">    
-          </div>
-
-            <div className="flex justify-center mt-5"> {/* mismo link pa los dos */}
-        
-          {evento.Precio > 0 ? (
-            <button onClick={handleComprar } className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-               Comprar 
-            </button>
-          ) : (
-            <button onClick={handleEntrar}  className="bg-pink-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-              Entrar
-            </button>
-          )}
-        </div>
-
-         
         </div>
         </div>
-        
+    ) : ( //ver evento en pc
+      <div className="pc">
+      
+      </div>
+    )}  
+    </div>  
       }
 
       {MostrarParticipantes &&

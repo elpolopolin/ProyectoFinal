@@ -214,76 +214,70 @@ function Eventos({ eventos }) {
         
       ) : (
        
-        <div className="flex space-x-2 p-2">
-
-      
-        <form onSubmit={handleSearch} className="">
-
-            <input
-              type="search"
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-              placeholder="Buscar eventos por nombre"
-              className="py-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300 focus:outline-none w-full"
-            />
-        </form>
-
-          <div className="flex ">
-          
-          <select
-            value={ubicacionFilter}
-            onChange={(e) => setUbicacionFilter(e.target.value)}
-            className=" border border-gray-500 focus:ring focus:ring-indigo-300 focus:outline-none "
-          >
-            <option value="">Filtrar por ubicación</option>
-            <option value="guardia vieja">Guardia Vieja</option>
-            <option value="bosques de palermo">Bosques de Palermo</option>
-            <option value="indonesia">Indonesia</option>
-          </select> 
-
+         
+            <div className="flex justify-center">
+            <div className="mt-5">
+      <form onSubmit={handleSearch} className="w-full max-w-xl">
+        <div className="flex items-center">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-1/8"
+            className="flex-shrink-0 w-2/6  z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
-            <option value="">Categorías</option>
+            <option value="">Categorias</option>
             {categorias.map((categoria) => (
               <option key={categoria.IdCategoria} value={categoria.IdCategoria}>
                 {categoria.NombreCategoria}
               </option>
             ))}
           </select>
-          <select
-              value={fechaFilterOption}
-              onChange={(e) => setFechaFilterOption(e.target.value)}
-              className=" border border-gray-300  focus:ring focus:ring-indigo-300 focus:outline-none "
+          <div className="relative w-full">
+            <input
+              type="search"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+              id="search-dropdown"
+              className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              placeholder="Search..."
+            />
+            <button
+              type="submit"
+              className="absolute top-0 right-0 p-2.5 h-full text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              <option value="">Filtrar Por Fecha</option>
-              <option value="Hoy">Hoy</option>
-              <option value="EsteMes">Este mes</option>
-              <option value="Otro">Otro</option>
-            </select>
-            {fechaFilterOption === "Otro" && (
-              <input
-                type="date"
-                value={fechaFilter}
-                onChange={(e) => setFechaFilter(e.target.value)}
-                placeholder="Fecha específica"
-                className=" h-10 px-4 py-2 border border-gray-300 focus:ring focus:ring-indigo-300 focus:outline-none"
-              />
-            )}
-          
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
+        
+      </form>
       
-      </div>
+              </div>
+              <button onClick={toggleFilters} className="rounded ml-4 text-white w-24 border border-blue-500 mt-5">
+                +
+              </button>
+    </div>
+   
       )}
 
-      {showFilters && isMobile && (
+      {showFilters && (
         // Mostrar los filtros adicionales solo en dispositivos móviles cuando se hace clic en el icono de más
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-        
-        <div className="bg-black shadow-md rounded-lg p-4 max-w-md w-64">
-          <h2 className="text-2xl font-bold text-white">Filtros</h2>
+        <div className="bg-white bg-opacity-25 fixed inset-0 flex items-center justify-center z-50">
+    <div className="bg-black backdrop-blur shadow-md rounded-lg p-4 max-w-md w-64">
+      <h2 className="text-2xl font-bold text-white">Filtros</h2>
           <div className="mt-4">
             <select
               value={ubicacionFilter}
@@ -337,7 +331,7 @@ function Eventos({ eventos }) {
             <div key={categoria.IdCategoria} className="">
               {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
 
-                <div className="flex overflow-x-auto gap-4" >
+                <div className="flex overflow-x-auto gap-4 mb-2" >
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -362,9 +356,9 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card mb-4 h-48 bg-slate-700 text-gray-200 shadow-gold relative transition-transform transform hover:-translate-y-1 hover:shadow-md "
+                          className="card  h-48 bg-slate-700 text-gray-200  relative transition-transform transform hover:-translate-y-1 hover:bg-pink-700 hover:bg-opacity-50  "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "32%"}}
+                          style={{width: "33%"}}
                         >
                            <Link
                         key={eventop.Id}
@@ -379,7 +373,7 @@ function Eventos({ eventos }) {
                                 className="h-20 w-full"
                               />
                             </figure>
-                            <div className="card-text  px-2 m-2 font-semibold ">
+                            <div className="card-text   px-2 m-2 font-semibold ">
                             <h4 className="font-black mb-1 overflow-hidden" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                         {eventop.Nombre}
                         </h4>
@@ -401,7 +395,7 @@ function Eventos({ eventos }) {
                               </p>
                               <p className="card-text card-text-line flex items-center" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                                 <img src={PinIcon} className="h-3 w-3 mr-1 " />
-                                Almagro
+                                {direccion}
                               </p>
                             </div>
                           </div>
@@ -426,9 +420,9 @@ function Eventos({ eventos }) {
           <div className="card-container overflow-y-auto ">
           {categorias.map((categoria) => (
             <div key={categoria.IdCategoria} className="">
-              {mostrar && ( <h1 className="text-white mb-2 text-2xl font-bold">{categoria.NombreCategoria}</h1> )}
+              {mostrar && ( <h1 className="text-white mb-2 text-2xl font-bold flex justify-center">{categoria.NombreCategoria}</h1> )}
 
-                <div className="flex overflow-x-auto" style={{gap: "10px"}}>
+                <div className="flex overflow-x-auto justify-center mb-10" style={{gap: "10px"}}>
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -453,9 +447,9 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card  mb-4 h-48 bg-white text-black "
+                          className="rounded-md text-gray-200 shadow-gold relative transition-transform transform hover:-translate-y-1  m-2 "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "10%"}}
+                          style={{width: "12%"}}
                         >
                            <Link
                         key={eventop.Id}
@@ -467,7 +461,7 @@ function Eventos({ eventos }) {
                               <img
                                 src={eventop.ImagenEvento}
                                 alt="..."
-                                className="h-20 w-full"
+                                className="h-32 w-full"
                               />
                             </figure>
                             <div className="card-text  px-2 m-2 font-semibold ">
@@ -492,7 +486,7 @@ function Eventos({ eventos }) {
                               </p>
                               <p className="card-text card-text-line flex items-center">
                                 <img src={PinIcon} className="h-3 w-3 mr-1" />
-                                Almagro
+                                {direccion}
                               </p>
                             </div>
                           </div>
