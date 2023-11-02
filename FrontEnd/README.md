@@ -4,6 +4,10 @@
 
 cuando las muestra en el profile estan como usuario.interes1, 2 etc. Ponelo asi o cambialo en profile tmb.
 
+//UPDATE Evento SET participando = 0 WHERE id = 34;
+
+
+
 Tambien falta que pueda poner su ESTADO(soltero, en pareja, etc)
 
 ## https://tailwindcss.com

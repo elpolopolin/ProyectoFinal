@@ -331,7 +331,7 @@ function Eventos({ eventos }) {
             <div key={categoria.IdCategoria} className="">
               {mostrar && ( <h1 className="text-white mb-2 text-l font-bold">{categoria.NombreCategoria}</h1> )}
 
-                <div className="flex overflow-x-auto gap-4 mb-2" >
+                <div className="flex overflow-x-auto gap-2 mb-2" >
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -356,9 +356,9 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card  h-48 bg-slate-700 text-gray-200  relative transition-transform transform hover:-translate-y-1 hover:shadow-pink-500/50 shadow-lg  "
+                          className="card bg-slate-700 h-48 text-white  relative transition-transform transform hover:-translate-y-1 hover:shadow-pink-500/50 shadow-lg  "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "33%"}}
+                          style={{width: "36%"}}
                         >
                            <Link
                         key={eventop.Id}

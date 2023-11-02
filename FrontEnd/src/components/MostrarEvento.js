@@ -43,9 +43,13 @@ function MostrarEvento({ evento, participantesEvento }) {
       })
       .catch((error) => {
         console.error('Error:', error);
-
-        // Mostrar modal de "Ups... Algo salió mal"
-        setModalMessage('Ups... Algo salió mal');
+        if (error.response) {
+          // Error específico del servidor
+          setModalMessage(error.response.data.error);
+        } else {
+          // Error genérico de red
+          setModalMessage('Ups... Algo salió mal');
+        }
         setModalVisible(true);
       });
   };
@@ -197,7 +201,7 @@ function MostrarEvento({ evento, participantesEvento }) {
        {/* Modal */}
        {modalVisible && (
         
-        <div className="fixed inset-0 flex items-center justify-center  text-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center  text-center z-50 bg-black bg-opacity-50">
           <div className="modal-container bg-white w-1/2 mx-auto p-6 rounded shadow-lg">
             <div className="mb-4">{modalMessage}</div>
             <button
