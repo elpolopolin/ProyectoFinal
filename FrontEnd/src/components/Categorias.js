@@ -93,8 +93,9 @@ function Categorias({cargarUsuario}) {
 
   return (
     <div className="">
+       <h2 className=" text-white font-bold text-2xl text-center py-6 bg-white bg-opacity-20 decoration-pink-500 ">Seleccione Sus Categorias</h2>
       <div className="nana-container overflow-y-scroll text-white">
-        <h2 className="font-bold text-2xl text-center py-6">Categorias</h2>
+       
         <div className="">
           <div
             className="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8 "

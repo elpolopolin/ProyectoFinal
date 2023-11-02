@@ -79,6 +79,9 @@ function Profile({ logout, cargarUsuario }) { // Receive logout prop
             <Link  to={`/EventosUsuario`} className="cursor-pointer">
             <li><a className="hover:bg-green-300" >Mis Eventos</a> </li>
             </Link>
+            <Link  to={`/categorias`} className="cursor-pointer">
+            <li><a className="hover:bg-pink-300" >Mis Categorias</a> </li>
+            </Link>
             <li>
               <a className="hover:bg-red-500" onClick={logout}>
                 Cerrar Sesión

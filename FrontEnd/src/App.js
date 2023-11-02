@@ -18,6 +18,9 @@ import QrScanner from "./components/QrScanner.jsx";
 import Home from "./components/Home.js";
 import Categorias from "./components/Categorias.js";
 import EventosDeUsuario from "./components/EventosUsuario.js";
+import VerXcategoria from "./components/verXcategoria.js";
+
+import Index from "./components/Index.js";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
@@ -220,8 +223,10 @@ function App() {
             </div>
             )}
             <Routes>
-            <Route path="/"  element={<Home />}/>
+            <Route path="/"  element={<Index />}/>
               <Route path="/eventos" element={<Eventos eventos={eventos} />} />
+              <Route path="/Categoria/:id" element={<VerXcategoria cargarUsuario={cargarUsuario}/>} />
+              <Route path="/index" element={<Index />} />
               <Route path="/categorias" element={<Categorias cargarUsuario={cargarUsuario}/>} />
               <Route path="/eventos/VerEvento/:id" element={<MostrarEventoWrapper eventos={eventos} participantes={participantes} />} />
               <Route path="/CrearEvento" element={<CrearEvento cargarUsuario={cargarUsuario}/>} />

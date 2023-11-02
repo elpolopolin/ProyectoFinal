@@ -356,7 +356,7 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="card  h-48 bg-slate-700 text-gray-200  relative transition-transform transform hover:-translate-y-1 hover:bg-pink-700 hover:bg-opacity-50  "
+                          className="card  h-48 bg-slate-700 text-gray-200  relative transition-transform transform hover:-translate-y-1 hover:shadow-pink-500/50 shadow-lg  "
                           onClick={() => handleClick(eventop)}
                           style={{width: "33%"}}
                         >
