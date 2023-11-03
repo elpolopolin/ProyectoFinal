@@ -19,6 +19,11 @@
 
 }
 
+.indones-container {
+  max-height: 80vh; /* Establece la altura máxima del contenedor */
+  max-width: 100%;
+}
+
 .eventodesc-container {
   max-height: 34vh; 
   max-width: 100%;
