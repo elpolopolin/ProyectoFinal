@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { CheckCircle } from "feather-icons-react";
+import { AlertCircle } from "feather-icons-react";
 import axios from "axios";
 import { HostContext } from "../App";
 import './styles/CrearEvento.css';
@@ -8,6 +9,7 @@ import { UsuarioContext } from "../App";
 function CrearEvento({cargarUsuario}) {
   const usuario = cargarUsuario();
   const [categorias, setCategorias] = useState([]);
+  const [textoModal, setTextoModal] = useState("");
   const [evento, setEvento] = useState({
     Nombre: "",
     Fecha: "",
@@ -22,6 +24,7 @@ function CrearEvento({cargarUsuario}) {
     Organizador: usuario.Id,
   });
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
 
   const host = useContext(HostContext); //en ort poner localhost o la ip de la pc
@@ -49,17 +52,20 @@ function CrearEvento({cargarUsuario}) {
       }})
     .then((response) => {
       console.log("Evento creado exitosamente:", response.data);
-      if (Array.isArray(response.data) && response.data.length > 0) {
+      setTextoModal("Evento creado exitosamente")
         setShowModal(true);
-      }else {
-        alert("!Alguno de los campos es INVALIDO!")
-      }
-      
-      
+
     })
     .catch((error) => {
       console.error("Error al crear el evento:", error);
-      // Maneja errores aquí.
+      if (error.response) {
+        // Error específico del servidor
+        setTextoModal(error.response.data.error);
+      } else {
+        // Error genérico de red
+        setTextoModal('Ups... Algo salió mal');
+      }
+      setShowModal2(true);
     });
   }
 
@@ -113,7 +119,7 @@ function CrearEvento({cargarUsuario}) {
   return (
     <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md profile-container overflow-y-auto">
     <h1 className="text-xl font-bold text-white capitalize dark:text-white mb-4">Crear Evento</h1>
-    <form>
+    <form className="">
       <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
           <label className="text-white dark:text-gray-200" for="nombre">
@@ -141,12 +147,13 @@ function CrearEvento({cargarUsuario}) {
             value={evento.Fecha}
             onChange={handleInputChange}
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
           />
         </div>
 
         <div>
           <label className="text-white dark:text-gray-200" for="precio">
-            Precio
+            Precio <b className="text-red-500">(si es gratis dejar campo vacio)</b>
           </label>
           <input
             id="precio"
@@ -169,6 +176,7 @@ function CrearEvento({cargarUsuario}) {
             value={evento.Participantes}
             onChange={handleInputChange}
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            required
           />
         </div>
 
@@ -268,12 +276,31 @@ function CrearEvento({cargarUsuario}) {
           <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
             <div className="text-center">
               <CheckCircle className="text-green-500 mx-auto" size={64} />
-              <p className="text-xl font-semibold mt-4">Evento creado exitosamente.</p>
+              <p className="text-xl font-semibold mt-4">{textoModal}</p>
             </div>
             <div className="text-center mt-6">
               <button
                 onClick={() => setShowModal(false)}
                 className="bg-green-500 text-white font-semibold px-4 py-2 rounded-md hover-bg-green-600 focus-outline-none focus-ring focus-ring-green-400"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+  {showModal2 && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
+            <div className="text-center">
+              <AlertCircle className="text-red-500 mx-auto" size={64} />
+              <p className="text-xl font-semibold mt-4">{textoModal}</p>
+            </div>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setShowModal2(false)}
+                className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md hover-bg-red-700 focus-outline-none focus-ring focus-ring-green-400"
               >
                 Cerrar
               </button>

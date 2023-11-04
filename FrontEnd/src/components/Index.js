@@ -14,6 +14,7 @@ function Index() {
   const fechaActual = new Date().toLocaleDateString(); // Obtiene la fecha actual en formato de cadena
   const host = useContext(HostContext);
   const imagen = host + "/imagenesEventop/homefoto.png"
+  const PinIcon = host + "/imagenesEventop/users.png"
   const [Eventos, setEventos] = useState([]);
   const usuario = useContext(UsuarioContext);
   const isMobile = window.innerWidth <= 768; // Define el ancho máximo para considerar como dispositivo móvil
@@ -208,7 +209,7 @@ function Index() {
                               </p>
                               <p className="card-text card-text-line flex items-center" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                                 <img src={PinIcon} className="h-3 w-3 mr-1 " />
-                                {direccion}
+                                {eventop.Participando} / {eventop.Participantes}
                               </p>
                             </div>
                           </div>

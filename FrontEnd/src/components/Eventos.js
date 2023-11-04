@@ -395,7 +395,7 @@ function Eventos({ eventos }) {
                               </p>
                               <p className="card-text card-text-line flex items-center" style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden" }}>
                                 <img src={PinIcon} className="h-3 w-3 mr-1 " />
-                                {direccion}
+                                {eventop.Participando}/{eventop.Participantes}
                               </p>
                             </div>
                           </div>

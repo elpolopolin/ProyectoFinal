@@ -8,16 +8,18 @@ import { Link } from "react-router-dom";
 function MisEventos() {
   const [eventosIds, setEventosIds] = useState([]);
   const [eventos, setEventos] = useState([]);
+  const [eventosPasados, setEventosPasados] = useState([]);
   const [cargandoEventos, setCargandoEventos] = useState(true); // Estado para controlar la carga de eventos
   const host = useContext(HostContext);
   const usuario = useContext(UsuarioContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [qrImage, setQrImage] = useState(null);
+  const [mostrarEventosPasados, setMostrarEventosPasados] = useState(false);
 
   const abrirModal = (evento) => {
     setQrImage(evento.QrCode);
     setModalVisible(true);
-    console.log(eventos)
+    
   };
   const cerrarModal = () => {
     setModalVisible(false);
@@ -61,22 +63,33 @@ function MisEventos() {
       const eventosPromises = eventosIds.map(async (eventoId) => {
         const response = await axios.get(linkBase + eventoId.IdEvento);
         const eventoData = response.data;
-        // Aquí agregamos el campo qrcode al evento si QrImage está presente
+        //console.log(response.data)
         eventoData.QrCode = eventoId.QrImage;
         return eventoData;
       });
-
+    
       const datosEventos = await Promise.all(eventosPromises);
-      
-      setEventos(datosEventos);
-      setCargandoEventos(false); // Actualiza el estado cuando se completó la carga de eventos
-    };
+    
 
+      const fechaActual = new Date();
+    
+          const eventosFuturos = datosEventos.filter((evento) => new Date(evento.Fecha) >= fechaActual);
+    const eventosPasados = datosEventos.filter((evento) => new Date(evento.Fecha) < fechaActual);
+
+    eventosFuturos.sort((a, b) => new Date(a.Fecha) - new Date(b.Fecha));
+    eventosPasados.sort((a, b) => new Date(b.Fecha) - new Date(a.Fecha));
+    
+
+      setEventos(eventosFuturos);
+      setEventosPasados(eventosPasados);
+      setCargandoEventos(false);
+    };
+    
     obtenerDatosEventos().catch((error) => {
       console.log(error);
-      setCargandoEventos(false); // Maneja el caso de error también
+      setCargandoEventos(false); 
     });
-  };
+  }
 
   // Verifica si aún se están cargando los eventos
   if (cargandoEventos) {
@@ -94,54 +107,104 @@ function MisEventos() {
         <div className=" p-10">
           <div className="nana-container overflow-y-auto">
           <div className="flex text-white text-4xl font-bold text-center mb-8 justify-center">
-            <h1 className="text-green-300">
-              Eventos
-            </h1>
-            <h1 className="">  /</h1>
-            <h1 className="">
-              Pasados
-            </h1>
+          <h1
+            className={`cursor-pointer ${!mostrarEventosPasados ? 'text-green-300' : ''}`}
+            onClick={() => setMostrarEventosPasados(false)}
+          >
+            Eventos
+          </h1>
+          <h1>/</h1>
+          <h1
+            className={`cursor-pointer ${!mostrarEventosPasados ? '' : 'text-green-300'}`}
+            onClick={() => setMostrarEventosPasados(true)}
+          >
+            Pasados
+          </h1>
           </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {eventos.length === 0 ? (
-              <p className="text-white  text-center ">No formas parte de ningun evento...</p>
-            ) : (
-              eventos.map((evento) => (
-                <div
-                  key={evento.Id}
-                  className="rounded-lg shadow-md bg-white text-black cursor-pointer hover:shadow-lg"
-                >
-                  {evento.ImagenEvento && (
-                    <figure className="h-40">
-                      <img
-                        src={evento.ImagenEvento}
-                        alt="..."
-                        className="h-full w-full object-cover"
-                      />
-                    </figure>
-                  )}
-                  <div className="p-4">
+            <p className="text-white text-center">No formas parte de ningún evento...</p>
+          ) : mostrarEventosPasados ? (
+            eventosPasados.map((evento) => (
+              <div
+                key={evento.Id}
+                className="rounded-lg shadow-md bg-white text-black cursor-pointer hover:shadow-lg"
+              >
+                {evento.ImagenEvento && (
+                  <figure className="h-40">
+                    <img
+                      src={evento.ImagenEvento}
+                      alt="..."
+                      className="h-full w-full object-cover"
+                    />
+                  </figure>
+                )}
+                <div className="p-4">
                   <div className="flex justify-between">
-                    <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4> <p className="semi-bold">{formatDateDDMMYY(evento.Fecha)}</p>
-                    </div>
-                    <div className="flex justify-between">
-                      <button onClick={() => abrirModal(evento)} className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg">
-                        Código QR
+                    <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4>
+                    <p className="semi-bold">{formatDateDDMMYY(evento.Fecha)}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <button
+                      onClick={() => abrirModal(evento)}
+                      className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg"
+                    >
+                      Código QR
+                    </button>
+                    <Link
+                      key={evento.Id}
+                      to={`/eventos/VerEvento/${evento.Id}`}
+                      className="cursor-pointer"
+                    >
+                      <button className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">
+                        Ver Más
                       </button>
-                      <Link
-                        key={evento.Id}
-                        to={`/eventos/VerEvento/${evento.Id}`}
-                        className="cursor-pointer"
-                      >
-                        <button className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">
-                          Ver Más
-                        </button>
-                      </Link>
-                    </div>
+                    </Link>
                   </div>
                 </div>
-              ))
-            )}
+              </div>
+            ))
+          ) : (
+            eventos.map((evento) => (
+              <div
+                key={evento.Id}
+                className="rounded-lg shadow-md bg-white text-black cursor-pointer hover:shadow-lg"
+              >
+                {evento.ImagenEvento && (
+                  <figure className="h-40">
+                    <img
+                      src={evento.ImagenEvento}
+                      alt="..."
+                      className="h-full w-full object-cover"
+                    />
+                  </figure>
+                )}
+                <div className="p-4">
+                  <div className="flex justify-between">
+                    <h4 className="font-semibold text-lg mb-2">{evento.Nombre}</h4>
+                    <p className="semi-bold">{formatDateDDMMYY(evento.Fecha)}</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <button
+                      onClick={() => abrirModal(evento)}
+                      className="bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-lg"
+                    >
+                      Código QR
+                    </button>
+                    <Link
+                      key={evento.Id}
+                      to={`/eventos/VerEvento/${evento.Id}`}
+                      className="cursor-pointer"
+                    >
+                      <button className="bg-black hover:bg-gray-800 text-white py-2 px-4 rounded-lg">
+                        Ver Más
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
           </div>
         </div>
        {/* Modal */} 

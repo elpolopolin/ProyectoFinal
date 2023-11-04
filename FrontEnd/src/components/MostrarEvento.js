@@ -7,7 +7,8 @@ import './styles/MostrarEvento.css';
 import { HostContext } from "../App";
 import axios from "axios";
 import { UsuarioContext } from "../App";
-
+import { CheckCircle } from "feather-icons-react";
+import { AlertCircle } from "feather-icons-react";
 
 function MostrarEvento({ evento, participantesEvento }) {
 
@@ -17,6 +18,7 @@ function MostrarEvento({ evento, participantesEvento }) {
   const [MostrarParticipantes, setMostrarParticipantes] = useState(false);
   const [organizador, setOrganizador] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
   const handleComprar = () => {
@@ -50,7 +52,7 @@ function MostrarEvento({ evento, participantesEvento }) {
           // Error genérico de red
           setModalMessage('Ups... Algo salió mal');
         }
-        setModalVisible(true);
+        setModalVisible2(true);
       });
   };
 
@@ -200,18 +202,41 @@ function MostrarEvento({ evento, participantesEvento }) {
 
        {/* Modal */}
        {modalVisible && (
-        
-        <div className="fixed inset-0 flex items-center justify-center  text-center z-50 bg-black bg-opacity-50">
-          <div className="modal-container bg-white w-1/2 mx-auto p-6 rounded shadow-lg">
-            <div className="mb-4">{modalMessage}</div>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-green-500">
+          <div className="text-center">
+            <CheckCircle className="text-green-500 mx-auto" size={64} />
+            <p className="text-xl font-semibold mt-4">{modalMessage}</p>
+          </div>
+          <div className="text-center mt-6">
             <button
               onClick={() => setModalVisible(false)}
-              className="bg-red-500 hover:bg-red-900 text-white font-bold py-2 px-4 rounded "
+              className="bg-green-500 text-white font-semibold px-4 py-2 rounded-md hover-bg-green-600 focus-outline-none focus-ring focus-ring-green-400"
             >
-              x
+              Cerrar
             </button>
           </div>
         </div>
+      </div>
+        
+      )}
+       {modalVisible2 && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white w-4/6 p-6 rounded-lg shadow-lg border border-red-500">
+          <div className="text-center">
+            <AlertCircle className="text-red-500 mx-auto" size={64} />
+            <p className="text-xl font-semibold mt-4">{modalMessage}</p>
+          </div>
+          <div className="text-center mt-6">
+            <button
+              onClick={() => setModalVisible2(false)}
+              className="bg-red-500 text-white font-semibold px-4 py-2 rounded-md hover-bg-red-600 focus-outline-none focus-ring focus-ring-red-400"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
         
       )}
 
