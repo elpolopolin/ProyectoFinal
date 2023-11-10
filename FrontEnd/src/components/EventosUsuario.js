@@ -1,6 +1,7 @@
 import React, { useContext ,useEffect, useState } from "react";
 import { HostContext } from "../App";
 import axios from "axios";
+import { Link, BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 
 function EventosDeUsuario({cargarUsuario}) {
     const host = useContext(HostContext);
@@ -41,9 +42,11 @@ function EventosDeUsuario({cargarUsuario}) {
               <p className="block font-sans text-base antialiased font-medium leading-relaxed text-transparent bg-gradient-to-tr from-pink-600 to-pink-400 bg-clip-text">
                 Categoria {event.idCategoria}
               </p>
+              <Link to={`/EditarEvento/${event.Id}`} >
               <button className="bg-pink-500 text-white px-4 py-2 mt-4 rounded-full hover:bg--700 focus:outline-none">
                 Editar
               </button>
+              </Link>
             </div>
           </div>
         ))}
