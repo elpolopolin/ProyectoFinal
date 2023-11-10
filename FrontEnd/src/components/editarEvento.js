@@ -58,40 +58,63 @@ function EditarEvento({cargarUsuario}) {
       }
 
     return (
-        <div className="p-4">
-        <div className="  justify-items-center">
-            <img src={evento.ImagenEvento}  className=""/>
-            <div class=" grid grid-cols-2 gap-4">
-                <input
-                    id="nombre"
-                    type="text"
-                    name="Nombre"
-                    value={evento.Nombre}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 mt-2 text-gray-700  "
-                    required
+       
+        <div className="mx-2 overflow-y-auto">
+        <div>
+          <div className="flex justify-center mt-5">
+            <input
+              id="nombre"
+              type="text"
+              name="Nombre"
+              value={evento.Nombre}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 mt-2 text-gray-700"
+              required
+            />
+          </div>
+          <div className="mb-5">
+            <img src={evento.ImagenEvento} className="w-full" style={{ maxHeight: "50%" }} alt="Evento" />
+          </div>
+          <div className="mb-5">
+            <div className="eventodesc-container overflow-y-auto">
+              <p className="text-white flex justify-center text-center">
+              <input
+                  id="Descripcion"
+                  type="text"
+                  name="Descripcion"
+                  value={evento.Descripcion}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 mt-2 text-gray-700 rounded-md"
                 />
-                    <input
-                    id="precio"
-                    type="number"
-                    name="Precio"
-                    value={evento.Precio}
-                    onChange={handleInputChange}
-                    className=" w-full px-4 py-2 mt-2 text-gray-700 rounded-md "
-                />
-                
+                </p>
+
+              <div className="grid grid-cols-2 gap-4">
                 <input
-                    id="fecha"
-                    type="date"
-                    name="Fecha"
-                    value={evento.Fecha}
-                    onChange={handleInputChange}
-                    className=" w-full px-4 py-2 mt-2 text-gray-700  rounded-md"
-                    required
-                 />  
-                 </div>
+                  id="precio"
+                  type="number"
+                  name="Precio"
+                  value={evento.Precio}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 mt-2 text-gray-700 rounded-md"
+                />
+                <input
+                  id="fecha"
+                  type="date"
+                  name="Fecha"
+                  value={evento.Fecha}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 mt-2 text-gray-700 rounded-md"
+                  required
+                />
+              </div>
+              <div className="mb-5">
+                <hr className="hr1 mt-5" />
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+        
     )
 }
 

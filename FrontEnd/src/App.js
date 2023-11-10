@@ -26,7 +26,7 @@ import Index from "./components/Index.js";
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
 
-const host = "http://34.42.27.222:30001"; //en ort cambiar ip por localhost..
+const host = "https://polo.relied.cloud"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);
