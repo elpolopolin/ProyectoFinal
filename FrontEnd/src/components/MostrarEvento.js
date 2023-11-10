@@ -85,8 +85,6 @@ function MostrarEvento({ evento, participantesEvento }) {
     
       {!MostrarParticipantes &&
       <div>
-
-    {isMobile ? (
         <div key={evento.Id} className="mx-2 overflow-y-auto ">
           
           <div className="">
@@ -101,14 +99,41 @@ function MostrarEvento({ evento, participantesEvento }) {
             <div className="mb-5" >
             
 
-            <div className="eventodesc-container overflow-y-auto">
-                <p className="text-white flex justify-center text-center">{evento.Descripcion}</p>
-                
-    
-                <div className="mb-5">
-                <hr className="hr1 mt-5"></hr>
-                </div>
+                    <div className="eventodesc-container overflow-y-auto">
+          <p className="text-white text-center mb-5">{evento.Descripcion}</p>
+          <hr className="hr1 mt-5" />
 
+          <div className="grid grid-cols-2 gap-4">
+
+            <div className="text-white">
+              <label className="block mb-2">Precio</label>
+              <p className="">
+                {evento.Precio}
+              </p>
+            </div>
+
+            <div className="text-white">
+              <label className="block mb-2">Fecha</label>
+              <p className="">
+                {evento.Fecha}
+              </p>
+            </div>
+
+            <div className="text-white">
+              <label className="block mb-2">Dirección</label>
+              <p className="">
+                {evento.Direccion}
+              </p>
+            </div>
+
+            <div className="text-white">
+              <label className="block mb-2">Participantes</label>
+              <p className="">
+                {evento.Participando}/{evento.Participantes}
+              </p>
+            </div>
+
+          </div>
               
             <div className="flex justify-center">
             {evento.Precio > 0 ? (
@@ -127,11 +152,7 @@ function MostrarEvento({ evento, participantesEvento }) {
 
         </div>
         </div>
-    ) : ( //ver evento en pc
-      <div className="pc">
-      
-      </div>
-    )}  
+    
     </div>  
       }
 
