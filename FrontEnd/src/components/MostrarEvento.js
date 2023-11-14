@@ -56,6 +56,12 @@ function MostrarEvento({ evento, participantesEvento }) {
       });
   };
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+    return formattedDate;
+  }
+
   // useEffect(() => {
   
   //   Organizador()
@@ -85,54 +91,75 @@ function MostrarEvento({ evento, participantesEvento }) {
     
       {!MostrarParticipantes &&
       <div>
-        <div key={evento.Id} className="mx-2 overflow-y-auto ">
+        <div key={evento.Id} className=" ">
           
           <div className="">
-            <div className="flex justify-center mt-5 ">
-            <p className="titulo-evento">{evento.Nombre}</p>
-            </div>
+            <p className="text-white font-bold text-2xl text-center py-6 bg-white bg-opacity-20 decoration-pink-500">{evento.Nombre}</p>
               <div className="mb-5" >
-              
-                    <img src={evento.ImagenEvento} className="w-full " style={{maxHeight: "50%"}}/>
 
-                 </div>
+              
+
+              <div className="md:mx-40 sm:mx-15">
+              {isMobile ? (
+                 <img src={evento.ImagenEvento} className="mx-auto my-auto mt-2 " alt="Evento" style={{width:"400px", height:"300px"}} />
+                ) : (
+                  <img src={evento.ImagenEvento} className="mx-auto my-auto mt-2 " alt="Evento" style={{width:"900px", height:"500px"}} />
+                )}
+              
+              </div>
+                 
             <div className="mb-5" >
             
 
-                    <div className="eventodesc-container overflow-y-auto">
-          <p className="text-white text-center mb-5">{evento.Descripcion}</p>
-          <hr className="hr1 mt-5" />
+            
+          <p className="text-white text-center mt-4">{evento.Descripcion}</p>
+          <hr className="hr1 mt-1" />
 
-          <div className="grid grid-cols-2 gap-4">
-
-            <div className="text-white">
-              <label className="block mb-2">Precio</label>
-              <p className="">
-                {evento.Precio}
-              </p>
+          <div className="eventodesc-container lg:max-h-60 overflow-y-auto">
+            <div className="">
+            {isMobile ? (
+              <div className="flex items-center justify-center py-10 md:mx-20 sm:mx-5">
+                <ul className="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600 hover:bg-gray-500">
+                    Precio: {evento.Precio ? evento.Precio : <span className="text-green-400">Gratis</span>}
+                  </li>
+                  <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-500">
+                    Fecha: {formatDate(evento.Fecha)}
+                  </li>
+                  <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600 hover:bg-gray-500">
+                    Dirección: {evento.Direccion}
+                  </li>
+                  <li className="w-full px-4 py-2 rounded-b-lg hover:bg-gray-500" onClick={() => setMostrarParticipantes(true)}>
+                    Participantes: {evento.Participando}/{evento.Participantes}
+                  </li>
+                  <li className="w-full px-4 py-2 rounded-b-lg hover:bg-gray-500" >
+                    Organizador: {evento.OrganizadorNombre}
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <table className="flex items-center justify-center mt-5 mb-5">
+                <tbody className={`font-semibold ${isMobile ? 'text-center' : ''}`}>
+                  <tr>
+                    <td>Precio:</td>
+                    <td>{evento.Precio ? evento.Precio : <span className="text-green-400">Gratis</span>}</td>
+                  </tr>
+                  <tr>
+                    <td>Fecha:</td>
+                    <td>{formatDate(evento.Fecha)}</td>
+                  </tr>
+                  <tr>
+                    <td>Dirección:</td>
+                    <td>{evento.Direccion}</td>
+                  </tr>
+                  <tr>
+                    <td>Participantes:</td>
+                    <td>{evento.Participando}/{evento.Participantes}</td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
             </div>
-
-            <div className="text-white">
-              <label className="block mb-2">Fecha</label>
-              <p className="">
-                {evento.Fecha}
-              </p>
-            </div>
-
-            <div className="text-white">
-              <label className="block mb-2">Dirección</label>
-              <p className="">
-                {evento.Direccion}
-              </p>
-            </div>
-
-            <div className="text-white">
-              <label className="block mb-2">Participantes</label>
-              <p className="">
-                {evento.Participando}/{evento.Participantes}
-              </p>
-            </div>
-
           </div>
               
             <div className="flex justify-center">
@@ -152,8 +179,8 @@ function MostrarEvento({ evento, participantesEvento }) {
 
         </div>
         </div>
-    
-    </div>  
+        </div>
+   
       }
 
       {MostrarParticipantes &&
@@ -262,6 +289,7 @@ function MostrarEvento({ evento, participantesEvento }) {
       )}
 
     </div>
+   
   );
 }
 

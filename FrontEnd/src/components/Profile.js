@@ -92,42 +92,42 @@ function Profile({ logout, cargarUsuario }) { // Receive logout prop
       </div>
 
    
-    <div class="">
+    <div className="">
 
-     <i class="text-2xl p-2 absolute top-0 right-2 text-black fa fa-cog" aria-hidden="true"  onClick={() => setMostrarPanelConfiguracion(!mostrarPanelConfiguracion)}></i>
+     <i className="text-2xl p-2 absolute top-0 right-2 text-black fa fa-cog" aria-hidden="true"  onClick={() => setMostrarPanelConfiguracion(!mostrarPanelConfiguracion)}></i>
   
-    <div class="  transition-all text-white rounded-lg ">
-    <div class="  ">
+    <div className="  transition-all text-white rounded-lg ">
+    <div className="  ">
             <img src={usuario.FotoPerfil} style={{width: "100%", height:"300px"}}/>
         </div>
-        <div class="md:mt-12 mt-12  ">
+        <div className="md:mt-12 mt-12  ">
                 
-                <div class="flex gap-1">
-                    <p class="text-lg font-bold">@{usuario.NombreUsuario}</p>
+                <div className="flex gap-1">
+                    <p className="text-lg font-bold">@{usuario.NombreUsuario}</p>
                 </div>
           
-            <div class="flex gap-20 mt-5 text-m">
-            <div class="flex flex-col gap-1">
-                <div class="flex gap-3 items-center text-gray-200">
-                    <i class="text-gray-100 fa fa-id-card-o"></i>
-                    <p class=" font-semibold" >{usuario.Nombre} {usuario.Apellido} </p>
+            <div className="flex gap-20 mt-5 text-m">
+            <div className="flex flex-col gap-1">
+                <div className="flex gap-3 items-center text-gray-200">
+                    <i className="text-gray-100 fa fa-id-card-o"></i>
+                    <p className=" font-semibold" >{usuario.Nombre} {usuario.Apellido} </p>
                 </div>
                 
-                <div class="flex gap-3 items-center">
-                    <i class="text-gray-100 fa fa-address-card"></i>
-                    <p class="font-semibold ">{usuario.Genero}</p>
+                <div className="flex gap-3 items-center">
+                    <i className="text-gray-100 fa fa-address-card"></i>
+                    <p className="font-semibold ">{usuario.Genero}</p>
                 </div>
                
             </div>
 
-            <div class="flex flex-col gap-1">
-                <div class="flex gap-3 items-center text-gray-200">
-                    <i class="text-gray-100 fa fa-id-card-o"></i>
-                    <p class="font-semibold ">{formatDateDDMMYY(usuario.FechaNacimiento)}</p>
+            <div className="flex flex-col gap-1">
+                <div className="flex gap-3 items-center text-gray-200">
+                    <i className="text-gray-100 fa fa-id-card-o"></i>
+                    <p className="font-semibold ">{formatDateDDMMYY(usuario.FechaNacimiento)}</p>
                 </div>
-                <div class="flex gap-3 items-center">
-                    <i class="text-gray-100 fa fa-location-arrow"></i>
-                    <p class="font-semibold ">{usuario.Direccion}</p>
+                <div className="flex gap-3 items-center">
+                    <i className="text-gray-100 fa fa-location-arrow"></i>
+                    <p className="font-semibold ">{usuario.Direccion}</p>
                 </div>
                 
             </div>

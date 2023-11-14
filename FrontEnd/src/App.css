@@ -25,7 +25,7 @@
 }
 
 .eventodesc-container {
-  max-height: 34vh; 
+ 
   max-width: 100%;
 }
 
@@ -69,7 +69,7 @@
 
 .titulo-evento{
   color: azure;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
   font-size: x-large;
   font-weight: 850;
 }
