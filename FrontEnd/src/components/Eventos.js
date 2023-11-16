@@ -217,12 +217,12 @@ function Eventos({ eventos }) {
          
             <div className="flex justify-center">
             <div className="mt-5">
-      <form onSubmit={handleSearch} className="w-full max-w-xl">
-        <div className="flex items-center">
+      <form onSubmit={handleSearch} className=" ">
+        <div className="flex items-center ">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="flex-shrink-0 w-2/6  z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            className="flex-shrink-0 w-3/6  z-10 inline-flex  py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
             <option value="">Categorias</option>
             {categorias.map((categoria) => (
@@ -237,7 +237,7 @@ function Eventos({ eventos }) {
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               id="search-dropdown"
-              className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              className="block p-2.5  text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
               placeholder="Search..."
             />
             <button
@@ -266,7 +266,7 @@ function Eventos({ eventos }) {
       </form>
       
               </div>
-              <button onClick={toggleFilters} className="rounded ml-4 text-white w-24 border border-blue-500 mt-5">
+              <button onClick={toggleFilters} className="rounded ml-10 text-white w-48 bg-pink-500 mt-5">
                 +
               </button>
     </div>
@@ -358,7 +358,7 @@ function Eventos({ eventos }) {
                           key={eventop.Id}
                           className="card bg-slate-700 h-48 text-white  relative transition-transform transform hover:-translate-y-1 hover:shadow-pink-500/50 shadow-lg  "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "36%"}}
+                          style={{width: "33%"}}
                         >
                            <Link
                         key={eventop.Id}
@@ -420,9 +420,9 @@ function Eventos({ eventos }) {
           <div className="card-container overflow-y-auto ">
           {categorias.map((categoria) => (
             <div key={categoria.IdCategoria} className="">
-              {mostrar && ( <h1 className="text-white mb-2 text-2xl font-bold flex justify-center">{categoria.NombreCategoria}</h1> )}
+              {mostrar && ( <h1 className="text-white mb-2 text-2xl font-bold flex justify-center bg-gray-600 p-2 mb-2">{categoria.NombreCategoria}:</h1> )}
 
-                <div className="flex overflow-x-auto justify-center mb-10" style={{gap: "10px"}}>
+                <div className="flex overflow-x-auto justify-center mb-5 mt-5 m-5" style={{gap: "10px"}}>
                   
                   {filteredEventos
                     .filter((eventop) => eventop.idCategoria === categoria.IdCategoria)
@@ -447,9 +447,9 @@ function Eventos({ eventos }) {
                        
                         <div
                           key={eventop.Id}
-                          className="rounded-md text-gray-200 shadow-gold relative transition-transform transform hover:-translate-y-1  m-2 "
+                          className="card bg-slate-700  text-white  relative transition-transform transform hover:-translate-y-1 hover:shadow-pink-500/50 shadow-lg "
                           onClick={() => handleClick(eventop)}
-                          style={{width: "12%"}}
+                          style={{width: "10%"}}
                         >
                            <Link
                         key={eventop.Id}
