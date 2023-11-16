@@ -30,6 +30,7 @@ const host = "https://polo.relied.cloud"; //en ort cambiar ip por localhost..
 
 function App() {
   const [eventos, setEventos] = useState([]);
+  
   const [usuarios, setUsuarios] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [body, setBody] = useState(() => {
@@ -44,6 +45,7 @@ function App() {
 
   useEffect(() => {
     cargarEventos();
+   
 
       const token = localStorage.getItem('auth');
       const userJson = localStorage.getItem('userLogged');
@@ -73,6 +75,7 @@ function App() {
         console.log(error);
       });
   };
+
 
 
 

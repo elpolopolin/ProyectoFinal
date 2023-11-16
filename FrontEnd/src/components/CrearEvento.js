@@ -119,7 +119,7 @@ function CrearEvento({cargarUsuario}) {
   return (
     <section className="max-w-4xl p-6 mx-auto rounded-md shadow-md profile-container overflow-y-auto">
     <h1 className="text-xl font-bold text-white capitalize dark:text-white mb-4">Crear Evento</h1>
-    <form className="">
+    <form className="" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
           <label className="text-white dark:text-gray-200" for="nombre">
@@ -192,7 +192,7 @@ function CrearEvento({cargarUsuario}) {
             onChange={handleInputChange}
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             rows="4"
-            required
+       
           ></textarea>
         </div>
 
@@ -263,7 +263,7 @@ function CrearEvento({cargarUsuario}) {
       </div>
 
       <div className="flex justify-center ">
-        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600" onClick={handleSubmit}>
+        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600" >
           <span className="">
             <CheckCircle size={16} />
           </span>

@@ -23,6 +23,7 @@ function Eventos({ eventos }) {
   const [showFilters, setShowFilters] = useState(false); // Estado para mostrar/ocultar los filtros en dispositivos móviles
   const host = useContext(HostContext);
   const usuario = useContext(UsuarioContext)
+  const [eventosActuales, setEventosActuales] = useState([]);
 
   const [selectedCategory, setSelectedCategory] = useState("");
   
@@ -60,6 +61,17 @@ function Eventos({ eventos }) {
       });
   };
 
+  const cargarEventosActuales = () => {
+    axios
+      .get(host + "/getActuales")
+      .then((result) => {
+        const events = result.data;
+        setEventosActuales(events);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
 
   const cargarCategorias = () => { //logica de cargado de categorias ordenadas por categoriasDeUsuario 
@@ -104,8 +116,9 @@ function Eventos({ eventos }) {
   };
 
   useEffect(() => {
+    cargarEventosActuales();
     cargarCategorias();
-    eventos.forEach((evento) => {
+    eventosActuales.forEach((evento) => {
       cargarParticipantes(evento.Id);
     });
   }, [eventos]);
@@ -121,7 +134,7 @@ function Eventos({ eventos }) {
     }
   };
 
-  const filteredEventos = eventos.filter((evento) => {
+  const filteredEventos = eventosActuales.filter((evento) => {
     const nombreMatches = evento.Nombre.toLowerCase().includes(searchTerm.toLowerCase());
     const ubicacionMatches = evento.Direccion.toLowerCase().includes(ubicacionFilter.toLowerCase());
     const fechaEvento = new Date(evento.Fecha);
