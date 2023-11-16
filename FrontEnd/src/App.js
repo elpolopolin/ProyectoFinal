@@ -44,7 +44,7 @@ function App() {
 
 
   useEffect(() => {
-    cargarEventos();
+   // cargarEventos();
    
 
       const token = localStorage.getItem('auth');
