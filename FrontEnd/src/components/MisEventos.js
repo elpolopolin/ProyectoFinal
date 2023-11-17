@@ -63,8 +63,15 @@ function MisEventos() {
       const eventosPromises = eventosIds.map(async (eventoId) => {
         const response = await axios.get(linkBase + eventoId.IdEvento);
         const eventoData = response.data;
-        //console.log(response.data)
-        eventoData.QrCode = eventoId.QrImage;
+      
+        if (typeof eventoData === 'object') {
+          eventoData.QrCode = eventoId.QrImage;
+        } else {
+          console.error("Invalid response data:", eventoData);
+        }
+    
+
+    
         return eventoData;
       });
     

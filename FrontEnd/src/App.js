@@ -22,6 +22,7 @@ import VerXcategoria from "./components/verXcategoria.js";
 import EditarEvento from "./components/editarEvento.js";
 
 import Index from "./components/Index.js";
+import VerPerfil from "./components/verPerfil.js";
 
 export const UsuarioContext = createContext();
 export const HostContext = createContext(); 
@@ -240,6 +241,7 @@ function App() {
               <Route path="/comentarios/:id" element={<Comentarios />}  />
               <Route path="/QrScanner" element={<QrScanner />}  />
               <Route path="/EditarEvento/:id" element={<EditarEvento cargarUsuario={cargarUsuario}/>} />
+              <Route path="/verPerfil/:id" element={<VerPerfil/>}  />
               <Route path="*" element={<h1 className="text-white">Error</h1>}  />
             </Routes>
 
