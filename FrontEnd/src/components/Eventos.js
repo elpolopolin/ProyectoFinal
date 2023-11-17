@@ -63,7 +63,7 @@ function Eventos({ eventos }) {
 
   const cargarEventosActuales = () => {
     axios
-      .get(host + "/getActuales")
+      .get(host + "/getAll")
       .then((result) => {
         const events = result.data;
         setEventosActuales(events);
