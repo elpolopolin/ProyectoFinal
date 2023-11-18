@@ -96,7 +96,7 @@ function MostrarEvento({ evento, participantesEvento }) {
         <div key={evento.Id} className=" ">
           
           <div className="">
-            <p className="text-white font-bold text-2xl text-center py-6 bg-white bg-opacity-20 decoration-pink-500">{evento.Nombre}</p>
+            <p className="text-white font-bold text-2xl text-center py-6 bg-[#252525] decoration-pink-500">{evento.Nombre}</p>
               <div className="mb-5" >
 
               
