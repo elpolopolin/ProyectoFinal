@@ -100,7 +100,7 @@ function MostrarEvento({ evento, participantesEvento }) {
               <div className="mb-5" >
 
               
-
+              <div className="eventodesc-container  overflow-y-auto">
               <div className="md:mx-40 sm:mx-15">
               {isMobile ? (
                  <img src={evento.ImagenEvento} className="mx-auto my-auto mt-2 " alt="Evento" style={{width:"400px", height:"300px"}} />
@@ -114,15 +114,17 @@ function MostrarEvento({ evento, participantesEvento }) {
             
 
             
-          <p className="text-white text-center mt-4">{evento.Descripcion}</p>
-          <hr className="hr1 mt-1" />
+          <p className="text-white text-center mt-2">{evento.Descripcion}</p>
+        
 
-          <div className="eventodesc-container lg:max-h-60 overflow-y-auto">
+          
             <div className="">
             {isMobile ? (
-              <div className="flex items-center justify-center py-10 md:mx-20 sm:mx-5">
-                <ul className="w-full text-sm font-medium  border border-gray-200 rounded-lg bg-gray-700 border-gray-600 text-white">
-                  <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg border-gray-600 hover:bg-gray-500">
+              <div className="flex items-center justify-center py-5 md:mx-20 sm:mx-5">
+                 
+                <ul className="w-full text-sm font-medium text-center  rounded-lg border-gray-600 text-white ">
+                <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg border-gray-600  "> </li>
+                  <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg border-gray-600 hover:bg-gray-500 ">
                     Precio: {evento.Precio ? evento.Precio : <span className="text-green-400">Gratis</span>}
                   </li>
                   <li className="w-full px-4 py-2 border-b border-gray-200 border-gray-600 hover:bg-gray-500">
@@ -131,11 +133,11 @@ function MostrarEvento({ evento, participantesEvento }) {
                   <li className="w-full px-4 py-2 border-b border-gray-200 border-gray-600 hover:bg-gray-500">
                     Dirección: {evento.Direccion}
                   </li>
-                  <li className="w-full px-4 py-2 rounded-b-lg hover:bg-gray-500" onClick={() => setMostrarParticipantes(true)}>
+                  <li className="w-full px-4 py-2 border-b border-gray-200 border-gray-600 rounded-b-lg hover:bg-gray-500   " onClick={() => setMostrarParticipantes(true)}>
                     Participantes: {evento.Participando}/{evento.Participantes}
                   </li>
-                  <li className="w-full px-4 py-2 rounded-b-lg hover:bg-gray-500" >
-                    Organizador: {evento.OrganizadorNombre}
+                  <li className="w-full px-4 py-2 border-b border-gray-200 border-gray-600 rounded-b-lg hover:bg-gray-500" >
+                  <Link className="" to={`/verPerfil/${evento.IdOrganizador}`}> Organizador: <span className="text-pink-400">{evento.OrganizadorNombre}</span> </Link>
                   </li>
                 </ul>
               </div>

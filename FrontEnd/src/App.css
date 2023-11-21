@@ -25,7 +25,7 @@
 }
 
 .eventodesc-container {
- 
+  max-height: 80vh;
   max-width: 100%;
 }
 
