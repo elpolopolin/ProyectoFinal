@@ -6,6 +6,6 @@ webview using a React-based frontend.
 
 While this project doesn’t follow the best coding practices and lacks
 many advanced features, it holds great personal value. It represents one
-of my first real steps into programming—an experience that was not onl
-y fun but also the moment I began to genuinely care about buildingthings with code.
+of my first real steps into programming—an experience that was not only
+fun but also the moment I began to genuinely care about buildingthings with code.
 
