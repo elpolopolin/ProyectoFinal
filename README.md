@@ -1,5 +1,5 @@
 # Eventop - high school final project (2023)
-Final Project is a simple web application developed in 2023 as my high school graduation project.
+Eventop is a simple web application developed in 2023 as my high school graduation project.
 At the time, I was just beginning to explore web design and frontend development. The goal
 of this app was to simulate a basic event management interface, embedded as a
 webview using a React-based frontend.
